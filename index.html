@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Any-Home.ru - Комплексное оснащение интерьеров премиум-класса | Все в одном месте</title>
+    <meta name="description" content="Полный цикл создания интерьера: дизайн, производство, установка. Собственные цеха, оптимальное соотношение цена/качество, опытная команда. Все в одной компании.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: #2c2c2c;
+            font-weight: 300;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            color: #2c2c2c;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 500;
+            color: #2c2c2c;
+            letter-spacing: 1px;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .phone {
+            font-size: 16px;
+            font-weight: 400;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.5px;
+            box-shadow: 0 3px 12px rgba(44, 44, 44, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 44, 44, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f0f2f5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            color: #2c2c2c;
+            text-align: center;
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.06) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23e9ecef" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23e9ecef" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23e9ecef" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+            color: #666;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: #2c2c2c;
+            display: block;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-text {
+            font-size: 0.9rem;
+            margin-top: 10px;
+            color: #666;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        /* Pain Points Section */
+        .pain-points {
+            background: white;
+            padding: 120px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #2c2c2c;
+            font-weight: 500;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 80px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 60px;
+            margin-top: 80px;
+        }
+
+        .pain-card {
+            background: white;
+            padding: 30px;
+            text-align: left;
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .pain-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #2c2c2c 0%, #1a1a1a 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .pain-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .pain-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #e0e0e0;
+        }
+
+        .pain-icon {
+            font-size: 2rem;
+            color: #999;
+            margin-bottom: 30px;
+        }
+
+        .pain-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #2c2c2c;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .pain-description {
+            color: #666;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* USP Section */
+        .usp-section {
+            padding: 120px 0;
+            background: #f8f9fa;
+        }
+
+        .usp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 80px;
+            margin-top: 80px;
+        }
+
+        .usp-card {
+            background: white;
+            padding: 50px;
+            border: none;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .usp-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: #2c2c2c;
+        }
+
+        .usp-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .usp-icon {
+            font-size: 2rem;
+            color: #2c2c2c;
+            margin-bottom: 30px;
+        }
+
+        .usp-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #2c2c2c;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .usp-description {
+            color: #666;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background: white;
+            padding: 120px 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            background: #f8f9fa;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(44, 44, 44, 0.9);
+            color: white;
+            padding: 30px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: #2c2c2c;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .cta-form {
+            max-width: 600px;
+            margin: 60px auto;
+            background: white;
+            padding: 60px;
+            color: #2c2c2c;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #2c2c2c;
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e9ecef;
+            background: transparent;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2c2c2c;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: white;
+            padding: 18px 50px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 15px rgba(44, 44, 44, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(44, 44, 44, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: #f8f9fa;
+            color: #666;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                gap: 30px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">ANY-HOME</div>
+                <div class="contact-info">
+                    <a href="tel:+74951203542" class="phone">
+                        +7 (495) 120-35-42
+                    </a>
+                    <a href="#project" class="cta-button">Обсудить проект</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Мебель премиум-класса за 45-65 дней</h1>
+                <p class="subtitle">Комплексное решение в одной компании: дизайн, производство, установка. Оптимальное соотношение цена/качество без посредников.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">45-65</span>
+                        <span class="stat-text">дней изготовления</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1</span>
+                        <span class="stat-text">день на расчет</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-text">собственное производство</span>
+                    </div>
+                </div>
+
+                <a href="#project" class="cta-button" style="font-size: 1.2rem; padding: 15px 35px;">
+                    Получить расчет за 1 день
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pain Points Section -->
+    <section class="pain-points">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают нас</h2>
+            <p class="section-subtitle">
+                Ключевые преимущества, которые решают главные проблемы клиентов
+            </p>
+            
+            <div class="pain-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px;">
+                <div class="pain-card" style="padding: 20px;">
+                    <div class="pain-icon" style="font-size: 1.3rem; margin-bottom: 12px;">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="pain-title" style="font-size: 1rem; margin-bottom: 8px;">Быстрые расчеты</h3>
+                    <p class="pain-description" style="font-size: 0.85rem; line-height: 1.4;">Расчет за 1 день вместо недель ожидания. Оперативность — наш приоритет.</p>
+                </div>
+                
+                <div class="pain-card" style="padding: 20px;">
+                    <div class="pain-icon" style="font-size: 1.3rem; margin-bottom: 12px;">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="pain-title" style="font-size: 1rem; margin-bottom: 8px;">Четкие сроки</h3>
+                    <p class="pain-description" style="font-size: 0.85rem; line-height: 1.4;">45-65 дней без переносов. Соблюдаем договоренности и ценим ваше время.</p>
+                </div>
+                
+                <div class="pain-card" style="padding: 20px;">
+                    <div class="pain-icon" style="font-size: 1.3rem; margin-bottom: 12px;">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="pain-title" style="font-size: 1rem; margin-bottom: 8px;">Один подрядчик</h3>
+                    <p class="pain-description" style="font-size: 0.85rem; line-height: 1.4;">От дизайна до установки — все в одной компании. Единые стандарты качества.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#project" class="cta-button" style="font-size: 1.1rem; padding: 12px 30px;">
+                    Получить расчет за 1 день
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- USP Section -->
+    <section class="usp-section">
+        <div class="container">
+            <h2 class="section-title">Как мы работаем с клиентами</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto;">
+                От первой встречи до готового интерьера — полный цикл с гарантией качества
+            </p>
+            
+            <!-- Этапы работы -->
+            <div style="margin-top: 60px;">
+                <h3 style="text-align: center; font-size: 1.6rem; margin-bottom: 40px; color: #2c2c2c;">Этапы работы</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px;">
+                    <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
+                        <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Консультация и расчет</h4>
+                        <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">Обсуждаем ваши задачи. Расчет за 1 день. Четкие сроки и бюджет.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
+                        <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Дизайн и визуализация</h4>
+                        <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">AI-визуализация проекта. Вы видите результат до начала работ.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
+                        <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Производство</h4>
+                        <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">Собственные цеха. Контроль качества на каждом этапе. 45-65 дней.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
+                        <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Установка</h4>
+                        <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">Предварительная сборка на производстве. Быстрая установка без сюрпризов.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#project" class="cta-button" style="font-size: 1.1rem; padding: 12px 30px;">
+                    Обсудить мой проект
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Наши работы</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto;">
+                Примеры реализованных проектов с использованием наших технологий
+            </p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23f8f9fa' width='400' height='300'/><rect fill='%232c2c2c' x='50' y='100' width='300' height='100'/><text x='200' y='160' text-anchor='middle' fill='white' font-size='16'>Кухня премиум</text></svg>" alt="Кухня премиум-класса">
+                    <div class="gallery-overlay">
+                        <h4>Кухня премиум-класса</h4>
+                        <p>Срок изготовления: 50 дней</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23f8f9fa' width='400' height='300'/><rect fill='%232c2c2c' x='50' y='100' width='300' height='100'/><text x='200' y='160' text-anchor='middle' fill='white' font-size='16'>Гостиная с LED</text></svg>" alt="Гостиная с LED подсветкой">
+                    <div class="gallery-overlay">
+                        <h4>Гостиная с LED подсветкой</h4>
+                        <p>Ноу-хау технологии</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23f8f9fa' width='400' height='300'/><rect fill='%232c2c2c' x='50' y='100' width='300' height='100'/><text x='200' y='160' text-anchor='middle' fill='white' font-size='16'>Спальня из МДФ</text></svg>" alt="Спальня из МДФ">
+                    <div class="gallery-overlay">
+                        <h4>Спальня из МДФ</h4>
+                        <p>Полная влагозащита</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23f8f9fa' width='400' height='300'/><rect fill='%232c2c2c' x='50' y='100' width='300' height='100'/><text x='200' y='160' text-anchor='middle' fill='white' font-size='16'>Ванная комната</text></svg>" alt="Ванная комната">
+                    <div class="gallery-overlay">
+                        <h4>Ванная комната</h4>
+                        <p>Влагозащищенная мебель</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23f8f9fa' width='400' height='300'/><rect fill='%232c2c2c' x='50' y='100' width='300' height='100'/><text x='200' y='160' text-anchor='middle' fill='white' font-size='16'>Кабинет</text></svg>" alt="Кабинет">
+                    <div class="gallery-overlay">
+                        <h4>Кабинет</h4>
+                        <p>Фурнитура BLUM</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23f8f9fa' width='400' height='300'/><rect fill='%232c2c2c' x='50' y='100' width='300' height='100'/><text x='200' y='160' text-anchor='middle' fill='white' font-size='16'>Детская</text></svg>" alt="Детская комната">
+                    <div class="gallery-overlay">
+                        <h4>Детская комната</h4>
+                        <p>Экологичные материалы</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="#project" class="cta-button" style="font-size: 1.2rem; padding: 15px 35px;">
+                    Хочу такой же результат
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section class="usp-section">
+        <div class="container">
+            <h2 class="section-title">Наши технологии и качество</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto;">
+                Технические решения, которые обеспечивают премиальное качество
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 50px;">
+                <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
+                    <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Качество материалов</h4>
+                    <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">ЛДСП кромятся полностью, МДФ окрашиваются со всех сторон. Полная защита от влаги.</p>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
+                    <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Премиальная фурнитура</h4>
+                    <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">Только BLUM и Hettich. Конические стяжки. Собственное производство без наценок.</p>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
+                    <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Работа с латунью</h4>
+                    <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">Собственные цеха обработки латуни. Создаем свет и акцентные элементы. Уникальные проекты.</p>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
+                    <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Опытная команда</h4>
+                    <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">Собственные дизайнеры и мастера. Многолетний опыт в премиум-сегменте.</p>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
+                    <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Один подрядчик</h4>
+                    <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">От дизайна до установки — все в одной компании. Единые стандарты качества.</p>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
+                    <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Точность исполнения</h4>
+                    <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">Каменные детали изготавливаются после снятия размеров с готовых изделий.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#project" class="cta-button" style="font-size: 1.1rem; padding: 12px 30px;">
+                    Получить расчет с учетом технологий
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="project">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Получите расчет за 1 день</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 20px;">
+                Оставьте заявку и получите детальный расчет с учетом всех ваших требований
+            </p>
+            
+            <div class="cta-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Ваше имя *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project_type">Тип проекта</label>
+                        <select id="project_type" name="project_type">
+                            <option value="">Выберите тип проекта</option>
+                            <option value="kitchen">Кухня</option>
+                            <option value="living_room">Гостиная</option>
+                            <option value="bedroom">Спальня</option>
+                            <option value="bathroom">Ванная комната</option>
+                            <option value="office">Кабинет</option>
+                            <option value="children">Детская</option>
+                            <option value="full_apartment">Полная квартира</option>
+                            <option value="house">Частный дом</option>
+                            <option value="commercial">Коммерческое помещение</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="budget">Бюджет проекта</label>
+                        <select id="budget" name="budget">
+                            <option value="">Выберите бюджет</option>
+                            <option value="1m-2m">1 000 000 - 2 000 000 ₽</option>
+                            <option value="2m-5m">2 000 000 - 5 000 000 ₽</option>
+                            <option value="5m-10m">5 000 000 - 10 000 000 ₽</option>
+                            <option value="10m+">10 000 000+ ₽</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="timeline">Желаемые сроки реализации</label>
+                        <select id="timeline" name="timeline">
+                            <option value="">Выберите сроки</option>
+                            <option value="urgent">Приоритетный проект (до 60 дней)</option>
+                            <option value="normal">Стандартные сроки (60-80 дней)</option>
+                            <option value="flexible">Гибкие сроки</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="services">Какие услуги вас интересуют?</label>
+                        <select id="services" name="services">
+                            <option value="">Выберите услуги</option>
+                            <option value="full_cycle">Полный цикл (дизайн + производство + установка)</option>
+                            <option value="design_production">Дизайн + производство</option>
+                            <option value="production_only">Только производство</option>
+                            <option value="consultation">Консультация по проекту</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Дополнительная информация</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Опишите ваши пожелания, особенности помещения, стиль..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-calculator"></i> Получить расчет за 1 день
+                    </button>
+                </form>
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <p style="font-size: 1rem; color: #ccc;">
+                    Конфиденциальность ваших данных гарантирована
+                </p>
+                <p style="font-size: 0.9rem; color: #999; margin-top: 15px;">
+                    ⚡ Расчет готов в течение 1 дня | 📞 Консультация бесплатно | 🎯 Без обязательств
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 40px;">
+                <div>
+                    <div class="logo" style="margin-bottom: 15px;">ANY-HOME</div>
+                    <p style="color: #999; font-size: 0.9rem;">Мебель премиум-класса с собственного производства</p>
+                </div>
+                
+                <div style="text-align: right;">
+                    <a href="tel:+74951203542" class="phone" style="margin-bottom: 10px; display: block;">
+                        +7 (495) 120-35-42
+                    </a>
+                    <p style="color: #999; font-size: 0.9rem;">Консультации: Пн-Пт 10:00-20:00, Сб-Вс 11:00-19:00</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e9ecef; text-align: center;">
+                <p style="color: #999; font-size: 0.8rem;">&copy; 2024 Any-Home. Все права защищены.</p>
+                <p style="color: #999; font-size: 0.8rem; margin-top: 10px;">Шоу-рум: Москва, Большой Саввинский переулок, д. 12, стр. 8</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simple validation
+            if (!data.name || !data.phone) {
+                alert('Пожалуйста, заполните обязательные поля');
+                return;
+            }
+            
+            // Simulate form submission
+            alert('Спасибо за заявку! Мы свяжемся с вами в течение 1 дня для составления расчета.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Add some interactive effects
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
