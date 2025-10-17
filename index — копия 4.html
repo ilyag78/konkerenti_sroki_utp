@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Any-Home.ru - Мебель премиум-класса за 45-65 дней | Дизайн, комфорт, функциональность</title>
+    <meta name="description" content="Интерьеры, в которых хочется жить. Премиум-дизайн, комфорт и функциональность за 45-65 дней. Полный цикл в одной компании. Собственное производство, итальянские стандарты качества.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: #2c2c2c;
+            font-weight: 300;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            color: #2c2c2c;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 500;
+            color: #2c2c2c;
+            letter-spacing: 1px;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .phone {
+            font-size: 16px;
+            font-weight: 400;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.5px;
+            box-shadow: 0 3px 12px rgba(44, 44, 44, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 44, 44, 0.3);
+        }
+
+        .cta-center {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-secondary {
+            font-size: 1.1rem;
+            padding: 12px 30px;
+        }
+
+        .cta-primary {
+            font-size: 1.2rem;
+            padding: 15px 35px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            color: #2c2c2c;
+            text-align: center;
+            margin-top: 80px;
+            position: relative;
+        }
+
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23e9ecef" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23e9ecef" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23e9ecef" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+            color: #666;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: #2c2c2c;
+            display: block;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-text {
+            font-size: 0.9rem;
+            margin-top: 10px;
+            color: #666;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        /* Pain Points Section */
+        .pain-points {
+            background: white;
+            padding: 120px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #2c2c2c;
+            font-weight: 500;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 80px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .section-description {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .pain-card {
+            background: white;
+            padding: 30px;
+            text-align: left;
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .pain-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #2c2c2c 0%, #1a1a1a 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .pain-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .pain-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #e0e0e0;
+        }
+
+        .pain-icon {
+            font-size: 2rem;
+            color: #999;
+            margin-bottom: 30px;
+        }
+
+        .pain-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #2c2c2c;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .pain-description {
+            color: #666;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* USP Section */
+        .usp-section {
+            padding: 120px 0;
+            background: #f8f9fa;
+        }
+
+        .usp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 80px;
+            margin-top: 80px;
+        }
+
+        .usp-card {
+            background: white;
+            padding: 50px;
+            border: none;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .usp-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: #2c2c2c;
+        }
+
+        .usp-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .usp-icon {
+            font-size: 2rem;
+            color: #2c2c2c;
+            margin-bottom: 30px;
+        }
+
+        .usp-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #2c2c2c;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .usp-description {
+            color: #666;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* Work Steps */
+        .work-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .work-step {
+            background: white;
+            padding: 30px;
+            text-align: left;
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .work-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #2c2c2c 0%, #1a1a1a 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .work-step:hover::before {
+            transform: scaleX(1);
+        }
+
+        .work-step:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #e0e0e0;
+        }
+
+        .work-step-icon {
+            font-size: 2rem;
+            color: #999;
+            margin-bottom: 30px;
+        }
+
+        .work-step-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #2c2c2c;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .work-step-description {
+            color: #666;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .work-steps-section {
+            margin-top: 60px;
+        }
+
+        .work-steps-title {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: 40px;
+            color: #2c2c2c;
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+        }
+
+        /* Tech Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .tech-card {
+            background: white;
+            padding: 20px;
+            border-left: 3px solid #2c2c2c;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .tech-icon {
+            font-size: 1.3rem;
+            color: #2c2c2c;
+            margin-bottom: 12px;
+        }
+
+        .tech-title {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #2c2c2c;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .tech-description {
+            color: #666;
+            font-weight: 300;
+            line-height: 1.4;
+            font-size: 0.85rem;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background: white;
+            padding: 120px 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            background: #f8f9fa;
+            transition: transform 0.3s ease;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(44, 44, 44, 0.9);
+            color: white;
+            padding: 30px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Gallery Slider Styles */
+        .gallery-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .slider-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .slider-image.active {
+            opacity: 1;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px;
+            pointer-events: none;
+        }
+
+        .slider-btn {
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-btn:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Fullscreen Gallery */
+        .fullscreen-gallery {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fullscreen-gallery.active {
+            display: flex;
+        }
+
+        .fullscreen-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .fullscreen-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .fullscreen-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .fullscreen-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .fullscreen-dots {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .fullscreen-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-dot.active {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.3);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: #2c2c2c;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .cta-form {
+            max-width: 600px;
+            margin: 60px auto;
+            background: white;
+            padding: 60px;
+            color: #2c2c2c;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #2c2c2c;
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e9ecef;
+            background: transparent;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2c2c2c;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            color: white;
+            padding: 18px 50px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 15px rgba(44, 44, 44, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(44, 44, 44, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: #f8f9fa;
+            color: #666;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        
+        /* Tablet styles */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .pain-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .work-steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+        
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            /* Header mobile */
+            .header {
+                padding: 16px 0;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+            
+            .logo {
+                font-size: 26px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 16px;
+                width: 100%;
+            }
+            
+            .phone {
+                font-size: 18px;
+                font-weight: 500;
+            }
+            
+            .cta-button {
+                padding: 14px 28px;
+                font-size: 16px;
+                width: 100%;
+                max-width: 280px;
+                min-height: 48px;
+            }
+            
+            /* Hero mobile */
+            .hero {
+                margin-top: 120px;
+                min-height: 75vh;
+                padding: 48px 0;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.4rem;
+                line-height: 1.15;
+                margin-bottom: 24px;
+            }
+            
+            .hero-content .subtitle {
+                font-size: 1.15rem;
+                margin-bottom: 36px;
+                line-height: 1.5;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 24px;
+                margin: 36px 0;
+            }
+            
+            .stat-number {
+                font-size: 2.2rem;
+            }
+            
+            .stat-text {
+                font-size: 1rem;
+            }
+            
+            /* Sections mobile */
+            .pain-points,
+            .usp-section,
+            .gallery-section {
+                padding: 72px 0;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 24px;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 48px;
+                line-height: 1.5;
+            }
+            
+            .section-description {
+                font-size: 1.1rem;
+                margin-bottom: 48px;
+                line-height: 1.5;
+            }
+            
+            /* Grids mobile */
+            .pain-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                margin-top: 48px;
+            }
+            
+            .pain-card {
+                padding: 28px;
+            }
+            
+            .pain-icon {
+                font-size: 1.5rem;
+                margin-bottom: 16px;
+            }
+            
+            .pain-title {
+                font-size: 1.3rem;
+                margin-bottom: 16px;
+            }
+            
+            .pain-description {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            /* USP cards mobile */
+            .usp-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                margin-top: 48px;
+            }
+            
+            .usp-card {
+                padding: 32px;
+            }
+            
+            /* Gallery mobile */
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                margin-top: 48px;
+            }
+            
+            .gallery-item img {
+                height: 500px;
+            }
+            
+            .slider-container {
+                height: 500px;
+            }
+            
+            /* Work steps mobile */
+            .work-steps {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .work-step {
+                padding: 28px;
+            }
+            
+            .work-step-icon {
+                font-size: 1.5rem;
+                margin-bottom: 16px;
+            }
+            
+            .work-step-title {
+                font-size: 1.3rem;
+                margin-bottom: 16px;
+            }
+            
+            .work-step-description {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            /* Tech grid mobile */
+            .tech-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .tech-card {
+                padding: 28px;
+            }
+            
+            .tech-icon {
+                font-size: 1.5rem;
+                margin-bottom: 16px;
+            }
+            
+            .tech-title {
+                font-size: 1.3rem;
+                margin-bottom: 16px;
+            }
+            
+            .tech-description {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            /* CTA section mobile */
+            .cta-section {
+                padding: 72px 0;
+            }
+            
+            .cta-form {
+                padding: 36px;
+                margin: 36px auto;
+            }
+            
+            .form-group {
+                margin-bottom: 24px;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 16px;
+                font-size: 16px; /* Prevents zoom on iOS */
+                min-height: 48px;
+            }
+            
+            .submit-btn {
+                padding: 18px 36px;
+                font-size: 16px;
+                min-height: 56px;
+            }
+            
+            /* Footer mobile */
+            .footer {
+                padding: 48px 0;
+            }
+            
+            .footer .container > div:first-child {
+                flex-direction: column;
+                text-align: center;
+                gap: 24px;
+            }
+            
+            .footer .container > div:first-child > div:last-child {
+                text-align: center;
+            }
+        }
+        
+        /* Small mobile styles */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 12px;
+            }
+            
+            .hero {
+                margin-top: 140px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content .subtitle {
+                font-size: 1.05rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-subtitle,
+            .section-description {
+                font-size: 1rem;
+            }
+            
+            .pain-card,
+            .usp-card,
+            .work-step,
+            .tech-card {
+                padding: 24px;
+            }
+            
+            .pain-title,
+            .work-step-title,
+            .tech-title {
+                font-size: 1.2rem;
+            }
+            
+            .pain-description,
+            .work-step-description,
+            .tech-description {
+                font-size: 0.95rem;
+            }
+            
+            .gallery-item img {
+                height: 450px;
+            }
+            
+            .slider-container {
+                height: 450px;
+            }
+            
+            .cta-button {
+                padding: 12px 24px;
+                font-size: 15px;
+                min-height: 44px;
+            }
+            
+            .submit-btn {
+                padding: 16px 32px;
+                min-height: 52px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">ANY-HOME</div>
+                <div class="contact-info">
+                    <a href="tel:+74951203542" class="phone">
+                        +7 (495) 120-35-42
+                    </a>
+                    <a href="#project" class="cta-button">Обсудить проект</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Мебель премиум-класса за 45-65 дней<br>Дизайн, комфорт и функциональность + гарантия сроков</h1>
+                <p class="subtitle">Создаем интерьеры, которыми вы будете наслаждаться каждый день. Полный цикл в одной компании: от дизайна до установки. Гибкость решений, премиум-качество и гарантия сроков.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">45-65</span>
+                        <span class="stat-text">дней изготовления</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1</span>
+                        <span class="stat-text">день на расчет</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-text">собственное производство</span>
+                    </div>
+                </div>
+
+                <a href="#project" class="cta-button" style="font-size: 1.2rem; padding: 15px 35px;">
+                    Получить расчет за 1 день
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- What You Get Section -->
+    <section class="pain-points" style="background: white; padding: 100px 0;">
+        <div class="container">
+            <h2 class="section-title">Что вы получаете</h2>
+            <p class="section-subtitle">
+                Не просто мебель — пространство, в котором хочется жить, работать и отдыхать
+            </p>
+            
+            <div class="pain-grid">
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="pain-title">Дизайн, который вдохновляет</h3>
+                    <p class="pain-description">Не просто мебель, а продуманное пространство. Каждая деталь работает на общую композицию. AI-визуализация — видите результат до начала работ.</p>
+                </div>
+                
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <h3 class="pain-title">Комфорт в каждой детали</h3>
+                    <p class="pain-description">Эргономика, мягкое закрывание, удобная организация пространства. Мебель, которая делает жизнь проще и приятнее.</p>
+                </div>
+                
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3 class="pain-title">Функциональность премиум-класса</h3>
+                    <p class="pain-description">Умные системы хранения, качественная фурнитура BLUM и Hettich, продуманная эргономика. Всё работает безупречно годами.</p>
+                </div>
+                
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="pain-title">Удовольствие от использования</h3>
+                    <p class="pain-description">Качество, которое чувствуется: от плавного закрывания дверей до идеально гладких поверхностей. Каждый день — как новый.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pain Points Section -->
+    <section class="pain-points">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают Any-Home</h2>
+            <p class="section-subtitle">
+                Мы создаем не просто мебель — мы создаем пространства для жизни. И делаем это так, чтобы процесс был комфортным для вас.
+            </p>
+            
+            <div class="pain-grid">
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="pain-title">Дизайн + функциональность</h3>
+                    <p class="pain-description">Создаем интерьеры, в которых красота сочетается с удобством. От классики до современных трендов. Каждый проект — уникальное решение под ваш стиль жизни.</p>
+                </div>
+                
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="pain-title">Премиум-качество + гарантия сроков</h3>
+                    <p class="pain-description">45-65 дней без переносов. Качество на уровне топовых итальянских производств. Мебель, которой вы будете гордиться и наслаждаться годами.</p>
+                </div>
+                
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3 class="pain-title">Гибкость + один подрядчик</h3>
+                    <p class="pain-description">Адаптируем проект под ваш бюджет и пожелания. Весь процесс в одних руках — от первой встречи до финальной установки. Никакой головной боли с координацией.</p>
+                </div>
+                
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="pain-title">Лучшая цена за премиум-результат</h3>
+                    <p class="pain-description">Собственное производство без посредников. Вы платите за качество и работу, а не за бренд и цепочку наценок. Разумная цена за премиум.</p>
+                </div>
+            </div>
+            
+            <div class="cta-center">
+                <a href="#project" class="cta-button cta-secondary">
+                    Получить расчет за 1 день
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why We Can Offer This -->
+    <section class="usp-section" style="padding: 80px 0; background: white;">
+        <div class="container">
+            <h2 class="section-title" style="font-size: 2.2rem; margin-bottom: 20px;">Почему мы можем предложить такое сочетание?</h2>
+            <p class="section-description" style="margin-bottom: 60px;">
+                Каждое наше преимущество — результат продуманной системы работы
+            </p>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h4 class="tech-title">Собственное производство</h4>
+                    <p class="tech-description">Полный контроль над сроками и качеством. Нет зависимости от сторонних подрядчиков.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h4 class="tech-title">Опытная команда</h4>
+                    <p class="tech-description">Дизайнеры и мастера с многолетним опытом. Можем реализовать проект любой сложности.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h4 class="tech-title">Полный цикл в одной компании</h4>
+                    <p class="tech-description">Никаких потерь времени на координацию. Прозрачность и удобство на всех этапах.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4 class="tech-title">Прямые поставки</h4>
+                    <p class="tech-description">Работаем напрямую с поставщиками материалов. Оптимальная цена без наценок посредников.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h4 class="tech-title">Отлаженные процессы</h4>
+                    <p class="tech-description">Каждый этап проверен сотнями проектов. Знаем, как избежать задержек и ошибок.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h4 class="tech-title">Репутация и стандарты</h4>
+                    <p class="tech-description">Работаем по европейским стандартам качества. Каждый проект — наша визитная карточка.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- USP Section -->
+    <section class="usp-section">
+        <div class="container">
+            <h2 class="section-title">Как мы работаем с клиентами</h2>
+            <p class="section-description">
+                От первой встречи до готового интерьера — полный цикл с гарантией качества
+            </p>
+            
+            <!-- Этапы работы -->
+            <div class="work-steps-section">
+                <h3 class="work-steps-title">Этапы работы</h3>
+                
+                <div class="work-steps">
+                    <div class="work-step">
+                        <div class="work-step-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h4 class="work-step-title">Консультация и расчет</h4>
+                        <p class="work-step-description">Обсуждаем ваши задачи. Расчет за 1 день. Четкие сроки и бюджет.</p>
+                    </div>
+                    
+                    <div class="work-step">
+                        <div class="work-step-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h4 class="work-step-title">Дизайн и визуализация</h4>
+                        <p class="work-step-description">AI-визуализация проекта. Вы видите результат до начала работ.</p>
+                    </div>
+                    
+                    <div class="work-step">
+                        <div class="work-step-icon">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h4 class="work-step-title">Производство</h4>
+                        <p class="work-step-description">Собственные цеха. Контроль качества на каждом этапе. 45-65 дней.</p>
+                    </div>
+                    
+                    <div class="work-step">
+                        <div class="work-step-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4 class="work-step-title">Установка</h4>
+                        <p class="work-step-description">Предварительная сборка на производстве. Быстрая установка без сюрпризов.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta-center">
+                <a href="#project" class="cta-button cta-secondary">
+                    Обсудить мой проект
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Наши работы</h2>
+            <p class="section-description">
+                Реальные интерьеры наших клиентов. Каждый проект — это история о том, как пространство стало любимым местом в доме.
+            </p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" data-folder="1">
+                    <div class="gallery-slider">
+                        <div class="slider-container">
+                            <img src="1/bathroom_0.webp" alt="Ванная комната" class="slider-image active">
+                            <img src="1/bathroom_1.webp" alt="Ванная комната" class="slider-image">
+                            <img src="1/bathroom_2.webp" alt="Ванная комната" class="slider-image">
+                            <img src="1/main_24.webp" alt="Главная комната" class="slider-image">
+                            <img src="1/main_25.webp" alt="Главная комната" class="slider-image">
+                            <img src="1/office_1.webp" alt="Офис" class="slider-image">
+                    </div>
+                        <div class="slider-controls">
+                            <button class="slider-btn prev" onclick="changeSlide(this, -1)">‹</button>
+                            <button class="slider-btn next" onclick="changeSlide(this, 1)">›</button>
+                </div>
+                        <div class="slider-dots">
+                            <span class="dot active" onclick="currentSlide(this, 0)"></span>
+                            <span class="dot" onclick="currentSlide(this, 1)"></span>
+                            <span class="dot" onclick="currentSlide(this, 2)"></span>
+                            <span class="dot" onclick="currentSlide(this, 3)"></span>
+                            <span class="dot" onclick="currentSlide(this, 4)"></span>
+                            <span class="dot" onclick="currentSlide(this, 5)"></span>
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-folder="2">
+                    <div class="gallery-slider">
+                        <div class="slider-container">
+                            <img src="2/kitchen_0.webp" alt="Кухня премиум" class="slider-image active">
+                            <img src="2/kitchen_5.webp" alt="Кухня премиум" class="slider-image">
+                            <img src="2/kitchen_6.webp" alt="Кухня премиум" class="slider-image">
+                            <img src="2/kitchen_16.webp" alt="Кухня премиум" class="slider-image">
+                            <img src="2/kitchen_17.webp" alt="Кухня премиум" class="slider-image">
+                            <img src="2/kitchen_23.webp" alt="Кухня премиум" class="slider-image">
+                            <img src="2/kitchen_25.webp" alt="Кухня премиум" class="slider-image">
+                            <img src="2/kitchen_29.webp" alt="Кухня премиум" class="slider-image">
+                            <img src="2/kitchen_30.webp" alt="Кухня премиум" class="slider-image">
+                            <img src="2/kitchen_31.webp" alt="Кухня премиум" class="slider-image">
+                            <img src="2/kitchen_37.webp" alt="Кухня премиум" class="slider-image">
+                            <img src="2/kitchen_38.webp" alt="Кухня премиум" class="slider-image">
+                            <img src="2/kitchen_43.webp" alt="Кухня премиум" class="slider-image">
+                            <img src="2/kitchen_45.webp" alt="Кухня премиум" class="slider-image">
+                            <img src="2/kitchen_48.webp" alt="Кухня премиум" class="slider-image">
+                            <img src="2/kitchen_50.webp" alt="Кухня премиум" class="slider-image">
+                    </div>
+                        <div class="slider-controls">
+                            <button class="slider-btn prev" onclick="changeSlide(this, -1)">‹</button>
+                            <button class="slider-btn next" onclick="changeSlide(this, 1)">›</button>
+                </div>
+                        <div class="slider-dots">
+                            <span class="dot active" onclick="currentSlide(this, 0)"></span>
+                            <span class="dot" onclick="currentSlide(this, 1)"></span>
+                            <span class="dot" onclick="currentSlide(this, 2)"></span>
+                            <span class="dot" onclick="currentSlide(this, 3)"></span>
+                            <span class="dot" onclick="currentSlide(this, 4)"></span>
+                            <span class="dot" onclick="currentSlide(this, 5)"></span>
+                            <span class="dot" onclick="currentSlide(this, 6)"></span>
+                            <span class="dot" onclick="currentSlide(this, 7)"></span>
+                            <span class="dot" onclick="currentSlide(this, 8)"></span>
+                            <span class="dot" onclick="currentSlide(this, 9)"></span>
+                            <span class="dot" onclick="currentSlide(this, 10)"></span>
+                            <span class="dot" onclick="currentSlide(this, 11)"></span>
+                            <span class="dot" onclick="currentSlide(this, 12)"></span>
+                            <span class="dot" onclick="currentSlide(this, 13)"></span>
+                            <span class="dot" onclick="currentSlide(this, 14)"></span>
+                            <span class="dot" onclick="currentSlide(this, 15)"></span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="cta-center">
+                <a href="#project" class="cta-button cta-primary">
+                    Хочу такой же результат
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section class="usp-section">
+        <div class="container">
+            <h2 class="section-title">Качество, которое чувствуется каждый день</h2>
+            <p class="section-description">
+                Технические решения и материалы, которые превращают мебель в удовольствие от использования
+            </p>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4 class="tech-title">Качество материалов</h4>
+                    <p class="tech-description">ЛДСП кромятся полностью, МДФ окрашиваются со всех сторон. Полная защита от влаги и долговечность.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4 class="tech-title">Премиальная фурнитура</h4>
+                    <p class="tech-description">Только BLUM и Hettich. Конические стяжки. Немецкое качество без компромиссов.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4 class="tech-title">Работа с латунью</h4>
+                    <p class="tech-description">Собственные цеха обработки латуни. Создаем свет и акцентные элементы. Уникальные решения для вашего интерьера.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <h4 class="tech-title">Точность исполнения</h4>
+                    <p class="tech-description">Каменные детали изготавливаются после снятия размеров с готовых изделий. Идеальная подгонка без зазоров.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h4 class="tech-title">Итальянские стандарты</h4>
+                    <p class="tech-description">Окраска и финишная обработка по технологиям топовых итальянских производств. Безупречная поверхность.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                    <h4 class="tech-title">Контроль качества</h4>
+                    <p class="tech-description">Проверка на каждом этапе: от раскроя до финальной установки. Гарантия безупречного результата.</p>
+                </div>
+            </div>
+            
+            <div class="cta-center">
+                <a href="#project" class="cta-button cta-secondary">
+                    Получить расчет с учетом технологий
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="project">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Создадим интерьер вашей мечты</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 20px;">
+                От идеи до реальности — всего 45-65 дней
+            </p>
+            <p style="font-size: 1.1rem; margin-bottom: 20px; color: rgba(255,255,255,0.9);">
+                Расчет за 1 день → Дизайн-проект с AI-визуализацией → Производство 45-65 дней → Установка → Ваше удовольствие
+            </p>
+            <p style="font-size: 1rem; margin-bottom: 20px; color: rgba(255,255,255,0.8);">
+                Получите детальный расчет с учетом всех ваших требований и бюджета
+            </p>
+            
+            <div class="cta-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Ваше имя *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project_type">Тип проекта</label>
+                        <select id="project_type" name="project_type">
+                            <option value="">Выберите тип проекта</option>
+                            <option value="kitchen">Кухня</option>
+                            <option value="living_room">Гостиная</option>
+                            <option value="bedroom">Спальня</option>
+                            <option value="bathroom">Ванная комната</option>
+                            <option value="office">Кабинет</option>
+                            <option value="children">Детская</option>
+                            <option value="full_apartment">Полная квартира</option>
+                            <option value="house">Частный дом</option>
+                            <option value="commercial">Коммерческое помещение</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="budget">Бюджет проекта</label>
+                        <select id="budget" name="budget">
+                            <option value="">Выберите бюджет</option>
+                            <option value="1m-2m">1 000 000 - 2 000 000 ₽</option>
+                            <option value="2m-5m">2 000 000 - 5 000 000 ₽</option>
+                            <option value="5m-10m">5 000 000 - 10 000 000 ₽</option>
+                            <option value="10m+">10 000 000+ ₽</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="timeline">Желаемые сроки реализации</label>
+                        <select id="timeline" name="timeline">
+                            <option value="">Выберите сроки</option>
+                            <option value="urgent">Приоритетный проект (до 60 дней)</option>
+                            <option value="normal">Стандартные сроки (60-80 дней)</option>
+                            <option value="flexible">Гибкие сроки</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="services">Какие услуги вас интересуют?</label>
+                        <select id="services" name="services">
+                            <option value="">Выберите услуги</option>
+                            <option value="full_cycle">Полный цикл (дизайн + производство + установка)</option>
+                            <option value="design_production">Дизайн + производство</option>
+                            <option value="production_only">Только производство</option>
+                            <option value="consultation">Консультация по проекту</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Дополнительная информация</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Опишите ваши пожелания, особенности помещения, стиль..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        Получить расчет и начать проект
+                    </button>
+                </form>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 40px;">
+                <div>
+                    <div class="logo" style="margin-bottom: 15px;">ANY-HOME</div>
+                    <p style="color: #999; font-size: 0.9rem;">Мебель премиум-класса с собственного производства</p>
+                </div>
+                
+                <div style="text-align: right;">
+                    <a href="tel:+74951203542" class="phone" style="margin-bottom: 10px; display: block;">
+                        +7 (495) 120-35-42
+                    </a>
+                    <p style="color: #999; font-size: 0.9rem;">Консультации: Пн-Пт 10:00-20:00, Сб-Вс 11:00-19:00</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e9ecef; text-align: center;">
+                <p style="color: #999; font-size: 0.8rem;">&copy; 2024 Any-Home. Все права защищены.</p>
+                <p style="color: #999; font-size: 0.8rem; margin-top: 10px;">Шоу-рум: Москва, Большой Саввинский переулок, д. 12, стр. 8</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fullscreen Gallery -->
+    <div class="fullscreen-gallery" id="fullscreenGallery">
+        <div class="fullscreen-content">
+            <button class="close-btn" onclick="closeFullscreen()">×</button>
+            <img id="fullscreenImage" class="fullscreen-image" src="" alt="">
+            <div class="fullscreen-controls">
+                <button class="fullscreen-btn" onclick="changeFullscreenSlide(-1)">‹</button>
+                <button class="fullscreen-btn" onclick="changeFullscreenSlide(1)">›</button>
+            </div>
+            <div class="fullscreen-dots" id="fullscreenDots"></div>
+        </div>
+    </div>
+
+    <script>
+        // Gallery Slider Functions
+        function changeSlide(button, direction) {
+            const galleryItem = button.closest('.gallery-item');
+            const images = galleryItem.querySelectorAll('.slider-image');
+            const dots = galleryItem.querySelectorAll('.dot');
+            
+            let currentIndex = 0;
+            images.forEach((img, index) => {
+                if (img.classList.contains('active')) {
+                    currentIndex = index;
+                }
+            });
+            
+            let newIndex = currentIndex + direction;
+            if (newIndex < 0) newIndex = images.length - 1;
+            if (newIndex >= images.length) newIndex = 0;
+            
+            images[currentIndex].classList.remove('active');
+            images[newIndex].classList.add('active');
+            
+            dots[currentIndex].classList.remove('active');
+            dots[newIndex].classList.add('active');
+        }
+
+        function currentSlide(dot, index) {
+            const galleryItem = dot.closest('.gallery-item');
+            const images = galleryItem.querySelectorAll('.slider-image');
+            const dots = galleryItem.querySelectorAll('.dot');
+            
+            images.forEach(img => img.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            
+            images[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+
+        // Fullscreen Gallery Functions
+        let currentFullscreenImages = [];
+        let currentFullscreenIndex = 0;
+
+        function openFullscreen(galleryItem) {
+            const images = galleryItem.querySelectorAll('.slider-image');
+            const folder = galleryItem.getAttribute('data-folder');
+            
+            currentFullscreenImages = Array.from(images).map(img => img.src);
+            currentFullscreenIndex = 0;
+            
+            const fullscreenGallery = document.getElementById('fullscreenGallery');
+            const fullscreenImage = document.getElementById('fullscreenImage');
+            const fullscreenDots = document.getElementById('fullscreenDots');
+            
+            fullscreenImage.src = currentFullscreenImages[0];
+            fullscreenGallery.classList.add('active');
+            
+            // Create dots
+            fullscreenDots.innerHTML = '';
+            currentFullscreenImages.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.className = 'fullscreen-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.onclick = () => setFullscreenSlide(index);
+                fullscreenDots.appendChild(dot);
+            });
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFullscreen() {
+            const fullscreenGallery = document.getElementById('fullscreenGallery');
+            fullscreenGallery.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeFullscreenSlide(direction) {
+            currentFullscreenIndex += direction;
+            if (currentFullscreenIndex < 0) currentFullscreenIndex = currentFullscreenImages.length - 1;
+            if (currentFullscreenIndex >= currentFullscreenImages.length) currentFullscreenIndex = 0;
+            
+            setFullscreenSlide(currentFullscreenIndex);
+        }
+
+        function setFullscreenSlide(index) {
+            currentFullscreenIndex = index;
+            const fullscreenImage = document.getElementById('fullscreenImage');
+            const dots = document.querySelectorAll('.fullscreen-dot');
+            
+            fullscreenImage.src = currentFullscreenImages[index];
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        // Add click events to gallery items
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (!e.target.closest('.slider-btn') && !e.target.closest('.dot')) {
+                        openFullscreen(this);
+                    }
+                });
+            });
+        });
+
+        // Keyboard navigation for fullscreen
+        document.addEventListener('keydown', function(e) {
+            const fullscreenGallery = document.getElementById('fullscreenGallery');
+            if (fullscreenGallery.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeFullscreen();
+                } else if (e.key === 'ArrowLeft') {
+                    changeFullscreenSlide(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeFullscreenSlide(1);
+                }
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simple validation
+            if (!data.name || !data.phone) {
+                alert('Пожалуйста, заполните обязательные поля');
+                return;
+            }
+            
+            // Simulate form submission
+            alert('Спасибо за заявку! Мы свяжемся с вами в течение 1 дня для составления расчета.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Add some interactive effects
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+    </script>
+</body>
+</html>

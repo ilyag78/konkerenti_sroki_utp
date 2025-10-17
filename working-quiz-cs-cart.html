@@ -1,0 +1,2468 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Any-Home Quiz - CS-Cart Version</title>
+    <style>
+        /* CS-Cart адаптированные стили */
+        .anyhome-quiz-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .anyhome-quiz-container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin: 20px;
+            position: relative;
+        }
+
+        .anyhome-quiz-header {
+            background: linear-gradient(135deg, #C9A961 0%, #A08950 100%);
+            padding: 20px;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .anyhome-quiz-header h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        .anyhome-quiz-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .anyhome-quiz-close:hover {
+            opacity: 1;
+        }
+
+        .anyhome-quiz-content {
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .anyhome-quiz-step {
+            display: none;
+        }
+
+        .anyhome-quiz-step.active {
+            display: block;
+        }
+
+        .anyhome-quiz-step h2 {
+            color: #1A1A1A;
+            margin-bottom: 15px;
+            font-size: 28px;
+            font-weight: 300;
+            text-align: center;
+        }
+
+        .anyhome-quiz-step p {
+            color: #666666;
+            margin-bottom: 25px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .anyhome-quiz-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .anyhome-quiz-option-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .anyhome-quiz-option-card:hover {
+            border-color: #C9A961;
+            transform: translateY(-2px);
+        }
+
+        .anyhome-quiz-option-card.selected {
+            background: rgba(201, 169, 97, 0.1);
+            border-color: #C9A961;
+        }
+
+        .anyhome-quiz-option-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .anyhome-quiz-option-text {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1A1A1A;
+        }
+
+        /* Мобильные стили для блока комнат */
+        .anyhome-quiz-options-mobile {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .anyhome-quiz-option-card.compact {
+            padding: 12px 8px;
+            border-radius: 8px;
+        }
+
+        .anyhome-quiz-option-card.compact .anyhome-quiz-option-icon {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .anyhome-quiz-option-card.compact .anyhome-quiz-option-text {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .anyhome-quiz-form {
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .anyhome-quiz-form-group {
+            margin-bottom: 20px;
+        }
+
+        .anyhome-quiz-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #1A1A1A;
+        }
+
+        .anyhome-quiz-form-group input,
+        .anyhome-quiz-form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f8f9fa;
+            box-sizing: border-box;
+            margin-bottom: 0;
+            transition: all 0.3s ease;
+        }
+
+        .anyhome-quiz-form-group input:focus,
+        .anyhome-quiz-form-group select:focus {
+            outline: none;
+            border-color: #C9A961;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1);
+        }
+
+        .anyhome-quiz-navigation {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .anyhome-quiz-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .anyhome-quiz-btn.primary {
+            background: linear-gradient(135deg, #C9A961 0%, #A08950 100%);
+            color: white;
+        }
+
+        .anyhome-quiz-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 169, 97, 0.3);
+        }
+
+        .anyhome-quiz-btn.secondary {
+            background: #f8f9fa;
+            color: #666666;
+            border: 2px solid #e9ecef;
+        }
+
+        .anyhome-quiz-btn.secondary:hover {
+            background: #e9ecef;
+        }
+
+        .anyhome-quiz-progress {
+            width: 100%;
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .anyhome-quiz-progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #C9A961 0%, #A08950 100%);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        /* Стили для мебели */
+        .anyhome-quiz-category-section {
+            margin-bottom: 25px;
+        }
+
+        .anyhome-quiz-category-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #C9A961;
+        }
+
+        .anyhome-quiz-checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .anyhome-quiz-checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .anyhome-quiz-checkbox-item:hover {
+            background: #f8f9fa;
+        }
+
+        .anyhome-quiz-checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #C9A961;
+        }
+
+        .anyhome-quiz-checkbox-item label {
+            cursor: pointer;
+            flex: 1;
+            color: #1A1A1A;
+        }
+
+        /* Компактные стили для мебели */
+        .anyhome-quiz-category-section.compact {
+            margin-bottom: 15px;
+        }
+
+        .anyhome-quiz-category-title.compact {
+            font-size: 14px;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+        }
+
+        .anyhome-quiz-checkbox-group.compact {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+        }
+
+        .anyhome-quiz-checkbox-item.compact {
+            padding: 8px;
+            margin-bottom: 4px;
+        }
+
+        .anyhome-quiz-checkbox-item.compact input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        .anyhome-quiz-checkbox-item.compact label {
+            font-size: 12px;
+        }
+
+        /* Стили для карточек мебели */
+        .anyhome-quiz-furniture-mobile {
+            margin-bottom: 20px;
+        }
+
+        .anyhome-quiz-furniture-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .anyhome-quiz-furniture-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .anyhome-quiz-furniture-card:hover {
+            border-color: #C9A961;
+            transform: translateY(-2px);
+        }
+
+        .anyhome-quiz-furniture-card.selected {
+            background: rgba(201, 169, 97, 0.1);
+            border-color: #C9A961;
+        }
+
+        .anyhome-quiz-furniture-icon {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .anyhome-quiz-furniture-text {
+            font-size: 10px;
+            font-weight: 500;
+            color: #1A1A1A;
+            line-height: 1.2;
+        }
+
+        /* Стили для стилей интерьера */
+        .anyhome-quiz-style-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .anyhome-quiz-style-card {
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: white;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .anyhome-quiz-style-card:hover {
+            border-color: #C9A961;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(201, 169, 97, 0.2);
+        }
+
+        .anyhome-quiz-style-card.selected {
+            border-color: #C9A961;
+            background: linear-gradient(135deg, rgba(201, 169, 97, 0.05) 0%, rgba(201, 169, 97, 0.1) 100%);
+            box-shadow: 0 4px 15px rgba(201, 169, 97, 0.3);
+        }
+
+        .anyhome-quiz-style-image {
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(135deg, #f8f9fa, #E0E0E0);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .anyhome-quiz-style-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 4px;
+        }
+
+        .anyhome-quiz-style-desc {
+            font-size: 11px;
+            color: #666666;
+            line-height: 1.2;
+            flex: 1;
+        }
+
+        /* Стили для экрана успеха */
+        .anyhome-quiz-success-message {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .anyhome-quiz-success-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+            color: #C9A961;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .anyhome-quiz-success-message h2 {
+            color: #1A1A1A;
+            margin-bottom: 15px;
+            font-size: 36px;
+            font-weight: 300;
+        }
+
+        .anyhome-quiz-success-message p {
+            color: #666666;
+            margin-bottom: 25px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Кнопки выбора способа связи */
+        .anyhome-quiz-contact-method-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .anyhome-quiz-contact-method-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #E8E0D0;
+            background: white;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .anyhome-quiz-contact-method-btn.active {
+            border-color: #C9A961;
+            background: rgba(201, 169, 97, 0.1);
+            color: #C9A961;
+        }
+
+        .anyhome-quiz-contact-method-btn:hover {
+            border-color: #C9A961;
+        }
+
+        /* Кнопки действий на финальной странице */
+        .anyhome-quiz-action-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .anyhome-quiz-action-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .anyhome-quiz-action-btn.whatsapp-btn {
+            background: #25D366;
+            color: white;
+        }
+
+        .anyhome-quiz-action-btn.whatsapp-btn:hover {
+            background: #128C7E;
+        }
+
+        .anyhome-quiz-action-btn.call-btn {
+            background: #C9A961;
+            color: white;
+        }
+
+        .anyhome-quiz-action-btn.call-btn:hover {
+            background: #A08950;
+        }
+
+        /* Компактные стили для экрана успеха */
+        .anyhome-quiz-success-message.compact {
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .anyhome-quiz-success-description {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        .anyhome-quiz-compact-process {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .anyhome-quiz-compact-item {
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        .anyhome-quiz-compact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .anyhome-quiz-compact-contact {
+            background: white;
+            border: 1px solid #E8E0D0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .anyhome-quiz-compact-contact div {
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        .anyhome-quiz-compact-contact div:last-child {
+            margin-bottom: 0;
+        }
+
+        .anyhome-quiz-compact-contact strong {
+            color: #C9A961;
+        }
+
+        .anyhome-quiz-compact-actions {
+            margin: 20px 0;
+        }
+
+        .anyhome-quiz-success-footer {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #E8E0D0;
+        }
+
+        .anyhome-quiz-footer-text {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        /* Премиальные стили для первого экрана */
+        .anyhome-quiz-welcome-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.1) rotate(5deg); opacity: 0.8; }
+        }
+
+        .anyhome-quiz-welcome-header h2 {
+            color: #1A1A1A;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 1.2;
+        }
+
+        .anyhome-quiz-welcome-subtitle {
+            color: #666;
+            font-size: 14px;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .anyhome-quiz-premium-benefits {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .anyhome-quiz-benefit-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border: 1px solid #E8E0D0;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anyhome-quiz-benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #C9A961 0%, #A08950 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .anyhome-quiz-benefit-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201, 169, 97, 0.15);
+            border-color: #C9A961;
+        }
+
+        .anyhome-quiz-benefit-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .anyhome-quiz-benefit-icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+            color: #C9A961;
+        }
+
+        .anyhome-quiz-benefit-content h4 {
+            color: #1A1A1A;
+            margin: 0 0 4px 0;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .anyhome-quiz-benefit-content p {
+            color: #666;
+            margin: 0;
+            font-size: 11px;
+            line-height: 1.3;
+        }
+
+        .anyhome-quiz-welcome-footer {
+            text-align: center;
+        }
+
+        .anyhome-quiz-trust-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: linear-gradient(135deg, rgba(201, 169, 97, 0.05) 0%, rgba(201, 169, 97, 0.1) 100%);
+            border-radius: 8px;
+            border: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .anyhome-quiz-trust-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .anyhome-quiz-trust-number {
+            font-size: 16px;
+            font-weight: 700;
+            color: #C9A961;
+            margin-bottom: 2px;
+        }
+
+        .anyhome-quiz-trust-text {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .anyhome-quiz-btn.premium-btn {
+            background: linear-gradient(135deg, #C9A961 0%, #A08950 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(201, 169, 97, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anyhome-quiz-btn.premium-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .anyhome-quiz-btn.premium-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 169, 97, 0.4);
+        }
+
+        .anyhome-quiz-btn.premium-btn:hover::before {
+            left: 100%;
+        }
+
+        .anyhome-quiz-btn-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .anyhome-quiz-btn-arrow {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .anyhome-quiz-btn.premium-btn:hover .anyhome-quiz-btn-arrow {
+            transform: translateX(4px);
+        }
+
+        /* Мобильная адаптация - Планшеты (768px) */
+        @media (max-width: 768px) {
+            .anyhome-quiz-container {
+                max-width: 95%;
+                margin: 15px auto;
+                border-radius: 16px;
+            }
+            
+            .anyhome-quiz-content {
+                padding: 24px;
+                max-height: 85vh;
+                overflow-y: auto;
+            }
+            
+            .anyhome-quiz-step h2 {
+                font-size: 26px;
+                line-height: 1.2;
+                margin-bottom: 12px;
+            }
+            
+            .anyhome-quiz-step p {
+                font-size: 16px;
+                line-height: 1.4;
+                margin-bottom: 20px;
+            }
+            
+            .anyhome-quiz-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .anyhome-quiz-options-mobile {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+                margin-bottom: 15px;
+            }
+            
+            .anyhome-quiz-option-card.compact {
+                padding: 10px 6px;
+            }
+            
+            .anyhome-quiz-option-card.compact .anyhome-quiz-option-icon {
+                font-size: 18px;
+                margin-bottom: 3px;
+            }
+            
+            .anyhome-quiz-option-card.compact .anyhome-quiz-option-text {
+                font-size: 11px;
+            }
+            
+            .anyhome-quiz-navigation {
+                flex-direction: column;
+            }
+            
+            .anyhome-quiz-style-options {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            
+            .anyhome-quiz-style-card {
+                min-height: 120px;
+                padding: 10px;
+            }
+            
+            .anyhome-quiz-style-image {
+                height: 40px;
+                font-size: 20px;
+            }
+            
+            .anyhome-quiz-style-name {
+                font-size: 13px;
+            }
+            
+            .anyhome-quiz-style-desc {
+                font-size: 10px;
+            }
+            
+            .anyhome-quiz-welcome-header {
+                margin-bottom: 8px;
+            }
+            
+            .anyhome-quiz-welcome-header h2 {
+                font-size: 16px;
+                margin-bottom: 4px;
+                line-height: 1.1;
+            }
+            
+            .anyhome-quiz-welcome-subtitle {
+                font-size: 11px;
+                margin-bottom: 0;
+            }
+            
+            .anyhome-quiz-premium-benefits {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 4px;
+                margin-bottom: 10px;
+            }
+            
+            .anyhome-quiz-benefit-card {
+                padding: 6px;
+                border-radius: 6px;
+            }
+            
+            .anyhome-quiz-benefit-icon {
+                font-size: 14px;
+                margin-bottom: 2px;
+            }
+            
+            .anyhome-quiz-benefit-content h4 {
+                font-size: 10px;
+                margin-bottom: 1px;
+                line-height: 1.1;
+            }
+            
+            .anyhome-quiz-benefit-content p {
+                font-size: 8px;
+                line-height: 1.1;
+            }
+            
+            .anyhome-quiz-trust-indicators {
+                flex-direction: row;
+                gap: 6px;
+                padding: 6px;
+                margin-bottom: 10px;
+                border-radius: 6px;
+            }
+            
+            .anyhome-quiz-trust-item {
+                flex-direction: column;
+                align-items: center;
+                gap: 1px;
+            }
+            
+            .anyhome-quiz-trust-number {
+                font-size: 12px;
+            }
+            
+            .anyhome-quiz-trust-text {
+                font-size: 8px;
+            }
+            
+            .anyhome-quiz-btn.premium-btn {
+                padding: 10px 16px;
+                font-size: 13px;
+                margin-top: 0;
+            }
+            
+            /* Кнопки выбора способа связи на мобильных */
+            .anyhome-quiz-contact-method-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .anyhome-quiz-contact-method-btn {
+                padding: 14px 16px;
+                font-size: 15px;
+            }
+            
+            /* Кнопки действий на мобильных */
+            .anyhome-quiz-action-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .anyhome-quiz-action-btn {
+                padding: 14px 16px;
+                font-size: 15px;
+            }
+            
+            /* Компактные стили на мобильных */
+            .anyhome-quiz-success-message.compact {
+                padding: 16px;
+                max-width: 100%;
+            }
+            
+            .anyhome-quiz-compact-contact {
+                margin: 16px 0;
+                padding: 16px;
+            }
+            
+            .anyhome-quiz-compact-contact div {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+            
+            .anyhome-quiz-compact-process {
+                margin: 16px 0;
+                padding: 16px;
+            }
+            
+            .anyhome-quiz-compact-item {
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+            
+            .anyhome-quiz-compact-actions {
+                margin: 16px 0;
+            }
+            
+            .anyhome-quiz-success-footer {
+                margin-top: 16px;
+                padding-top: 12px;
+            }
+        }
+
+        /* Медиа-запрос для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .anyhome-quiz-container {
+                max-width: 98%;
+                margin: 5px auto;
+            }
+            
+            .anyhome-quiz-content {
+                padding: 15px 15px 15px 15px;
+            }
+            
+            .anyhome-quiz-step h2 {
+                font-size: 20px;
+            }
+            
+            .anyhome-quiz-step p {
+                font-size: 14px;
+            }
+            
+            .anyhome-quiz-contact-method-btn,
+            .anyhome-quiz-action-btn {
+                padding: 12px 14px;
+                font-size: 14px;
+            }
+            
+            .anyhome-quiz-compact-contact,
+            .anyhome-quiz-compact-process {
+                padding: 12px;
+                margin: 12px 0;
+            }
+            
+            .anyhome-quiz-compact-contact div,
+            .anyhome-quiz-compact-item {
+                font-size: 13px;
+            }
+            
+            .anyhome-quiz-success-message.compact {
+                padding: 12px;
+            }
+            
+            /* Чекбоксы на очень маленьких экранах */
+            .anyhome-quiz-checkbox-item {
+                padding: 10px;
+                margin-bottom: 6px;
+            }
+            
+            .anyhome-quiz-checkbox-item input[type="checkbox"] {
+                width: 18px;
+                height: 18px;
+                margin-right: 10px;
+            }
+            
+            .anyhome-quiz-checkbox-item label {
+                font-size: 13px;
+            }
+            
+            .anyhome-quiz-category-title {
+                font-size: 16px;
+                margin-bottom: 12px;
+            }
+            
+            .anyhome-quiz-category-title.compact {
+                font-size: 12px;
+                margin-bottom: 6px;
+            }
+            
+            .anyhome-quiz-checkbox-group.compact {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+            
+            .anyhome-quiz-checkbox-item.compact {
+                padding: 6px;
+                margin-bottom: 3px;
+            }
+            
+            .anyhome-quiz-checkbox-item.compact input[type="checkbox"] {
+                width: 14px;
+                height: 14px;
+                margin-right: 6px;
+            }
+            
+            .anyhome-quiz-checkbox-item.compact label {
+                font-size: 11px;
+            }
+            
+            .anyhome-quiz-furniture-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+            
+            .anyhome-quiz-furniture-card {
+                padding: 6px;
+            }
+            
+            .anyhome-quiz-furniture-icon {
+                font-size: 14px;
+                margin-bottom: 3px;
+            }
+            
+            .anyhome-quiz-furniture-text {
+                font-size: 9px;
+            }
+            
+            /* Форма на очень маленьких экранах */
+            .anyhome-quiz-form-group input,
+            .anyhome-quiz-form-group select {
+                padding: 12px;
+                font-size: 16px; /* Предотвращает зум на iOS */
+            }
+            
+            .anyhome-quiz-form {
+                margin-bottom: 20px;
+            }
+            
+            .anyhome-quiz-navigation {
+                gap: 10px;
+            }
+            
+            .anyhome-quiz-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            /* Иконки на очень маленьких экранах */
+            .anyhome-quiz-option-icon {
+                font-size: 28px;
+                margin-bottom: 8px;
+            }
+            
+            .anyhome-quiz-option-text {
+                font-size: 13px;
+            }
+            
+            .anyhome-quiz-option-card {
+                padding: 12px;
+            }
+            
+            .anyhome-quiz-options-mobile {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 4px;
+                margin-bottom: 12px;
+            }
+            
+            .anyhome-quiz-option-card.compact {
+                padding: 8px 4px;
+            }
+            
+            .anyhome-quiz-option-card.compact .anyhome-quiz-option-icon {
+                font-size: 16px;
+                margin-bottom: 2px;
+            }
+            
+            .anyhome-quiz-option-card.compact .anyhome-quiz-option-text {
+                font-size: 10px;
+            }
+            
+            .anyhome-quiz-welcome-header {
+                margin-bottom: 8px;
+            }
+            
+            .anyhome-quiz-welcome-header h2 {
+                font-size: 16px;
+                margin-bottom: 4px;
+                line-height: 1.1;
+            }
+            
+            .anyhome-quiz-welcome-subtitle {
+                font-size: 11px;
+            }
+            
+            .anyhome-quiz-category-title.compact {
+                font-size: 11px;
+                margin-bottom: 4px;
+            }
+            
+            .anyhome-quiz-checkbox-group.compact {
+                grid-template-columns: 1fr;
+                gap: 3px;
+            }
+            
+            .anyhome-quiz-checkbox-item.compact {
+                padding: 4px;
+                margin-bottom: 2px;
+            }
+            
+            .anyhome-quiz-checkbox-item.compact input[type="checkbox"] {
+                width: 12px;
+                height: 12px;
+                margin-right: 4px;
+            }
+            
+            .anyhome-quiz-checkbox-item.compact label {
+                font-size: 10px;
+            }
+            
+            .anyhome-quiz-furniture-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 4px;
+            }
+            
+            .anyhome-quiz-furniture-card {
+                padding: 4px;
+            }
+            
+            .anyhome-quiz-furniture-icon {
+                font-size: 12px;
+                margin-bottom: 2px;
+            }
+            
+            .anyhome-quiz-furniture-text {
+                font-size: 8px;
+            }
+            
+            .anyhome-quiz-premium-benefits {
+                gap: 4px;
+                margin-bottom: 12px;
+            }
+            
+            .anyhome-quiz-benefit-card {
+                padding: 6px;
+            }
+            
+            .anyhome-quiz-benefit-icon {
+                font-size: 16px;
+                margin-bottom: 3px;
+            }
+            
+            .anyhome-quiz-benefit-content h4 {
+                font-size: 11px;
+                margin-bottom: 2px;
+            }
+            
+            .anyhome-quiz-benefit-content p {
+                font-size: 9px;
+            }
+            
+            .anyhome-quiz-trust-indicators {
+                padding: 6px;
+                gap: 6px;
+                margin-bottom: 12px;
+            }
+            
+            .anyhome-quiz-trust-number {
+                font-size: 12px;
+            }
+            
+            .anyhome-quiz-trust-text {
+                font-size: 8px;
+            }
+            
+            .anyhome-quiz-btn.premium-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- CS-Cart адаптированный квиз -->
+    <div class="anyhome-quiz-overlay" id="anyhome-quiz-overlay">
+        <div class="anyhome-quiz-container">
+            <div class="anyhome-quiz-header">
+                <h2>Any-Home - Калькулятор стоимости комплектации</h2>
+                <button class="anyhome-quiz-close" onclick="anyhomeCloseQuiz()">&times;</button>
+            </div>
+            
+            <div class="anyhome-quiz-content">
+                <div class="anyhome-quiz-progress">
+                    <div class="anyhome-quiz-progress-bar" id="anyhome-quiz-progress-bar"></div>
+                </div>
+
+                <!-- Step 1: Welcome -->
+                <div class="anyhome-quiz-step active" data-step="1">
+                    <div class="anyhome-quiz-welcome-header">
+                        <h2>Персональный расчет стоимости<br>комплектации</h2>
+                        <p class="anyhome-quiz-welcome-subtitle">Получите смету за 2 минуты</p>
+                    </div>
+                    
+                    <div class="anyhome-quiz-premium-benefits">
+                        <div class="anyhome-quiz-benefit-card">
+                            <div class="anyhome-quiz-benefit-icon">📊</div>
+                            <div class="anyhome-quiz-benefit-content">
+                                <h4>Детальный расчет</h4>
+                                <p>Точная стоимость каждого элемента</p>
+                            </div>
+                        </div>
+                        <div class="anyhome-quiz-benefit-card">
+                            <div class="anyhome-quiz-benefit-icon">🎨</div>
+                            <div class="anyhome-quiz-benefit-content">
+                                <h4>3D-визуализация</h4>
+                                <p>Ваш интерьер с нашей мебелью</p>
+                            </div>
+                        </div>
+                        <div class="anyhome-quiz-benefit-card">
+                            <div class="anyhome-quiz-benefit-icon">💰</div>
+                            <div class="anyhome-quiz-benefit-content">
+                                <h4>Эксклюзивная скидка</h4>
+                                <p>До 15% для участников квиза</p>
+                            </div>
+                        </div>
+                        <div class="anyhome-quiz-benefit-card">
+                            <div class="anyhome-quiz-benefit-icon">👨‍💼</div>
+                            <div class="anyhome-quiz-benefit-content">
+                                <h4>Консультация эксперта</h4>
+                                <p>Персональные рекомендации</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="anyhome-quiz-welcome-footer">
+                        <div class="anyhome-quiz-trust-indicators">
+                            <div class="anyhome-quiz-trust-item">
+                                <span class="anyhome-quiz-trust-number">2016</span>
+                                <span class="anyhome-quiz-trust-text">год основания</span>
+                            </div>
+                            <div class="anyhome-quiz-trust-item">
+                                <span class="anyhome-quiz-trust-number">500+</span>
+                                <span class="anyhome-quiz-trust-text">довольных клиентов</span>
+                            </div>
+                            <div class="anyhome-quiz-trust-item">
+                                <span class="anyhome-quiz-trust-number">24/7</span>
+                                <span class="anyhome-quiz-trust-text">поддержка</span>
+                            </div>
+                        </div>
+                        
+                        <div class="anyhome-quiz-navigation">
+                            <button class="anyhome-quiz-btn premium-btn" onclick="anyhomeNextStep()">
+                                <span class="anyhome-quiz-btn-text">Получить расчет</span>
+                                <span class="anyhome-quiz-btn-arrow">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Rooms -->
+                <div class="anyhome-quiz-step" data-step="2">
+                    <h2>Что планируете комплектовать?</h2>
+                    <div class="anyhome-quiz-options-mobile">
+                        <div class="anyhome-quiz-option-card compact" data-value="living" data-type="rooms" onclick="anyhomeSelectOption(this, 'rooms')">
+                            <div class="anyhome-quiz-option-icon">🛋️</div>
+                            <div class="anyhome-quiz-option-text">Гостиная</div>
+                        </div>
+                        <div class="anyhome-quiz-option-card compact" data-value="bedroom" data-type="rooms" onclick="anyhomeSelectOption(this, 'rooms')">
+                            <div class="anyhome-quiz-option-icon">🛏️</div>
+                            <div class="anyhome-quiz-option-text">Спальня</div>
+                        </div>
+                        <div class="anyhome-quiz-option-card compact" data-value="kitchen" data-type="rooms" onclick="anyhomeSelectOption(this, 'rooms')">
+                            <div class="anyhome-quiz-option-icon">🍳</div>
+                            <div class="anyhome-quiz-option-text">Кухня-столовая</div>
+                        </div>
+                        <div class="anyhome-quiz-option-card compact" data-value="office" data-type="rooms" onclick="anyhomeSelectOption(this, 'rooms')">
+                            <div class="anyhome-quiz-option-icon">💼</div>
+                            <div class="anyhome-quiz-option-text">Кабинет</div>
+                        </div>
+                        <div class="anyhome-quiz-option-card compact" data-value="hallway" data-type="rooms" onclick="anyhomeSelectOption(this, 'rooms')">
+                            <div class="anyhome-quiz-option-icon">🚪</div>
+                            <div class="anyhome-quiz-option-text">Прихожая</div>
+                        </div>
+                        <div class="anyhome-quiz-option-card compact" data-value="all" data-type="rooms" onclick="anyhomeSelectOption(this, 'rooms')">
+                            <div class="anyhome-quiz-option-icon">🏡</div>
+                            <div class="anyhome-quiz-option-text">Вся квартира/дом</div>
+                        </div>
+                    </div>
+                    <div class="anyhome-quiz-navigation">
+                        <button class="anyhome-quiz-btn secondary" onclick="anyhomePrevStep()">Назад</button>
+                        <button class="anyhome-quiz-btn primary" onclick="anyhomeNextStep()">Далее</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Area -->
+                <div class="anyhome-quiz-step" data-step="3">
+                    <h2>Какова общая площадь помещений для комплектации?</h2>
+                    <div class="anyhome-quiz-form">
+                        <div class="anyhome-quiz-form-group">
+                            <input type="number" id="anyhome-area-input" placeholder="Укажите площадь: ___ м²" min="1" max="1000">
+                        </div>
+                    </div>
+                    <div class="anyhome-quiz-navigation">
+                        <button class="anyhome-quiz-btn secondary" onclick="anyhomePrevStep()">Назад</button>
+                        <button class="anyhome-quiz-btn primary" onclick="anyhomeNextStep()">Далее</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Furniture -->
+                <div class="anyhome-quiz-step" data-step="4">
+                    <h2>Какая мебель вас интересует?</h2>
+                    
+                    <div class="anyhome-quiz-furniture-mobile">
+                        <div class="anyhome-quiz-category-section compact">
+                            <div class="anyhome-quiz-category-title compact">📚 Корпусная мебель</div>
+                            <div class="anyhome-quiz-furniture-grid">
+                                <div class="anyhome-quiz-furniture-card" data-value="shelves" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">📚</div>
+                                    <div class="anyhome-quiz-furniture-text">Стеллажи и библиотечные системы</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="tv" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">📺</div>
+                                    <div class="anyhome-quiz-furniture-text">Медиа-консоли и ТВ-тумбы</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="dressers" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">🗄️</div>
+                                    <div class="anyhome-quiz-furniture-text">Комоды и тумбы</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="tables" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">🪑</div>
+                                    <div class="anyhome-quiz-furniture-text">Столы и консоли</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="anyhome-quiz-category-section compact">
+                            <div class="anyhome-quiz-category-title compact">🍳 Кухня</div>
+                            <div class="anyhome-quiz-furniture-grid">
+                                <div class="anyhome-quiz-furniture-card" data-value="kitchen-furniture" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">🍳</div>
+                                    <div class="anyhome-quiz-furniture-text">Кухонная мебель</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="island" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">🏝️</div>
+                                    <div class="anyhome-quiz-furniture-text">Остров и барная стойка</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="storage" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">📦</div>
+                                    <div class="anyhome-quiz-furniture-text">Системы хранения</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="dining" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">🍽️</div>
+                                    <div class="anyhome-quiz-furniture-text">Обеденная группа</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="anyhome-quiz-category-section compact">
+                            <div class="anyhome-quiz-category-title compact">👔 Гардеробная</div>
+                            <div class="anyhome-quiz-furniture-grid">
+                                <div class="anyhome-quiz-furniture-card" data-value="wardrobes" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">👔</div>
+                                    <div class="anyhome-quiz-furniture-text">Шкафы и стеллажные системы</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="islands" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">🏝️</div>
+                                    <div class="anyhome-quiz-furniture-text">Островные модули</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="lingerie" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">👕</div>
+                                    <div class="anyhome-quiz-furniture-text">Комоды для белья</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="mirrors" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">🪞</div>
+                                    <div class="anyhome-quiz-furniture-text">Зеркала и пуфы</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="anyhome-quiz-category-section compact">
+                            <div class="anyhome-quiz-category-title compact">🛋 Мягкая мебель</div>
+                            <div class="anyhome-quiz-furniture-grid">
+                                <div class="anyhome-quiz-furniture-card" data-value="sofas" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">🛋️</div>
+                                    <div class="anyhome-quiz-furniture-text">Диваны и кушетки</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="armchairs" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">🪑</div>
+                                    <div class="anyhome-quiz-furniture-text">Кресла и шезлонги</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="ottomans" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">🪑</div>
+                                    <div class="anyhome-quiz-furniture-text">Пуфы и банкетки</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="anyhome-quiz-category-section compact">
+                            <div class="anyhome-quiz-category-title compact">💡 Освещение</div>
+                            <div class="anyhome-quiz-furniture-grid">
+                                <div class="anyhome-quiz-furniture-card" data-value="chandeliers" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">💡</div>
+                                    <div class="anyhome-quiz-furniture-text">Люстры</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="sconces" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">🕯️</div>
+                                    <div class="anyhome-quiz-furniture-text">Бра</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="floor-lamps" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">🔦</div>
+                                    <div class="anyhome-quiz-furniture-text">Торшеры</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="table-lamps" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">💡</div>
+                                    <div class="anyhome-quiz-furniture-text">Настольные лампы</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="anyhome-quiz-category-section compact">
+                            <div class="anyhome-quiz-category-title compact">✨ Декор с латунью</div>
+                            <div class="anyhome-quiz-furniture-grid">
+                                <div class="anyhome-quiz-furniture-card" data-value="decor-mirrors" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">🪞</div>
+                                    <div class="anyhome-quiz-furniture-text">Зеркала</div>
+                                </div>
+                                <div class="anyhome-quiz-furniture-card" data-value="accessories" onclick="anyhomeSelectFurniture(this)">
+                                    <div class="anyhome-quiz-furniture-icon">✨</div>
+                                    <div class="anyhome-quiz-furniture-text">Аксессуары</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="anyhome-quiz-navigation">
+                        <button class="anyhome-quiz-btn secondary" onclick="anyhomePrevStep()">← Назад</button>
+                        <button class="anyhome-quiz-btn primary" onclick="anyhomeNextStep()">Далее →</button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Style -->
+                <div class="anyhome-quiz-step" data-step="5">
+                    <h2>В каком стиле ваш интерьер?</h2>
+                    <p class="subtitle">Это поможет нам подобрать идеальные решения</p>
+                    
+                    <div class="anyhome-quiz-style-options">
+                        <div class="anyhome-quiz-style-card" onclick="anyhomeSelectStyle(this)" data-style="modern">
+                            <div class="anyhome-quiz-style-image">✨</div>
+                            <div class="anyhome-quiz-style-name">Неоклассика</div>
+                            <div class="anyhome-quiz-style-desc">Премиальный стиль с латунными акцентами</div>
+                        </div>
+                        <div class="anyhome-quiz-style-card" onclick="anyhomeSelectStyle(this)" data-style="artdeco">
+                            <div class="anyhome-quiz-style-image">🏛️</div>
+                            <div class="anyhome-quiz-style-name">Ар-деко</div>
+                            <div class="anyhome-quiz-style-desc">Переосмысление классики 20-х годов</div>
+                        </div>
+                        <div class="anyhome-quiz-style-card" onclick="anyhomeSelectStyle(this)" data-style="contemporary">
+                            <div class="anyhome-quiz-style-image">🎨</div>
+                            <div class="anyhome-quiz-style-name">Современная классика</div>
+                            <div class="anyhome-quiz-style-desc">Гармония традиций и современности</div>
+                        </div>
+                        <div class="anyhome-quiz-style-card" onclick="anyhomeSelectStyle(this)" data-style="minimalist">
+                            <div class="anyhome-quiz-style-image">◯</div>
+                            <div class="anyhome-quiz-style-name">Минимализм</div>
+                            <div class="anyhome-quiz-style-desc">Лаконичность с теплыми металлами</div>
+                        </div>
+                        <div class="anyhome-quiz-style-card" onclick="anyhomeSelectStyle(this)" data-style="industrial">
+                            <div class="anyhome-quiz-style-image">⚙️</div>
+                            <div class="anyhome-quiz-style-name">Индустриальный</div>
+                            <div class="anyhome-quiz-style-desc">Урбанистический шик</div>
+                        </div>
+                        <div class="anyhome-quiz-style-card" onclick="anyhomeSelectStyle(this)" data-style="undecided">
+                            <div class="anyhome-quiz-style-image">💭</div>
+                            <div class="anyhome-quiz-style-name">Еще не определился</div>
+                            <div class="anyhome-quiz-style-desc">Нужна консультация</div>
+                        </div>
+                    </div>
+                    
+                    <div class="anyhome-quiz-navigation">
+                        <button class="anyhome-quiz-btn secondary" onclick="anyhomePrevStep()">← Назад</button>
+                        <button class="anyhome-quiz-btn primary" onclick="anyhomeNextStep()">Далее →</button>
+                    </div>
+                </div>
+
+                <!-- Step 6: Contact -->
+                <div class="anyhome-quiz-step" data-step="6">
+                    <h2>Оставьте контакты для получения расчета</h2>
+                    <div class="anyhome-quiz-form">
+                        <div class="anyhome-quiz-form-group">
+                            <label for="anyhome-name-input">Ваше имя</label>
+                            <input type="text" id="anyhome-name-input" placeholder="Ваше имя" required>
+                        </div>
+                        <div class="anyhome-quiz-form-group">
+                            <label for="anyhome-phone-input">Номер телефона</label>
+                            <input type="tel" id="anyhome-phone-input" placeholder="+7 (___) ___-__-__" pattern="\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}" required>
+                        </div>
+                        <div class="anyhome-quiz-form-group">
+                            <label>Способ связи:</label>
+                            <div class="anyhome-quiz-contact-method-buttons">
+                                <button type="button" class="anyhome-quiz-contact-method-btn active" data-method="whatsapp" onclick="anyhomeSelectContactMethod(this)">
+                                    📱 WhatsApp
+                                </button>
+                                <button type="button" class="anyhome-quiz-contact-method-btn" data-method="phone" onclick="anyhomeSelectContactMethod(this)">
+                                    📞 Звонок
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="anyhome-quiz-navigation">
+                        <button class="anyhome-quiz-btn secondary" onclick="anyhomePrevStep()">← Назад</button>
+                        <button class="anyhome-quiz-btn primary" onclick="anyhomeSubmitQuiz()">Получить расчет стоимости</button>
+                    </div>
+                </div>
+
+                <!-- Success Step -->
+                <div class="anyhome-quiz-step" data-step="7">
+                    <div class="anyhome-quiz-success-message compact">
+                        <div class="anyhome-quiz-success-icon">✨</div>
+                        <h2>Спасибо, <span id="anyhome-userName">Имя</span>!</h2>
+                        <p class="anyhome-quiz-success-description">Мы уже начали готовить для вас персональное предложение премиальной комплектации.</p>
+                        
+                        <div class="anyhome-quiz-compact-process">
+                            <div class="anyhome-quiz-compact-item">🎯 Наши эксперты изучат ваши пожелания</div>
+                            <div class="anyhome-quiz-compact-item">💎 Подготовим персональные предложения</div>
+                            <div class="anyhome-quiz-compact-item">📞 Свяжемся с вами в течение 2 часов</div>
+                        </div>
+                        
+                        <div class="anyhome-quiz-compact-contact">
+                            <div>📍 <strong>Шоу-рум:</strong> Большой Саввинский пер. 12, стр. 8</div>
+                            <div>⏰ <strong>Работаем:</strong> ежедневно с 10:00 до 20:00</div>
+                            <div>📞 <strong>Телефон:</strong> +7 (495) 120-35-42</div>
+                        </div>
+                        
+                        <div class="anyhome-quiz-compact-actions">
+                            <div class="anyhome-quiz-action-buttons">
+                                <button class="anyhome-quiz-action-btn whatsapp-btn" onclick="anyhomeOpenWhatsApp()">
+                                    📱 WhatsApp
+                                </button>
+                                <button class="anyhome-quiz-action-btn call-btn" onclick="anyhomeMakeCall()">
+                                    📞 Позвонить
+                                </button>
+                            </div>
+                            <button class="anyhome-quiz-btn primary" onclick="anyhomeCloseQuiz()">Закрыть</button>
+                        </div>
+                        
+                        <div class="anyhome-quiz-success-footer">
+                            <p class="anyhome-quiz-footer-text">Создаем интерьеры мечты с 2016 года</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CS-Cart адаптированный JavaScript
+        (function() {
+            'use strict';
+            
+            // Настройки квиза
+            const BOT_TOKEN = '8272787786:AAHhdBCZvk1B30ZaVvWIttRWBGuwF64gdaI';
+            const CHAT_ID = '384321326';
+            
+            // Яндекс.Метрика
+            const YANDEX_METRIKA_ID = '43640809'; // ID счетчика Яндекс.Метрики
+            
+            // Состояние квиза
+            let anyhomeQuizState = {
+                currentStep: 1,
+                totalSteps: 6,
+                backButtonClicks: 0,
+                data: {
+                    rooms: [],
+                    area: '',
+                    furniture: [],
+                    style: '',
+                    timeline: '',
+                    contact: {
+                        name: '',
+                        phone: '',
+                        method: 'whatsapp'
+                    }
+                }
+            };
+
+            // Инициализация квиза
+            function anyhomeInitQuiz() {
+                // Инициализация сессии
+                if (!sessionStorage.getItem('anyhome-session-start')) {
+                    sessionStorage.setItem('anyhome-session-start', new Date().toISOString());
+                }
+                
+                // Проверяем, не запускался ли квиз уже в этой сессии
+                if (sessionStorage.getItem('anyhome-quiz-shown') === 'true') {
+                    console.log('Квиз уже показывался в этой сессии');
+                    return;
+                }
+                
+                // Автозапуск через 30 секунд
+                setTimeout(anyhomeShowQuiz, 1000);
+                
+                // Маска для телефона
+                const phoneInput = document.getElementById('anyhome-phone-input');
+                if (phoneInput) {
+                    phoneInput.addEventListener('input', anyhomeFormatPhone);
+                }
+            }
+
+            // Показать квиз
+            function anyhomeShowQuiz() {
+                // Проверяем еще раз перед показом
+                if (sessionStorage.getItem('anyhome-quiz-shown') === 'true') {
+                    return;
+                }
+                
+                // Сохраняем время запуска квиза
+                sessionStorage.setItem('anyhome-quiz-start', new Date().toISOString());
+                
+                const overlay = document.getElementById('anyhome-quiz-overlay');
+                if (overlay) {
+                    overlay.style.display = 'flex';
+                    anyhomeUpdateProgress();
+                    
+                    // Сохраняем статус, что квиз был показан
+                    sessionStorage.setItem('anyhome-quiz-shown', 'true');
+                    console.log('Квиз показан, статус сохранен в сессии');
+                }
+            }
+
+            // Скрыть квиз
+            function anyhomeCloseQuiz() {
+                const overlay = document.getElementById('anyhome-quiz-overlay');
+                if (overlay) {
+                    overlay.style.display = 'none';
+                }
+            }
+
+            // Следующий шаг
+            function anyhomeNextStep() {
+                if (anyhomeValidateStep()) {
+                    anyhomeSaveStepData();
+                    
+                    // Отправить уведомление о начале квиза (только при переходе с первого шага)
+                    if (anyhomeQuizState.currentStep === 1) {
+                        anyhomeSendStartNotification();
+                    }
+                    
+                    if (anyhomeQuizState.currentStep < anyhomeQuizState.totalSteps) {
+                        anyhomeQuizState.currentStep++;
+                        anyhomeShowStep();
+                        anyhomeUpdateProgress();
+                    }
+                }
+            }
+
+            // Предыдущий шаг
+            function anyhomePrevStep() {
+                if (anyhomeQuizState.currentStep > 1) {
+                    anyhomeQuizState.currentStep--;
+                    anyhomeQuizState.backButtonClicks++;
+                    anyhomeShowStep();
+                    anyhomeUpdateProgress();
+                }
+            }
+
+            // Показать текущий шаг
+            function anyhomeShowStep() {
+                const steps = document.querySelectorAll('.anyhome-quiz-step');
+                steps.forEach(step => {
+                    step.classList.remove('active');
+                });
+                
+                const currentStep = document.querySelector(`[data-step="${anyhomeQuizState.currentStep}"]`);
+                if (currentStep) {
+                    currentStep.classList.add('active');
+                }
+            }
+
+            // Обновить прогресс
+            function anyhomeUpdateProgress() {
+                const progressBar = document.getElementById('anyhome-quiz-progress-bar');
+                if (progressBar) {
+                    const progress = (anyhomeQuizState.currentStep / anyhomeQuizState.totalSteps) * 100;
+                    progressBar.style.width = progress + '%';
+                }
+            }
+
+            // Валидация шага
+            function anyhomeValidateStep() {
+                if (anyhomeQuizState.currentStep === 6) {
+                    const name = document.getElementById('anyhome-name-input').value.trim();
+                    const phone = document.getElementById('anyhome-phone-input').value.trim();
+                    
+                    if (!name || !phone) {
+                        alert('Пожалуйста, заполните имя и номер телефона');
+                        return false;
+                    }
+                    
+                    const phonePattern = /\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}/;
+                    if (!phonePattern.test(phone)) {
+                        alert('Пожалуйста, введите корректный номер телефона');
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            // Сохранить данные шага
+            function anyhomeSaveStepData() {
+                if (anyhomeQuizState.currentStep === 3) {
+                    const areaInput = document.getElementById('anyhome-area-input');
+                    if (areaInput) {
+                        anyhomeQuizState.data.area = areaInput.value;
+                    }
+                } else if (anyhomeQuizState.currentStep === 4) {
+                    // Сначала пробуем считать выбранные карточки мебели (CS-Cart вариант без чекбоксов)
+                    const selectedCards = document.querySelectorAll('.anyhome-quiz-furniture-card.selected');
+                    if (selectedCards.length > 0) {
+                        anyhomeQuizState.data.furniture = Array.from(selectedCards).map(el => el.getAttribute('data-value'));
+                    } else {
+                        // Фолбэк: если используются чекбоксы, считаем их
+                        const furnitureCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                        if (furnitureCheckboxes.length > 0) {
+                            anyhomeQuizState.data.furniture = Array.from(furnitureCheckboxes).map(cb => cb.value);
+                        }
+                        // Иначе оставляем ранее выбранные значения (клики по карточкам уже записали в состояние)
+                    }
+                } else if (anyhomeQuizState.currentStep === 6) {
+                    const nameInput = document.getElementById('anyhome-name-input');
+                    const phoneInput = document.getElementById('anyhome-phone-input');
+                    const activeContactMethod = document.querySelector('.anyhome-quiz-contact-method-btn.active');
+                    
+                    if (nameInput) anyhomeQuizState.data.contact.name = nameInput.value.trim();
+                    if (phoneInput) anyhomeQuizState.data.contact.phone = phoneInput.value.trim();
+                    if (activeContactMethod) anyhomeQuizState.data.contact.method = activeContactMethod.dataset.method;
+                }
+            }
+
+            // Выбор опции
+            function anyhomeSelectOption(element, type) {
+                const value = element.getAttribute('data-value');
+                
+                if (type === 'rooms') {
+                    if (!anyhomeQuizState.data.rooms.includes(value)) {
+                        anyhomeQuizState.data.rooms.push(value);
+                        element.classList.add('selected');
+                    } else {
+                        anyhomeQuizState.data.rooms = anyhomeQuizState.data.rooms.filter(room => room !== value);
+                        element.classList.remove('selected');
+                    }
+                }
+            }
+
+            // Выбор мебели
+            function anyhomeSelectFurniture(element) {
+                const value = element.getAttribute('data-value');
+                
+                if (!anyhomeQuizState.data.furniture.includes(value)) {
+                    anyhomeQuizState.data.furniture.push(value);
+                    element.classList.add('selected');
+                } else {
+                    anyhomeQuizState.data.furniture = anyhomeQuizState.data.furniture.filter(item => item !== value);
+                    element.classList.remove('selected');
+                }
+            }
+
+            // Выбор стиля
+            function anyhomeSelectStyle(element) {
+                document.querySelectorAll('.anyhome-quiz-style-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
+                element.classList.add('selected');
+                anyhomeQuizState.data.style = element.dataset.style;
+            }
+
+            // Выбор способа связи
+            function anyhomeSelectContactMethod(element) {
+                document.querySelectorAll('.anyhome-quiz-contact-method-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                element.classList.add('active');
+                anyhomeQuizState.data.contact.method = element.dataset.method;
+            }
+
+            // Форматирование телефона
+            function anyhomeFormatPhone(event) {
+                let value = event.target.value.replace(/\D/g, '');
+                if (value.startsWith('7')) {
+                    value = value.substring(1);
+                }
+                if (value.length > 0) {
+                    value = '+7 (' + value.substring(0, 3) + ') ' + value.substring(3, 6) + '-' + value.substring(6, 8) + '-' + value.substring(8, 10);
+                } else {
+                    value = '+7 (';
+                }
+                event.target.value = value;
+            }
+
+            // Отправка квиза
+            function anyhomeSubmitQuiz() {
+                if (anyhomeValidateStep()) {
+                    anyhomeSaveStepData();
+                    
+                    // Обновить имя пользователя
+                    const userNameElement = document.getElementById('anyhome-userName');
+                    if (userNameElement) {
+                        userNameElement.textContent = anyhomeQuizState.data.contact.name || 'Клиент';
+                    }
+                    
+                    // Перейти к экрану успеха
+                    anyhomeQuizState.currentStep = 7;
+                    anyhomeShowStep();
+                    anyhomeUpdateProgress();
+                    
+                    // Отправить данные в Telegram
+                    anyhomeSendToTelegram();
+                }
+            }
+
+            // Отправка уведомления о начале квиза
+            function anyhomeSendStartNotification() {
+                // Получаем URL родительской страницы, если квиз в iframe
+                let currentPage, pageTitle;
+                
+                if (window.parent && window.parent !== window) {
+                    // Квиз загружен в iframe
+                    try {
+                        currentPage = window.parent.location.href;
+                        pageTitle = window.parent.document.title || 'Без названия';
+                    } catch (e) {
+                        // Если нет доступа к родительскому окну, используем referrer
+                        currentPage = document.referrer || window.location.href;
+                        pageTitle = 'Страница сайта';
+                    }
+                } else {
+                    // Квиз загружен напрямую
+                    currentPage = window.location.href;
+                    pageTitle = document.title || 'Без названия';
+                }
+                
+                // Получаем расширенные данные для уведомления о запуске
+                const deviceInfo = anyhomeGetDeviceInfo();
+                const trafficInfo = anyhomeGetTrafficInfo();
+                const sessionInfo = anyhomeGetSessionInfo();
+                
+                // Форматирование времени
+                const formatTime = (seconds) => {
+                    if (seconds < 60) return `${seconds} сек`;
+                    const minutes = Math.floor(seconds / 60);
+                    const remainingSeconds = seconds % 60;
+                    return `${minutes} мин ${remainingSeconds} сек`;
+                };
+                
+                // Определение типа устройства с эмодзи
+                const deviceEmoji = deviceInfo.deviceType === 'mobile' ? '📱' : 
+                                  deviceInfo.deviceType === 'tablet' ? '📱' : '💻';
+                
+                const startMessage = `🚀 <b>Пользователь начал квиз!</b>
+
+⏰ <b>Время:</b> ${new Date().toLocaleString('ru-RU')}
+🌐 <b>Источник:</b> Сайт Any-Home
+📄 <b>Страница:</b> ${pageTitle}
+🔗 <b>URL:</b> ${currentPage}
+
+${deviceEmoji} <b>Устройство:</b> ${deviceInfo.deviceType === 'mobile' ? 'Мобильное' : 
+                                   deviceInfo.deviceType === 'tablet' ? 'Планшет' : 'Десктоп'} (${deviceInfo.os})
+💻 <b>Браузер:</b> ${deviceInfo.browser}
+📐 <b>Разрешение:</b> ${deviceInfo.screenResolution}
+🌍 <b>Язык:</b> ${deviceInfo.language}
+🕐 <b>Часовой пояс:</b> ${deviceInfo.timezone}
+
+⏳ <b>Время на сайте до квиза:</b> ${formatTime(sessionInfo.timeToQuiz)}
+🔗 <b>Источник трафика:</b> ${trafficInfo.trafficSource} (${trafficInfo.trafficMedium})
+📄 <b>Referrer:</b> ${trafficInfo.referrer}
+${trafficInfo.utmCampaign ? `🎯 <b>UTM кампания:</b> ${trafficInfo.utmCampaign}` : ''}
+
+---
+💡 <i>Ожидаем завершения квиза для получения полных данных</i>`;
+                
+                // Отправляем событие в Яндекс.Метрику
+                anyhomeSendQuizStartEvent();
+                
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: startMessage,
+                        parse_mode: 'HTML'
+                    })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.ok) {
+                        console.log('Start notification sent to Telegram successfully', result);
+                    } else {
+                        console.error('Telegram API error (start notification):', result.description);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error sending start notification to Telegram:', error);
+                });
+            }
+
+            // Отправка в Telegram
+            function anyhomeSendToTelegram() {
+                const message = anyhomeFormatTelegramMessage();
+                
+                // Отправляем событие о завершении квиза в Яндекс.Метрику
+                anyhomeSendQuizCompleteEvent();
+                
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.ok) {
+                        console.log('Data sent to Telegram successfully', result);
+                    } else {
+                        console.error('Telegram API error:', result.description);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error sending to Telegram:', error);
+                });
+            }
+
+            // Получение данных об устройстве
+            function anyhomeGetDeviceInfo() {
+                const userAgent = navigator.userAgent;
+                const screen = window.screen;
+                
+                // Определение типа устройства
+                let deviceType = 'desktop';
+                if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)) {
+                    deviceType = 'mobile';
+                } else if (/iPad|Android/i.test(userAgent) && screen.width >= 768) {
+                    deviceType = 'tablet';
+                }
+                
+                // Определение операционной системы
+                let os = 'Unknown';
+                if (/Windows/i.test(userAgent)) os = 'Windows';
+                else if (/Mac/i.test(userAgent)) os = 'macOS';
+                else if (/Linux/i.test(userAgent)) os = 'Linux';
+                else if (/Android/i.test(userAgent)) os = 'Android';
+                else if (/iPhone|iPad|iPod/i.test(userAgent)) os = 'iOS';
+                
+                // Определение браузера
+                let browser = 'Unknown';
+                if (/Chrome/i.test(userAgent) && !/Edge/i.test(userAgent)) browser = 'Chrome';
+                else if (/Firefox/i.test(userAgent)) browser = 'Firefox';
+                else if (/Safari/i.test(userAgent) && !/Chrome/i.test(userAgent)) browser = 'Safari';
+                else if (/Edge/i.test(userAgent)) browser = 'Edge';
+                else if (/Opera/i.test(userAgent)) browser = 'Opera';
+                
+                return {
+                    deviceType: deviceType,
+                    os: os,
+                    browser: browser,
+                    screenResolution: `${screen.width}x${screen.height}`,
+                    language: navigator.language || navigator.userLanguage,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                };
+            }
+            
+            // Получение данных о трафике
+            function anyhomeGetTrafficInfo() {
+                const referrer = document.referrer;
+                const urlParams = new URLSearchParams(window.location.search);
+                
+                // Определение источника трафика
+                let trafficSource = 'direct';
+                let trafficMedium = 'none';
+                
+                if (referrer) {
+                    try {
+                        const referrerUrl = new URL(referrer);
+                        const hostname = referrerUrl.hostname.toLowerCase();
+                        
+                        if (hostname.includes('google')) {
+                            trafficSource = 'google';
+                            trafficMedium = 'organic';
+                        } else if (hostname.includes('yandex')) {
+                            trafficSource = 'yandex';
+                            trafficMedium = 'organic';
+                        } else if (hostname.includes('facebook') || hostname.includes('instagram')) {
+                            trafficSource = 'facebook';
+                            trafficMedium = 'social';
+                        } else if (hostname.includes('vk.com')) {
+                            trafficSource = 'vk';
+                            trafficMedium = 'social';
+                        } else if (hostname.includes('youtube')) {
+                            trafficSource = 'youtube';
+                            trafficMedium = 'social';
+                        } else if (hostname.includes('telegram')) {
+                            trafficSource = 'telegram';
+                            trafficMedium = 'social';
+                        } else {
+                            trafficSource = 'referral';
+                            trafficMedium = 'referral';
+                        }
+                    } catch (e) {
+                        trafficSource = 'referral';
+                        trafficMedium = 'referral';
+                    }
+                }
+                
+                // Получение UTM-меток
+                const utmSource = urlParams.get('utm_source') || '';
+                const utmMedium = urlParams.get('utm_medium') || '';
+                const utmCampaign = urlParams.get('utm_campaign') || '';
+                
+                return {
+                    referrer: referrer || 'Прямой заход',
+                    trafficSource: utmSource || trafficSource,
+                    trafficMedium: utmMedium || trafficMedium,
+                    utmCampaign: utmCampaign,
+                    utmSource: utmSource,
+                    utmMedium: utmMedium
+                };
+            }
+            
+            // Получение данных о сессии
+            function anyhomeGetSessionInfo() {
+                const now = new Date();
+                const sessionStart = sessionStorage.getItem('anyhome-session-start');
+                const quizStart = sessionStorage.getItem('anyhome-quiz-start');
+                
+                let sessionDuration = 0;
+                let timeToQuiz = 0;
+                
+                if (sessionStart) {
+                    sessionDuration = Math.round((now - new Date(sessionStart)) / 1000);
+                }
+                
+                if (quizStart) {
+                    timeToQuiz = Math.round((new Date(quizStart) - new Date(sessionStart)) / 1000);
+                }
+                
+                return {
+                    sessionDuration: sessionDuration,
+                    timeToQuiz: timeToQuiz,
+                    sessionStart: sessionStart
+                };
+            }
+            
+            // Получение данных о поведении в квизе
+            function anyhomeGetQuizBehavior() {
+                const quizStart = sessionStorage.getItem('anyhome-quiz-start');
+                const now = new Date();
+                
+                let quizDuration = 0;
+                if (quizStart) {
+                    quizDuration = Math.round((now - new Date(quizStart)) / 1000);
+                }
+                
+                return {
+                    quizDuration: quizDuration,
+                    stepsCompleted: anyhomeQuizState.currentStep,
+                    totalSteps: anyhomeQuizState.totalSteps,
+                    backButtonClicks: anyhomeQuizState.backButtonClicks || 0
+                };
+            }
+            
+            // Инициализация Яндекс.Метрики
+            function anyhomeInitYandexMetrika() {
+                // Проверяем Яндекс.Метрику в текущем окне
+                if (typeof ym !== 'undefined') {
+                    return true;
+                }
+                
+                // Проверяем Яндекс.Метрику в родительском окне
+                if (window.parent && window.parent !== window) {
+                    try {
+                        if (typeof window.parent.ym !== 'undefined') {
+                            return true;
+                        }
+                    } catch (e) {
+                        // Нет доступа к родительскому окну
+                    }
+                }
+                
+                console.log('Яндекс.Метрика не загружена');
+                return false;
+            }
+            
+            // Отправка события в Яндекс.Метрику
+            function anyhomeSendYandexEvent(eventName, eventParams = {}) {
+                if (!anyhomeInitYandexMetrika()) {
+                    console.log('Яндекс.Метрика недоступна для отправки события:', eventName);
+                    return;
+                }
+                
+                try {
+                    // Пытаемся отправить в текущем окне
+                    if (typeof ym !== 'undefined') {
+                        ym(YANDEX_METRIKA_ID, 'reachGoal', eventName, eventParams);
+                        console.log('Событие отправлено в Яндекс.Метрику (текущее окно):', eventName, eventParams);
+                        return;
+                    }
+                    
+                    // Пытаемся отправить в родительском окне
+                    if (window.parent && window.parent !== window) {
+                        try {
+                            window.parent.ym(YANDEX_METRIKA_ID, 'reachGoal', eventName, eventParams);
+                            console.log('Событие отправлено в Яндекс.Метрику (родительское окно):', eventName, eventParams);
+                            return;
+                        } catch (e) {
+                            console.log('Нет доступа к Яндекс.Метрике в родительском окне');
+                            
+                            // Альтернативный способ через postMessage
+                            try {
+                                window.parent.postMessage({
+                                    type: 'yandex_metrika_event',
+                                    eventName: eventName,
+                                    eventParams: eventParams,
+                                    metrikaId: YANDEX_METRIKA_ID
+                                }, '*');
+                                console.log('Событие отправлено через postMessage:', eventName);
+                                return;
+                            } catch (postError) {
+                                console.log('Не удалось отправить через postMessage:', postError);
+                            }
+                        }
+                    }
+                    
+                    console.log('Не удалось отправить событие в Яндекс.Метрику');
+                } catch (error) {
+                    console.error('Ошибка отправки события в Яндекс.Метрику:', error);
+                }
+            }
+            
+            // Отправка события о запуске квиза
+            function anyhomeSendQuizStartEvent() {
+                // Получаем URL родительской страницы
+                let currentPage, pageTitle;
+                
+                if (window.parent && window.parent !== window) {
+                    try {
+                        currentPage = window.parent.location.href;
+                        pageTitle = window.parent.document.title || 'Без названия';
+                    } catch (e) {
+                        currentPage = document.referrer || window.location.href;
+                        pageTitle = 'Страница сайта';
+                    }
+                } else {
+                    currentPage = window.location.href;
+                    pageTitle = document.title || 'Без названия';
+                }
+                
+                const eventParams = {
+                    'page_url': currentPage,
+                    'page_title': pageTitle,
+                    'quiz_type': 'anyhome_cost_calculator',
+                    'timestamp': new Date().toISOString()
+                };
+                
+                anyhomeSendYandexEvent('quiz_start', eventParams);
+            }
+            
+            // Отправка события о завершении квиза
+            function anyhomeSendQuizCompleteEvent() {
+                const data = anyhomeQuizState.data;
+                
+                // Получаем URL родительской страницы
+                let currentPage, pageTitle;
+                
+                if (window.parent && window.parent !== window) {
+                    try {
+                        currentPage = window.parent.location.href;
+                        pageTitle = window.parent.document.title || 'Без названия';
+                    } catch (e) {
+                        currentPage = document.referrer || window.location.href;
+                        pageTitle = 'Страница сайта';
+                    }
+                } else {
+                    currentPage = window.location.href;
+                    pageTitle = document.title || 'Без названия';
+                }
+                
+                const eventParams = {
+                    'page_url': currentPage,
+                    'page_title': pageTitle,
+                    'quiz_type': 'anyhome_cost_calculator',
+                    'user_name': data.contact.name || 'Не указано',
+                    'user_phone': data.contact.phone || 'Не указано',
+                    'contact_method': data.contact.method || 'Не указано',
+                    'rooms_count': data.rooms ? data.rooms.length : 0,
+                    'rooms_selected': data.rooms ? data.rooms.join(', ') : 'Не выбрано',
+                    'area': data.area || 'Не указано',
+                    'furniture_count': data.furniture ? data.furniture.length : 0,
+                    'furniture_selected': data.furniture ? data.furniture.join(', ') : 'Не выбрано',
+                    'style': data.style || 'Не выбран',
+                    'timeline': data.timeline || 'Не указано',
+                    'completion_time': new Date().toISOString(),
+                    'timestamp': new Date().toISOString()
+                };
+                
+                anyhomeSendYandexEvent('quiz_complete', eventParams);
+            }
+
+            // Форматирование сообщения для Telegram
+            function anyhomeFormatTelegramMessage() {
+                const data = anyhomeQuizState.data;
+                const roomsText = anyhomeGetRoomsText(data.rooms);
+                const furnitureText = anyhomeGetFurnitureText(data.furniture);
+                const styleText = anyhomeGetStyleText(data.style);
+                const contactMethodText = anyhomeGetContactMethodText(data.contact.method);
+                
+                // Получаем URL родительской страницы, если квиз в iframe
+                let currentPage, pageTitle;
+                
+                if (window.parent && window.parent !== window) {
+                    // Квиз загружен в iframe
+                    try {
+                        currentPage = window.parent.location.href;
+                        pageTitle = window.parent.document.title || 'Без названия';
+                    } catch (e) {
+                        // Если нет доступа к родительскому окну, используем referrer
+                        currentPage = document.referrer || window.location.href;
+                        pageTitle = 'Страница сайта';
+                    }
+                } else {
+                    // Квиз загружен напрямую
+                    currentPage = window.location.href;
+                    pageTitle = document.title || 'Без названия';
+                }
+                
+                // Получаем расширенные данные
+                const deviceInfo = anyhomeGetDeviceInfo();
+                const trafficInfo = anyhomeGetTrafficInfo();
+                const sessionInfo = anyhomeGetSessionInfo();
+                const quizBehavior = anyhomeGetQuizBehavior();
+                
+                // Форматирование времени
+                const formatTime = (seconds) => {
+                    if (seconds < 60) return `${seconds} сек`;
+                    const minutes = Math.floor(seconds / 60);
+                    const remainingSeconds = seconds % 60;
+                    return `${minutes} мин ${remainingSeconds} сек`;
+                };
+                
+                // Определение типа устройства с эмодзи
+                const deviceEmoji = deviceInfo.deviceType === 'mobile' ? '📱' : 
+                                  deviceInfo.deviceType === 'tablet' ? '📱' : '💻';
+                
+                return `🏠 <b>Новая заявка с сайта Any-Home</b>
+
+👤 <b>Имя:</b> ${data.contact.name}
+📞 <b>Телефон:</b> ${data.contact.phone}
+📱 <b>Способ связи:</b> ${contactMethodText}
+
+🏠 <b>Помещения:</b> ${roomsText}
+📐 <b>Площадь:</b> ${data.area || 'Не указана'} м²
+🪑 <b>Мебель:</b> ${furnitureText}
+🎨 <b>Стиль:</b> ${styleText}
+⏰ <b>Сроки:</b> ${anyhomeGetTimelineText(data.timeline)}
+
+${deviceEmoji} <b>Устройство:</b> ${deviceInfo.deviceType === 'mobile' ? 'Мобильное' : 
+                                   deviceInfo.deviceType === 'tablet' ? 'Планшет' : 'Десктоп'} (${deviceInfo.os})
+💻 <b>Браузер:</b> ${deviceInfo.browser}
+📐 <b>Разрешение:</b> ${deviceInfo.screenResolution}
+🌍 <b>Язык:</b> ${deviceInfo.language}
+🕐 <b>Часовой пояс:</b> ${deviceInfo.timezone}
+
+⏱️ <b>Время прохождения квиза:</b> ${formatTime(quizBehavior.quizDuration)}
+🔄 <b>Возвратов назад:</b> ${quizBehavior.backButtonClicks}
+⏳ <b>Время на сайте до квиза:</b> ${formatTime(sessionInfo.timeToQuiz)}
+
+🔗 <b>Источник:</b> ${trafficInfo.trafficSource} (${trafficInfo.trafficMedium})
+📄 <b>Referrer:</b> ${trafficInfo.referrer}
+${trafficInfo.utmCampaign ? `🎯 <b>UTM кампания:</b> ${trafficInfo.utmCampaign}` : ''}
+
+📄 <b>Страница:</b> ${pageTitle}
+🔗 <b>URL:</b> ${currentPage}
+📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU')}`;
+            }
+
+            // Вспомогательные функции
+            function anyhomeGetRoomsText(rooms) {
+                const roomNames = {
+                    'living': 'Гостиная',
+                    'bedroom': 'Спальня',
+                    'kitchen': 'Кухня-столовая',
+                    'office': 'Кабинет',
+                    'hallway': 'Прихожая',
+                    'all': 'Вся квартира/дом'
+                };
+                return rooms.map(room => `• ${roomNames[room] || room}`).join('\n') || 'Не выбрано';
+            }
+
+            function anyhomeGetFurnitureText(furniture) {
+                const furnitureNames = {
+                    'shelves': 'Стеллажи и библиотечные системы',
+                    'tv': 'Медиа-консоли и ТВ-тумбы',
+                    'dressers': 'Комоды и тумбы',
+                    'tables': 'Столы и консоли',
+                    'kitchen-furniture': 'Кухонная мебель',
+                    'island': 'Остров и барная стойка',
+                    'storage': 'Системы хранения',
+                    'dining': 'Обеденная группа',
+                    'wardrobes': 'Шкафы и стеллажные системы',
+                    'islands': 'Островные модули',
+                    'lingerie': 'Комоды для белья',
+                    'mirrors': 'Зеркала и пуфы',
+                    'sofas': 'Диваны и кушетки',
+                    'armchairs': 'Кресла и шезлонги',
+                    'ottomans': 'Пуфы и банкетки',
+                    'chandeliers': 'Люстры',
+                    'sconces': 'Бра',
+                    'floor-lamps': 'Торшеры',
+                    'table-lamps': 'Настольные лампы',
+                    'decor-mirrors': 'Зеркала',
+                    'accessories': 'Аксессуары'
+                };
+                return furniture.map(item => `• ${furnitureNames[item] || item}`).join('\n') || 'Не выбрано';
+            }
+
+            function anyhomeGetStyleText(style) {
+                const styleNames = {
+                    'modern': 'Неоклассика',
+                    'artdeco': 'Ар-деко',
+                    'contemporary': 'Современная классика',
+                    'minimalist': 'Минимализм',
+                    'industrial': 'Индустриальный',
+                    'undecided': 'Еще не определился'
+                };
+                return styleNames[style] || 'Не выбран';
+            }
+
+            function anyhomeGetContactMethodText(method) {
+                const methodNames = {
+                    'whatsapp': 'WhatsApp',
+                    'phone': 'Звонок'
+                };
+                return methodNames[method] || 'WhatsApp';
+            }
+
+            function anyhomeGetTimelineText(timeline) {
+                const timelineNames = {
+                    '2weeks': 'В течение 2 недель',
+                    '1month': 'В течение месяца',
+                    '3months': 'Через 1-3 месяца',
+                    'studying': 'Пока изучаю варианты'
+                };
+                return timelineNames[timeline] || 'Не указано';
+            }
+
+            // WhatsApp и звонок
+            function anyhomeOpenWhatsApp() {
+                const phoneNumber = '79938971045';
+                const message = 'Здравствуйте! Я прошел квиз на сайте Any-Home и хочу получить расчет стоимости комплектации.';
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            }
+
+            function anyhomeMakeCall() {
+                window.location.href = 'tel:+79938971045';
+            }
+
+            // Функция для сброса статуса квиза (для тестирования)
+            function anyhomeResetQuizStatus() {
+                sessionStorage.removeItem('anyhome-quiz-shown');
+                console.log('Статус квиза сброшен');
+            }
+            
+            // Функция для принудительного показа квиза (игнорирует статус)
+            function anyhomeForceShowQuiz() {
+                const overlay = document.getElementById('anyhome-quiz-overlay');
+                if (overlay) {
+                    overlay.style.display = 'flex';
+                    anyhomeUpdateProgress();
+                    console.log('Квиз принудительно показан');
+                }
+            }
+
+            // Глобальные функции для CS-Cart
+            window.anyhomeShowQuiz = anyhomeShowQuiz;
+            window.anyhomeCloseQuiz = anyhomeCloseQuiz;
+            window.anyhomeNextStep = anyhomeNextStep;
+            window.anyhomePrevStep = anyhomePrevStep;
+            window.anyhomeSelectOption = anyhomeSelectOption;
+            window.anyhomeSelectFurniture = anyhomeSelectFurniture;
+            window.anyhomeSelectStyle = anyhomeSelectStyle;
+            window.anyhomeSelectContactMethod = anyhomeSelectContactMethod;
+            window.anyhomeSubmitQuiz = anyhomeSubmitQuiz;
+            window.anyhomeOpenWhatsApp = anyhomeOpenWhatsApp;
+            window.anyhomeMakeCall = anyhomeMakeCall;
+            window.anyhomeResetQuizStatus = anyhomeResetQuizStatus;
+            window.anyhomeForceShowQuiz = anyhomeForceShowQuiz;
+
+            // Инициализация при загрузке
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', anyhomeInitQuiz);
+            } else {
+                anyhomeInitQuiz();
+            }
+        })();
+    </script>
+</body>
+</html>
