@@ -2913,15 +2913,19 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
             loadMiniGallery();
         }
 
-        // Preload first few images on page load
+        // Preload all images on page load
         document.addEventListener('DOMContentLoaded', function() {
             const images = document.querySelectorAll('.main-slider-image');
-            // Load first image (already has src)
-            imagesLoaded[0] = true;
-            // Preload second image
-            if (images.length > 1) {
-                lazyLoadImage(images[1]);
-            }
+            
+            // Load all images gradually in the background
+            images.forEach((img, index) => {
+                if (index === 0) return; // First image already loaded with src
+                
+                // Stagger loading to avoid blocking
+                setTimeout(() => {
+                    lazyLoadImage(img);
+                }, index * 100); // 100ms delay between each image
+            });
         });
 
         // Open full gallery with all projects
