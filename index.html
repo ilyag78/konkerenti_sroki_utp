@@ -3,8 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Any-Home.ru - Комплексное оснащение интерьеров премиум-класса | Все в одном месте</title>
-    <meta name="description" content="Полный цикл создания интерьера: дизайн, производство, установка. Собственные цеха, оптимальное соотношение цена/качество, опытная команда. Все в одной компании.">
+    <title>Any-Home.ru - Мебель премиум-класса за 45-65 дней | Дизайн, комфорт, функциональность</title>
+    <meta name="description" content="Интерьеры, в которых хочется жить. Премиум-дизайн, комфорт и функциональность за 45-65 дней. Полный цикл в одной компании. Собственное производство, итальянские стандарты качества.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://meb.any-home.ru/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://meb.any-home.ru/">
+    <meta property="og:title" content="Any-Home - Мебель премиум-класса за 45-65 дней">
+    <meta property="og:description" content="Интерьеры, в которых хочется жить. Премиум-дизайн, комфорт и функциональность за 45-65 дней. Полный цикл в одной компании.">
+    <meta property="og:image" content="https://meb.any-home.ru/2/kitchen_0.webp">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="Any-Home">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://meb.any-home.ru/">
+    <meta name="twitter:title" content="Any-Home - Мебель премиум-класса за 45-65 дней">
+    <meta name="twitter:description" content="Интерьеры, в которых хочется жить. Премиум-дизайн, комфорт и функциональность за 45-65 дней.">
+    <meta name="twitter:image" content="https://meb.any-home.ru/2/kitchen_0.webp">
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="author" content="Any-Home">
+    <meta name="copyright" content="Any-Home">
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="theme-color" content="#2c2c2c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Any-Home">
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -110,9 +147,24 @@
             box-shadow: 0 6px 20px rgba(44, 44, 44, 0.3);
         }
 
+        .cta-center {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-secondary {
+            font-size: 1.1rem;
+            padding: 12px 30px;
+        }
+
+        .cta-primary {
+            font-size: 1.2rem;
+            padding: 15px 35px;
+        }
+
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f0f2f5 100%);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -122,17 +174,6 @@
             position: relative;
         }
 
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.06) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
-            pointer-events: none;
-        }
 
         .hero::before {
             content: '';
@@ -207,6 +248,49 @@
             padding: 120px 0;
         }
 
+        /* Mini Gallery */
+        .mini-gallery {
+            padding: 60px 0;
+            background: #f8f9fa;
+        }
+
+        .mini-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .mini-gallery-item {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%; /* Square aspect ratio */
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .mini-gallery-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .mini-gallery-item:active {
+            transform: translateY(-1px);
+        }
+
+        .mini-gallery-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .section-title {
             text-align: center;
             font-size: 3rem;
@@ -225,10 +309,20 @@
             line-height: 1.6;
         }
 
+        .section-description {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
         .pain-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 60px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
             margin-top: 80px;
         }
 
@@ -341,6 +435,121 @@
             line-height: 1.7;
         }
 
+        /* Work Steps */
+        .work-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .work-step {
+            background: white;
+            padding: 30px;
+            text-align: left;
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .work-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #2c2c2c 0%, #1a1a1a 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .work-step:hover::before {
+            transform: scaleX(1);
+        }
+
+        .work-step:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #e0e0e0;
+        }
+
+        .work-step-icon {
+            font-size: 2rem;
+            color: #999;
+            margin-bottom: 30px;
+        }
+
+        .work-step-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #2c2c2c;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .work-step-description {
+            color: #666;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .work-steps-section {
+            margin-top: 60px;
+        }
+
+        .work-steps-title {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: 40px;
+            color: #2c2c2c;
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+        }
+
+        /* Tech Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .tech-card {
+            background: white;
+            padding: 20px;
+            border-left: 3px solid #2c2c2c;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .tech-icon {
+            font-size: 1.3rem;
+            color: #2c2c2c;
+            margin-bottom: 12px;
+        }
+
+        .tech-title {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #2c2c2c;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .tech-description {
+            color: #666;
+            font-weight: 300;
+            line-height: 1.4;
+            font-size: 0.85rem;
+        }
+
         /* Gallery Section */
         .gallery-section {
             background: white;
@@ -349,7 +558,7 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: 1fr;
             gap: 40px;
             margin-top: 80px;
         }
@@ -359,6 +568,8 @@
             overflow: hidden;
             background: #f8f9fa;
             transition: transform 0.3s ease;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .gallery-item:hover {
@@ -396,6 +607,264 @@
         .gallery-overlay p {
             font-size: 0.9rem;
             opacity: 0.8;
+        }
+
+        /* Gallery Slider Styles */
+        .gallery-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .slider-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .slider-image.active {
+            opacity: 1;
+        }
+
+        /* Main Gallery Slider (Compact) */
+        .main-gallery-slider {
+            position: relative;
+            width: 100%;
+            margin: 60px 0;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .main-slider-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 66.67%; /* 3:2 aspect ratio */
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            background: #f8f9fa;
+        }
+
+        .main-slider-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            cursor: pointer;
+        }
+
+        .main-slider-image.active {
+            opacity: 1;
+        }
+
+        .main-slider-image:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease, opacity 0.6s ease;
+        }
+
+        .main-slider-info {
+            text-align: center;
+            margin-top: 25px;
+            padding: 0 20px;
+        }
+
+        .main-slider-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #2c2c2c;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .main-slider-info p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px;
+            pointer-events: none;
+        }
+
+        .slider-btn {
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-btn:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Fullscreen Gallery */
+        .fullscreen-gallery {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fullscreen-gallery.active {
+            display: flex;
+        }
+
+        .fullscreen-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .fullscreen-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .fullscreen-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .fullscreen-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .fullscreen-dots {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .fullscreen-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-dot.active {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.3);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
 
         /* CTA Section */
@@ -486,6 +955,123 @@
             box-shadow: 0 8px 25px rgba(44, 44, 44, 0.3);
         }
 
+        /* Privacy Checkbox */
+        .privacy-checkbox {
+            display: flex;
+            align-items: flex-start;
+            margin: 20px 0;
+            gap: 10px;
+        }
+
+        .privacy-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #2c2c2c;
+        }
+
+        .privacy-checkbox label {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .privacy-checkbox label a {
+            color: #2c2c2c;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .privacy-checkbox label a:hover {
+            color: #C9A961;
+        }
+
+        /* Privacy Modal */
+        .privacy-modal {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .privacy-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .privacy-modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .privacy-modal-content h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #2c2c2c;
+        }
+
+        .privacy-modal-content h3 {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #2c2c2c;
+        }
+
+        .privacy-modal-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .privacy-modal-content ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        .privacy-modal-content li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .privacy-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .privacy-modal-close:hover {
+            color: #2c2c2c;
+        }
+
         /* Footer */
         .footer {
             background: #f8f9fa;
@@ -494,27 +1080,709 @@
             text-align: center;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
+        /* Sticky Action Bar */
+        .sticky-bar {
+            position: fixed;
+            bottom: -100px;
+            left: 0;
+            right: 0;
+            background: rgba(44, 44, 44, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 999;
+            transition: bottom 0.3s ease;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .sticky-bar.visible {
+            bottom: 0;
+        }
+
+        .sticky-bar-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .sticky-btn {
+            background: white;
+            color: #2c2c2c;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        .sticky-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+        }
+
+        .sticky-btn.primary {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            font-weight: 600;
+        }
+
+        .sticky-btn i {
+            margin-right: 5px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #2c2c2c;
+        }
+
+        .modal h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2c2c2c;
+        }
+
+        .modal p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: #f8f9fa;
+            padding: 100px 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 3rem;
+            color: #e9ecef;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-text {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .testimonial-info h5 {
+            font-family: 'Playfair Display', serif;
+            color: #2c2c2c;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-info p {
+            color: #999;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Final CTA Block */
+        .final-cta-block {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 80px 0;
+        }
+
+        .cta-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .cta-option {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .cta-option:hover {
+            transform: translateY(-5px);
+            border-color: #2c2c2c;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-option-icon {
+            font-size: 2.5rem;
+            color: #2c2c2c;
+            margin-bottom: 20px;
+        }
+
+        .cta-option h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #2c2c2c;
+        }
+
+        .cta-option p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        
+        /* Tablet styles */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 15px;
+            }
+            
             .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
                 font-size: 2.5rem;
             }
             
-            .hero-stats {
+            .pain-grid {
+                grid-template-columns: repeat(2, 1fr);
                 gap: 30px;
             }
             
-            .contact-info {
-                flex-direction: column;
-                gap: 15px;
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .work-steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+        
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            /* Header mobile */
+            .header {
+                padding: 10px 0;
             }
             
             .header-content {
                 flex-direction: column;
-                gap: 15px;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .logo {
+                font-size: 22px;
+                letter-spacing: 0.5px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+            }
+            
+            .phone {
+                font-size: 16px;
+                font-weight: 500;
+            }
+            
+            .cta-button {
+                padding: 10px 24px;
+                font-size: 14px;
+                width: 100%;
+                max-width: 240px;
+                min-height: 42px;
+            }
+            
+            /* Hero mobile */
+            .hero {
+                margin-top: 120px;
+                min-height: 75vh;
+                padding: 48px 0;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.4rem;
+                line-height: 1.15;
+                margin-bottom: 24px;
+            }
+            
+            .hero-content .subtitle {
+                font-size: 1.15rem;
+                margin-bottom: 36px;
+                line-height: 1.5;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 24px;
+                margin: 36px 0;
+            }
+            
+            .stat-number {
+                font-size: 2.2rem;
+            }
+            
+            .stat-text {
+                font-size: 1rem;
+            }
+            
+            /* Sections mobile */
+            .pain-points,
+            .usp-section,
+            .gallery-section {
+                padding: 72px 0;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 24px;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 48px;
+                line-height: 1.5;
+            }
+            
+            .section-description {
+                font-size: 1.1rem;
+                margin-bottom: 48px;
+                line-height: 1.5;
+            }
+            
+            /* Grids mobile */
+            .pain-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                margin-top: 48px;
+            }
+            
+            .pain-card {
+                padding: 28px;
+            }
+            
+            .pain-icon {
+                font-size: 1.5rem;
+                margin-bottom: 16px;
+            }
+            
+            .pain-title {
+                font-size: 1.3rem;
+                margin-bottom: 16px;
+            }
+            
+            .pain-description {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            /* USP cards mobile */
+            .usp-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                margin-top: 48px;
+            }
+            
+            .usp-card {
+                padding: 32px;
+            }
+            
+            /* Gallery mobile */
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                margin-top: 48px;
+            }
+            
+            .gallery-item img {
+                height: 400px;
+            }
+            
+            .slider-container {
+                height: 400px;
+            }
+            
+            .main-gallery-slider {
+                margin: 40px 0;
+            }
+            
+            .main-slider-container {
+                padding-bottom: 75%; /* 4:3 for mobile */
+            }
+            
+            .main-slider-info h4 {
+                font-size: 1.2rem;
+            }
+            
+            .main-slider-info p {
+                font-size: 0.9rem;
+            }
+            
+            /* Work steps mobile */
+            .work-steps {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .work-step {
+                padding: 28px;
+            }
+            
+            .work-step-icon {
+                font-size: 1.5rem;
+                margin-bottom: 16px;
+            }
+            
+            .work-step-title {
+                font-size: 1.3rem;
+                margin-bottom: 16px;
+            }
+            
+            .work-step-description {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            /* Tech grid mobile */
+            .tech-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .tech-card {
+                padding: 28px;
+            }
+            
+            .tech-icon {
+                font-size: 1.5rem;
+                margin-bottom: 16px;
+            }
+            
+            .tech-title {
+                font-size: 1.3rem;
+                margin-bottom: 16px;
+            }
+            
+            /* Mini Gallery Mobile */
+            .mini-gallery {
+                padding: 40px 0;
+            }
+            
+            .mini-gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            
+            .tech-description {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            /* CTA section mobile */
+            .cta-section {
+                padding: 72px 0;
+            }
+            
+            .cta-form {
+                padding: 36px;
+                margin: 36px auto;
+            }
+            
+            .form-group {
+                margin-bottom: 24px;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 16px;
+                font-size: 16px; /* Prevents zoom on iOS */
+                min-height: 48px;
+            }
+            
+            .submit-btn {
+                padding: 18px 36px;
+                font-size: 16px;
+                min-height: 56px;
+            }
+            
+            /* Footer mobile */
+            .footer {
+                padding: 48px 0;
+            }
+            
+            .footer .container > div:first-child {
+                flex-direction: column;
+                text-align: center;
+                gap: 24px;
+            }
+            
+            .footer .container > div:first-child > div:last-child {
+                text-align: center;
+            }
+        }
+        
+        /* Small mobile styles */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 12px;
+            }
+            
+            .hero {
+                margin-top: 140px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content .subtitle {
+                font-size: 1.05rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-subtitle,
+            .section-description {
+                font-size: 1rem;
+            }
+            
+            .pain-card,
+            .usp-card,
+            .work-step,
+            .tech-card {
+                padding: 24px;
+            }
+            
+            .pain-title,
+            .work-step-title,
+            .tech-title {
+                font-size: 1.2rem;
+            }
+            
+            .pain-description,
+            .work-step-description,
+            .tech-description {
+                font-size: 0.95rem;
+            }
+            
+            .gallery-item img {
+                height: 450px;
+            }
+            
+            .slider-container {
+                height: 450px;
+            }
+            
+            .cta-button {
+                padding: 12px 24px;
+                font-size: 15px;
+                min-height: 44px;
+            }
+            
+            .submit-btn {
+                padding: 16px 32px;
+                min-height: 52px;
             }
         }
     </style>
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104677623', 'ym');
+
+        ym(104677623, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/104677623" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Any-Home",
+        "url": "https://meb.any-home.ru",
+        "logo": "https://meb.any-home.ru/android-chrome-512x512.png",
+        "description": "Производство мебели премиум-класса. Полный цикл: дизайн, производство, установка. Сроки 45-65 дней.",
+        "telephone": "+7-495-120-35-42",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Москва",
+            "addressCountry": "RU",
+            "streetAddress": "Большой Саввинский переулок, д. 12, стр. 8"
+        },
+        "sameAs": [
+            "https://meb.any-home.ru"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+7-495-120-35-42",
+            "contactType": "customer service",
+            "availableLanguage": "Russian"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Any-Home",
+        "image": "https://meb.any-home.ru/2/kitchen_0.webp",
+        "url": "https://meb.any-home.ru",
+        "telephone": "+7-495-120-35-42",
+        "priceRange": "₽₽₽",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Большой Саввинский переулок, д. 12, стр. 8",
+            "addressLocality": "Москва",
+            "addressCountry": "RU"
+        },
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday"
+                ],
+                "opens": "10:00",
+                "closes": "20:00"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                    "Saturday",
+                    "Sunday"
+                ],
+                "opens": "11:00",
+                "closes": "19:00"
+            }
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Any-Home",
+        "url": "https://meb.any-home.ru",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://meb.any-home.ru/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -536,8 +1804,8 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Мебель премиум-класса за 45-65 дней</h1>
-                <p class="subtitle">Комплексное решение в одной компании: дизайн, производство, установка. Оптимальное соотношение цена/качество без посредников.</p>
+                <h1>Мебель премиум-класса за 45-65 дней<br>Дизайн, комфорт и функциональность + гарантия сроков</h1>
+                <p class="subtitle">Создаем интерьеры, которыми вы будете наслаждаться каждый день. Полный цикл в одной компании: от дизайна до установки. Гибкость решений, премиум-качество и гарантия сроков.</p>
                 
                 <div class="hero-stats">
                     <div class="stat-item">
@@ -561,44 +1829,165 @@
         </div>
     </section>
 
+    <!-- What You Get Section -->
+    <section class="pain-points" style="background: white; padding: 100px 0;">
+        <div class="container">
+            <h2 class="section-title">Что вы получаете</h2>
+            <p class="section-subtitle">
+                Не просто мебель — пространство, в котором хочется жить, работать и отдыхать
+            </p>
+            
+            <div class="pain-grid">
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="pain-title">Дизайн, который вдохновляет</h3>
+                    <p class="pain-description">Не просто мебель, а продуманное пространство. Каждая деталь работает на общую композицию. AI-визуализация — видите результат до начала работ.</p>
+                </div>
+                
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <h3 class="pain-title">Комфорт в каждой детали</h3>
+                    <p class="pain-description">Эргономика, мягкое закрывание, удобная организация пространства. Мебель, которая делает жизнь проще и приятнее.</p>
+                </div>
+                
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3 class="pain-title">Функциональность премиум-класса</h3>
+                    <p class="pain-description">Умные системы хранения, качественная фурнитура BLUM и Hettich, продуманная эргономика. Всё работает безупречно годами.</p>
+                </div>
+                
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="pain-title">Удовольствие от использования</h3>
+                    <p class="pain-description">Качество, которое чувствуется: от плавного закрывания дверей до идеально гладких поверхностей. Каждый день — как новый.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Pain Points Section -->
     <section class="pain-points">
         <div class="container">
-            <h2 class="section-title">Почему выбирают нас</h2>
+            <h2 class="section-title">Почему выбирают Any-Home</h2>
             <p class="section-subtitle">
-                Ключевые преимущества, которые решают главные проблемы клиентов
+                Мы создаем не просто мебель — мы создаем пространства для жизни. И делаем это так, чтобы процесс был комфортным для вас.
             </p>
             
-            <div class="pain-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px;">
-                <div class="pain-card" style="padding: 20px;">
-                    <div class="pain-icon" style="font-size: 1.3rem; margin-bottom: 12px;">
-                        <i class="fas fa-clock"></i>
+            <div class="pain-grid">
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-magic"></i>
                     </div>
-                    <h3 class="pain-title" style="font-size: 1rem; margin-bottom: 8px;">Быстрые расчеты</h3>
-                    <p class="pain-description" style="font-size: 0.85rem; line-height: 1.4;">Расчет за 1 день вместо недель ожидания. Оперативность — наш приоритет.</p>
+                    <h3 class="pain-title">Дизайн + функциональность</h3>
+                    <p class="pain-description">Создаем интерьеры, в которых красота сочетается с удобством. От классики до современных трендов. Каждый проект — уникальное решение под ваш стиль жизни.</p>
                 </div>
                 
-                <div class="pain-card" style="padding: 20px;">
-                    <div class="pain-icon" style="font-size: 1.3rem; margin-bottom: 12px;">
-                        <i class="fas fa-calendar-check"></i>
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-award"></i>
                     </div>
-                    <h3 class="pain-title" style="font-size: 1rem; margin-bottom: 8px;">Четкие сроки</h3>
-                    <p class="pain-description" style="font-size: 0.85rem; line-height: 1.4;">45-65 дней без переносов. Соблюдаем договоренности и ценим ваше время.</p>
+                    <h3 class="pain-title">Премиум-качество + гарантия сроков</h3>
+                    <p class="pain-description">45-65 дней без переносов. Качество на уровне топовых итальянских производств. Мебель, которой вы будете гордиться и наслаждаться годами.</p>
                 </div>
                 
-                <div class="pain-card" style="padding: 20px;">
-                    <div class="pain-icon" style="font-size: 1.3rem; margin-bottom: 12px;">
-                        <i class="fas fa-handshake"></i>
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-puzzle-piece"></i>
                     </div>
-                    <h3 class="pain-title" style="font-size: 1rem; margin-bottom: 8px;">Один подрядчик</h3>
-                    <p class="pain-description" style="font-size: 0.85rem; line-height: 1.4;">От дизайна до установки — все в одной компании. Единые стандарты качества.</p>
+                    <h3 class="pain-title">Гибкость + один подрядчик</h3>
+                    <p class="pain-description">Адаптируем проект под ваш бюджет и пожелания. Весь процесс в одних руках — от первой встречи до финальной установки. Никакой головной боли с координацией.</p>
+                </div>
+                
+                <div class="pain-card">
+                    <div class="pain-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="pain-title">Лучшая цена за премиум-результат</h3>
+                    <p class="pain-description">Собственное производство без посредников. Вы платите за качество и работу, а не за бренд и цепочку наценок. Разумная цена за премиум.</p>
                 </div>
             </div>
             
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="#project" class="cta-button" style="font-size: 1.1rem; padding: 12px 30px;">
-                    Получить расчет за 1 день
-                </a>
+            <div class="cta-center">
+                <button onclick="openCatalogModal()" class="cta-button cta-secondary">
+                    <i class="fas fa-download"></i> Скачать каталог проектов
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mini Gallery -->
+    <section class="mini-gallery">
+        <div class="container">
+            <div class="mini-gallery-grid" id="miniGallery">
+                <!-- Images will be loaded dynamically by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Why We Can Offer This -->
+    <section class="usp-section" style="padding: 80px 0; background: white;">
+        <div class="container">
+            <h2 class="section-title" style="font-size: 2.2rem; margin-bottom: 20px;">Почему мы можем предложить такое сочетание?</h2>
+            <p class="section-description" style="margin-bottom: 60px;">
+                Каждое наше преимущество — результат продуманной системы работы
+            </p>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h4 class="tech-title">Собственное производство</h4>
+                    <p class="tech-description">Полный контроль над сроками и качеством. Нет зависимости от сторонних подрядчиков.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h4 class="tech-title">Опытная команда</h4>
+                    <p class="tech-description">Дизайнеры и мастера с многолетним опытом. Можем реализовать проект любой сложности.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h4 class="tech-title">Полный цикл в одной компании</h4>
+                    <p class="tech-description">Никаких потерь времени на координацию. Прозрачность и удобство на всех этапах.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4 class="tech-title">Прямые поставки</h4>
+                    <p class="tech-description">Работаем напрямую с поставщиками материалов. Оптимальная цена без наценок посредников.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h4 class="tech-title">Отлаженные процессы</h4>
+                    <p class="tech-description">Каждый этап проверен сотнями проектов. Знаем, как избежать задержек и ошибок.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h4 class="tech-title">Репутация и стандарты</h4>
+                    <p class="tech-description">Работаем по европейским стандартам качества. Каждый проект — наша визитная карточка.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -607,119 +1996,132 @@
     <section class="usp-section">
         <div class="container">
             <h2 class="section-title">Как мы работаем с клиентами</h2>
-            <p style="text-align: center; font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto;">
+            <p class="section-description">
                 От первой встречи до готового интерьера — полный цикл с гарантией качества
             </p>
             
             <!-- Этапы работы -->
-            <div style="margin-top: 60px;">
-                <h3 style="text-align: center; font-size: 1.6rem; margin-bottom: 40px; color: #2c2c2c;">Этапы работы</h3>
+            <div class="work-steps-section">
+                <h3 class="work-steps-title">Этапы работы</h3>
                 
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px;">
-                    <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
-                        <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                <div class="work-steps">
+                    <div class="work-step">
+                        <div class="work-step-icon">
                             <i class="fas fa-comments"></i>
                         </div>
-                        <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Консультация и расчет</h4>
-                        <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">Обсуждаем ваши задачи. Расчет за 1 день. Четкие сроки и бюджет.</p>
+                        <h4 class="work-step-title">Консультация и расчет</h4>
+                        <p class="work-step-description">Обсуждаем ваши задачи. Расчет за 1 день. Четкие сроки и бюджет.</p>
                     </div>
                     
-                    <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
-                        <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                    <div class="work-step">
+                        <div class="work-step-icon">
                             <i class="fas fa-palette"></i>
                         </div>
-                        <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Дизайн и визуализация</h4>
-                        <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">AI-визуализация проекта. Вы видите результат до начала работ.</p>
+                        <h4 class="work-step-title">Дизайн и визуализация</h4>
+                        <p class="work-step-description">AI-визуализация проекта. Вы видите результат до начала работ.</p>
                     </div>
                     
-                    <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
-                        <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                    <div class="work-step">
+                        <div class="work-step-icon">
                             <i class="fas fa-industry"></i>
                         </div>
-                        <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Производство</h4>
-                        <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">Собственные цеха. Контроль качества на каждом этапе. 45-65 дней.</p>
+                        <h4 class="work-step-title">Производство</h4>
+                        <p class="work-step-description">Собственные цеха. Контроль качества на каждом этапе. 45-65 дней.</p>
                     </div>
                     
-                    <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
-                        <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                    <div class="work-step">
+                        <div class="work-step-icon">
                             <i class="fas fa-tools"></i>
                         </div>
-                        <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Установка</h4>
-                        <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">Предварительная сборка на производстве. Быстрая установка без сюрпризов.</p>
+                        <h4 class="work-step-title">Установка</h4>
+                        <p class="work-step-description">Предварительная сборка на производстве. Быстрая установка без сюрпризов.</p>
                     </div>
                 </div>
             </div>
             
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="#project" class="cta-button" style="font-size: 1.1rem; padding: 12px 30px;">
-                    Обсудить мой проект
-                </a>
+            <div class="cta-center">
+                <button onclick="openConsultationModal()" class="cta-button cta-secondary">
+                    <i class="fas fa-comments"></i> Бесплатная консультация дизайнера
+                </button>
             </div>
         </div>
     </section>
 
     <!-- Gallery Section -->
-    <section class="gallery-section">
+    <section class="gallery-section" id="our-works">
         <div class="container">
             <h2 class="section-title">Наши работы</h2>
-            <p style="text-align: center; font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto;">
-                Примеры реализованных проектов с использованием наших технологий
+            <p class="section-description">
+                Реальные интерьеры наших клиентов. Каждый проект — это история о том, как пространство стало любимым местом в доме.
             </p>
             
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23f8f9fa' width='400' height='300'/><rect fill='%232c2c2c' x='50' y='100' width='300' height='100'/><text x='200' y='160' text-anchor='middle' fill='white' font-size='16'>Кухня премиум</text></svg>" alt="Кухня премиум-класса">
-                    <div class="gallery-overlay">
-                        <h4>Кухня премиум-класса</h4>
-                        <p>Срок изготовления: 50 дней</p>
-                    </div>
+            <!-- Компактный слайдер -->
+            <div class="main-gallery-slider">
+                <div class="main-slider-container">
+                    <img src="main/bathroom_0.webp" alt="Премиум-интерьер" class="main-slider-image active" data-project="Премиум-интерьер" data-description="Где каждая деталь — произведение искусства" loading="eager">
+                    <img data-src="main/bathroom_1.webp" alt="Авторский проект" class="main-slider-image" data-project="Авторский проект" data-description="Пространство, которое вдохновляет каждый день" loading="lazy">
+                    <img data-src="main/bathroom_2.webp" alt="Дизайн Any-Home" class="main-slider-image" data-project="Дизайн Any-Home" data-description="Идеальное сочетание функциональности и эстетики" loading="lazy">
+                    <img data-src="main/kitchen_0.webp" alt="Наша работа" class="main-slider-image" data-project="Наша работа" data-description="Роскошь, которая чувствуется в каждом прикосновении" loading="lazy">
+                    <img data-src="main/kitchen_16.webp" alt="Готовое решение" class="main-slider-image" data-project="Готовое решение" data-description="Дизайн, созданный для жизни, а не для показа" loading="lazy">
+                    <img data-src="main/kitchen_17.webp" alt="Реализованный проект" class="main-slider-image" data-project="Реализованный проект" data-description="Когда качество становится образом жизни" loading="lazy">
+                    <img data-src="main/kitchen_23.webp" alt="Интерьер под ключ" class="main-slider-image" data-project="Интерьер под ключ" data-description="Интерьер, в который хочется возвращаться" loading="lazy">
+                    <img data-src="main/kitchen_25.webp" alt="Премиум-интерьер" class="main-slider-image" data-project="Премиум-интерьер" data-description="Где каждая деталь — произведение искусства" loading="lazy">
+                    <img data-src="main/kitchen_29.webp" alt="Авторский проект" class="main-slider-image" data-project="Авторский проект" data-description="Пространство, которое вдохновляет каждый день" loading="lazy">
+                    <img data-src="main/kitchen_30.webp" alt="Дизайн Any-Home" class="main-slider-image" data-project="Дизайн Any-Home" data-description="Идеальное сочетание функциональности и эстетики" loading="lazy">
+                    <img data-src="main/kitchen_31.webp" alt="Наша работа" class="main-slider-image" data-project="Наша работа" data-description="Роскошь, которая чувствуется в каждом прикосновении" loading="lazy">
+                    <img data-src="main/kitchen_37.webp" alt="Готовое решение" class="main-slider-image" data-project="Готовое решение" data-description="Дизайн, созданный для жизни, а не для показа" loading="lazy">
+                    <img data-src="main/kitchen_38.webp" alt="Реализованный проект" class="main-slider-image" data-project="Реализованный проект" data-description="Когда качество становится образом жизни" loading="lazy">
+                    <img data-src="main/kitchen_43.webp" alt="Интерьер под ключ" class="main-slider-image" data-project="Интерьер под ключ" data-description="Интерьер, в который хочется возвращаться" loading="lazy">
+                    <img data-src="main/kitchen_45.webp" alt="Премиум-интерьер" class="main-slider-image" data-project="Премиум-интерьер" data-description="Где каждая деталь — произведение искусства" loading="lazy">
+                    <img data-src="main/kitchen_48.webp" alt="Авторский проект" class="main-slider-image" data-project="Авторский проект" data-description="Пространство, которое вдохновляет каждый день" loading="lazy">
+                    <img data-src="main/kitchen_5.webp" alt="Дизайн Any-Home" class="main-slider-image" data-project="Дизайн Any-Home" data-description="Идеальное сочетание функциональности и эстетики" loading="lazy">
+                    <img data-src="main/kitchen_50.webp" alt="Наша работа" class="main-slider-image" data-project="Наша работа" data-description="Роскошь, которая чувствуется в каждом прикосновении" loading="lazy">
+                    <img data-src="main/kitchen_6.webp" alt="Готовое решение" class="main-slider-image" data-project="Готовое решение" data-description="Дизайн, созданный для жизни, а не для показа" loading="lazy">
+                    <img data-src="main/living_11.webp" alt="Реализованный проект" class="main-slider-image" data-project="Реализованный проект" data-description="Когда качество становится образом жизни" loading="lazy">
+                    <img data-src="main/living_12.webp" alt="Интерьер под ключ" class="main-slider-image" data-project="Интерьер под ключ" data-description="Интерьер, в который хочется возвращаться" loading="lazy">
+                    <img data-src="main/living_13.webp" alt="Премиум-интерьер" class="main-slider-image" data-project="Премиум-интерьер" data-description="Где каждая деталь — произведение искусства" loading="lazy">
+                    <img data-src="main/living_14.webp" alt="Авторский проект" class="main-slider-image" data-project="Авторский проект" data-description="Пространство, которое вдохновляет каждый день" loading="lazy">
+                    <img data-src="main/living_15.webp" alt="Дизайн Any-Home" class="main-slider-image" data-project="Дизайн Any-Home" data-description="Идеальное сочетание функциональности и эстетики" loading="lazy">
+                    <img data-src="main/living_18.webp" alt="Наша работа" class="main-slider-image" data-project="Наша работа" data-description="Роскошь, которая чувствуется в каждом прикосновении" loading="lazy">
+                    <img data-src="main/living_2.webp" alt="Готовое решение" class="main-slider-image" data-project="Готовое решение" data-description="Дизайн, созданный для жизни, а не для показа" loading="lazy">
+                    <img data-src="main/living_6.webp" alt="Реализованный проект" class="main-slider-image" data-project="Реализованный проект" data-description="Когда качество становится образом жизни" loading="lazy">
+                    <img data-src="main/main_24.webp" alt="Интерьер под ключ" class="main-slider-image" data-project="Интерьер под ключ" data-description="Интерьер, в который хочется возвращаться" loading="lazy">
+                    <img data-src="main/main_25.webp" alt="Премиум-интерьер" class="main-slider-image" data-project="Премиум-интерьер" data-description="Где каждая деталь — произведение искусства" loading="lazy">
+                    <img data-src="main/office_1.webp" alt="Авторский проект" class="main-slider-image" data-project="Авторский проект" data-description="Пространство, которое вдохновляет каждый день" loading="lazy">
+                    <img data-src="main/Vertico 0-0.webp" alt="Дизайн Any-Home" class="main-slider-image" data-project="Дизайн Any-Home" data-description="Идеальное сочетание функциональности и эстетики" loading="lazy">
+                    <img data-src="main/Vertico 15.webp" alt="Наша работа" class="main-slider-image" data-project="Наша работа" data-description="Роскошь, которая чувствуется в каждом прикосновении" loading="lazy">
+                    <img data-src="main/Vertico 21.webp" alt="Готовое решение" class="main-slider-image" data-project="Готовое решение" data-description="Дизайн, созданный для жизни, а не для показа" loading="lazy">
+                    <img data-src="main/Vertico 23.webp" alt="Реализованный проект" class="main-slider-image" data-project="Реализованный проект" data-description="Когда качество становится образом жизни" loading="lazy">
+                    <img data-src="main/Vertico 5.webp" alt="Интерьер под ключ" class="main-slider-image" data-project="Интерьер под ключ" data-description="Интерьер, в который хочется возвращаться" loading="lazy">
+                    <img data-src="main/wardrobe_19.webp" alt="Премиум-интерьер" class="main-slider-image" data-project="Премиум-интерьер" data-description="Где каждая деталь — произведение искусства" loading="lazy">
+                    <img data-src="main/wardrobe_22.webp" alt="Авторский проект" class="main-slider-image" data-project="Авторский проект" data-description="Пространство, которое вдохновляет каждый день" loading="lazy">
+                    <img data-src="main/wardrobe_25.webp" alt="Дизайн Any-Home" class="main-slider-image" data-project="Дизайн Any-Home" data-description="Идеальное сочетание функциональности и эстетики" loading="lazy">
+                    <img data-src="main/wardrobe_3.webp" alt="Наша работа" class="main-slider-image" data-project="Наша работа" data-description="Роскошь, которая чувствуется в каждом прикосновении" loading="lazy">
+                    <img data-src="main/wardrobe_9.webp" alt="Готовое решение" class="main-slider-image" data-project="Готовое решение" data-description="Дизайн, созданный для жизни, а не для показа" loading="lazy">
                 </div>
                 
-                <div class="gallery-item">
-                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23f8f9fa' width='400' height='300'/><rect fill='%232c2c2c' x='50' y='100' width='300' height='100'/><text x='200' y='160' text-anchor='middle' fill='white' font-size='16'>Гостиная с LED</text></svg>" alt="Гостиная с LED подсветкой">
-                    <div class="gallery-overlay">
-                        <h4>Гостиная с LED подсветкой</h4>
-                        <p>Ноу-хау технологии</p>
-                    </div>
+                <div class="main-slider-info">
+                    <h4 id="projectName">Премиум-интерьер</h4>
+                    <p id="projectDescription">Где каждая деталь — произведение искусства</p>
                 </div>
                 
-                <div class="gallery-item">
-                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23f8f9fa' width='400' height='300'/><rect fill='%232c2c2c' x='50' y='100' width='300' height='100'/><text x='200' y='160' text-anchor='middle' fill='white' font-size='16'>Спальня из МДФ</text></svg>" alt="Спальня из МДФ">
-                    <div class="gallery-overlay">
-                        <h4>Спальня из МДФ</h4>
-                        <p>Полная влагозащита</p>
-                    </div>
+                        <div class="slider-controls">
+                    <button class="slider-btn prev" onclick="changeMainSlide(-1)" aria-label="Предыдущий проект">‹</button>
+                    <button class="slider-btn next" onclick="changeMainSlide(1)" aria-label="Следующий проект">›</button>
                 </div>
                 
-                <div class="gallery-item">
-                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23f8f9fa' width='400' height='300'/><rect fill='%232c2c2c' x='50' y='100' width='300' height='100'/><text x='200' y='160' text-anchor='middle' fill='white' font-size='16'>Ванная комната</text></svg>" alt="Ванная комната">
-                    <div class="gallery-overlay">
-                        <h4>Ванная комната</h4>
-                        <p>Влагозащищенная мебель</p>
-                    </div>
+                <div class="slider-dots" id="mainSliderDots">
+                    <!-- Dots will be generated dynamically by JavaScript -->
+                </div>
                 </div>
                 
-                <div class="gallery-item">
-                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23f8f9fa' width='400' height='300'/><rect fill='%232c2c2c' x='50' y='100' width='300' height='100'/><text x='200' y='160' text-anchor='middle' fill='white' font-size='16'>Кабинет</text></svg>" alt="Кабинет">
-                    <div class="gallery-overlay">
-                        <h4>Кабинет</h4>
-                        <p>Фурнитура BLUM</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect fill='%23f8f9fa' width='400' height='300'/><rect fill='%232c2c2c' x='50' y='100' width='300' height='100'/><text x='200' y='160' text-anchor='middle' fill='white' font-size='16'>Детская</text></svg>" alt="Детская комната">
-                    <div class="gallery-overlay">
-                        <h4>Детская комната</h4>
-                        <p>Экологичные материалы</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 50px;">
-                <a href="#project" class="cta-button" style="font-size: 1.2rem; padding: 15px 35px;">
-                    Хочу такой же результат
+            <div class="cta-center" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <a href="#project" class="cta-button cta-primary">
+                    Рассчитать похожий проект
                 </a>
+                <button onclick="openFullGallery()" class="cta-button cta-secondary" style="background: white; color: #2c2c2c; border: 2px solid #2c2c2c;">
+                    Смотреть все проекты
+                </button>
             </div>
         </div>
     </section>
@@ -727,64 +2129,154 @@
     <!-- Advantages Section -->
     <section class="usp-section">
         <div class="container">
-            <h2 class="section-title">Наши технологии и качество</h2>
-            <p style="text-align: center; font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto;">
-                Технические решения, которые обеспечивают премиальное качество
+            <h2 class="section-title">Качество, которое чувствуется каждый день</h2>
+            <p class="section-description">
+                Технические решения и материалы, которые превращают мебель в удовольствие от использования
             </p>
             
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 50px;">
-                <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
-                    <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Качество материалов</h4>
-                    <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">ЛДСП кромятся полностью, МДФ окрашиваются со всех сторон. Полная защита от влаги.</p>
+                    <h4 class="tech-title">Качество материалов</h4>
+                    <p class="tech-description">ЛДСП кромятся полностью, МДФ окрашиваются со всех сторон. Полная защита от влаги и долговечность.</p>
                 </div>
                 
-                <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
-                    <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                <div class="tech-card">
+                    <div class="tech-icon">
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Премиальная фурнитура</h4>
-                    <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">Только BLUM и Hettich. Конические стяжки. Собственное производство без наценок.</p>
+                    <h4 class="tech-title">Премиальная фурнитура</h4>
+                    <p class="tech-description">Только BLUM и Hettich. Конические стяжки. Немецкое качество без компромиссов.</p>
                 </div>
                 
-                <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
-                    <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                <div class="tech-card">
+                    <div class="tech-icon">
                         <i class="fas fa-lightbulb"></i>
                     </div>
-                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Работа с латунью</h4>
-                    <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">Собственные цеха обработки латуни. Создаем свет и акцентные элементы. Уникальные проекты.</p>
+                    <h4 class="tech-title">Работа с латунью</h4>
+                    <p class="tech-description">Собственные цеха обработки латуни. Создаем свет и акцентные элементы. Уникальные решения для вашего интерьера.</p>
                 </div>
                 
-                <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
-                    <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Опытная команда</h4>
-                    <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">Собственные дизайнеры и мастера. Многолетний опыт в премиум-сегменте.</p>
-                </div>
-                
-                <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
-                    <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Один подрядчик</h4>
-                    <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">От дизайна до установки — все в одной компании. Единые стандарты качества.</p>
-                </div>
-                
-                <div style="background: white; padding: 20px; border-left: 3px solid #2c2c2c; transition: transform 0.3s ease;">
-                    <div style="font-size: 1.3rem; color: #2c2c2c; margin-bottom: 12px;">
+                <div class="tech-card">
+                    <div class="tech-icon">
                         <i class="fas fa-ruler-combined"></i>
                     </div>
-                    <h4 style="font-size: 1rem; font-weight: 500; margin-bottom: 8px; color: #2c2c2c; font-family: 'Playfair Display', serif;">Точность исполнения</h4>
-                    <p style="color: #666; font-weight: 300; line-height: 1.4; font-size: 0.85rem;">Каменные детали изготавливаются после снятия размеров с готовых изделий.</p>
+                    <h4 class="tech-title">Точность исполнения</h4>
+                    <p class="tech-description">Каменные детали изготавливаются после снятия размеров с готовых изделий. Идеальная подгонка без зазоров.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h4 class="tech-title">Итальянские стандарты</h4>
+                    <p class="tech-description">Окраска и финишная обработка по технологиям топовых итальянских производств. Безупречная поверхность.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                    <h4 class="tech-title">Контроль качества</h4>
+                    <p class="tech-description">Проверка на каждом этапе: от раскроя до финальной установки. Гарантия безупречного результата.</p>
                 </div>
             </div>
             
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="#project" class="cta-button" style="font-size: 1.1rem; padding: 12px 30px;">
+            <div class="cta-center">
+                <a href="#project" class="cta-button cta-secondary">
                     Получить расчет с учетом технологий
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">Что говорят наши клиенты</h2>
+            <p class="section-description">
+                Отзывы тех, кто уже создал интерьер своей мечты вместе с нами
+            </p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">
+                        Сделали кухню за 52 дня, как и обещали. Качество на уровне — мягкое закрывание, всё идеально подогнано. Особенно порадовало, что не пришлось бегать между разными подрядчиками. Всё сделали в одной компании.
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">М</div>
+                        <div class="testimonial-info">
+                            <h5>Мария Соколова</h5>
+                            <p>ЖК "Пресня Сити", кухня 25м²</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">
+                        Искали мастерскую, которая сможет работать с латунью и сделать уникальные светильники. Any-Home справились отлично! Проект получился именно таким, как мы задумывали. Рекомендую для сложных решений.
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">А</div>
+                        <div class="testimonial-info">
+                            <h5>Алексей Павлов</h5>
+                            <p>Загородный дом, полное оснащение</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">"</div>
+                    <p class="testimonial-text">
+                        Сначала боялись, что не уложатся в сроки, как бывает у других компаний. Но нет — ровно 48 дней, быстрее чем в договоре. Цена оказалась ниже, чем у конкурентов, при том же качестве. Очень довольны!
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">Е</div>
+                        <div class="testimonial-info">
+                            <h5>Елена и Дмитрий</h5>
+                            <p>ЖК "Остров", гостиная + спальня</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Block -->
+    <section class="final-cta-block">
+        <div class="container">
+            <h2 class="section-title">Готовы начать?</h2>
+            <p class="section-description">
+                Выберите удобный для вас способ связи
+            </p>
+            
+            <div class="cta-options">
+                <a href="#project" class="cta-option">
+                    <div class="cta-option-icon"><i class="fas fa-calculator"></i></div>
+                    <h4>Получить расчет</h4>
+                    <p>Точный расчет за 1 день с учетом всех пожеланий</p>
+                </a>
+                
+                <a href="javascript:void(0)" onclick="openCatalogModal()" class="cta-option">
+                    <div class="cta-option-icon"><i class="fas fa-images"></i></div>
+                    <h4>Скачать каталог</h4>
+                    <p>30+ реализованных проектов с описанием</p>
+                </a>
+                
+                <a href="tel:+74951203542" class="cta-option">
+                    <div class="cta-option-icon"><i class="fas fa-phone"></i></div>
+                    <h4>Позвонить нам</h4>
+                    <p>+7 (495) 120-35-42 • Пн-Вс 10:00-20:00</p>
+                </a>
+                
+                <a href="https://wa.me/74951203542" target="_blank" class="cta-option">
+                    <div class="cta-option-icon"><i class="fab fa-whatsapp"></i></div>
+                    <h4>Написать в WhatsApp</h4>
+                    <p>Быстрые ответы на любые вопросы</p>
                 </a>
             </div>
         </div>
@@ -793,9 +2285,15 @@
     <!-- CTA Section -->
     <section class="cta-section" id="project">
         <div class="container">
-            <h2 class="section-title" style="color: white;">Получите расчет за 1 день</h2>
+            <h2 class="section-title" style="color: white;">Создадим интерьер вашей мечты</h2>
             <p style="font-size: 1.2rem; margin-bottom: 20px;">
-                Оставьте заявку и получите детальный расчет с учетом всех ваших требований
+                От идеи до реальности — всего 45-65 дней
+            </p>
+            <p style="font-size: 1.1rem; margin-bottom: 20px; color: rgba(255,255,255,0.9);">
+                Расчет за 1 день → Дизайн-проект с AI-визуализацией → Производство 45-65 дней → Установка → Идеальный Интерьер
+            </p>
+            <p style="font-size: 1rem; margin-bottom: 20px; color: rgba(255,255,255,0.8);">
+                Получите детальный расчет с учетом всех ваших требований и бюджета
             </p>
             
             <div class="cta-form">
@@ -807,7 +2305,7 @@
                     
                     <div class="form-group">
                         <label for="phone">Телефон *</label>
-                        <input type="tel" id="phone" name="phone" required>
+                        <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" pattern="\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}" required>
                     </div>
                     
                     <div class="form-group">
@@ -828,17 +2326,6 @@
                             <option value="full_apartment">Полная квартира</option>
                             <option value="house">Частный дом</option>
                             <option value="commercial">Коммерческое помещение</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="budget">Бюджет проекта</label>
-                        <select id="budget" name="budget">
-                            <option value="">Выберите бюджет</option>
-                            <option value="1m-2m">1 000 000 - 2 000 000 ₽</option>
-                            <option value="2m-5m">2 000 000 - 5 000 000 ₽</option>
-                            <option value="5m-10m">5 000 000 - 10 000 000 ₽</option>
-                            <option value="10m+">10 000 000+ ₽</option>
                         </select>
                     </div>
                     
@@ -868,20 +2355,19 @@
                         <textarea id="message" name="message" rows="4" placeholder="Опишите ваши пожелания, особенности помещения, стиль..."></textarea>
                     </div>
                     
+                    <div class="privacy-checkbox">
+                        <input type="checkbox" id="privacy_agreement" name="privacy_agreement" checked required>
+                        <label for="privacy_agreement">
+                            Я согласен с <a href="javascript:void(0)" onclick="openPrivacyModal()">политикой обработки персональных данных</a>
+                        </label>
+                    </div>
+                    
                     <button type="submit" class="submit-btn">
-                        <i class="fas fa-calculator"></i> Получить расчет за 1 день
+                        Получить расчет и начать проект
                     </button>
                 </form>
             </div>
             
-            <div style="margin-top: 30px;">
-                <p style="font-size: 1rem; color: #ccc;">
-                    Конфиденциальность ваших данных гарантирована
-                </p>
-                <p style="font-size: 0.9rem; color: #999; margin-top: 15px;">
-                    ⚡ Расчет готов в течение 1 дня | 📞 Консультация бесплатно | 🎯 Без обязательств
-                </p>
-            </div>
         </div>
     </section>
 
@@ -909,7 +2395,139 @@
         </div>
     </footer>
 
+    <!-- Fullscreen Gallery -->
+    <div class="fullscreen-gallery" id="fullscreenGallery">
+        <div class="fullscreen-content">
+            <button class="close-btn" onclick="closeFullscreen()">×</button>
+            <img id="fullscreenImage" class="fullscreen-image" src="" alt="">
+            <div class="fullscreen-controls">
+                <button class="fullscreen-btn" onclick="changeFullscreenSlide(-1)">‹</button>
+                <button class="fullscreen-btn" onclick="changeFullscreenSlide(1)">›</button>
+            </div>
+            <div class="fullscreen-dots" id="fullscreenDots"></div>
+        </div>
+    </div>
+
     <script>
+        // Gallery Slider Functions
+        function changeSlide(button, direction) {
+            const galleryItem = button.closest('.gallery-item');
+            const images = galleryItem.querySelectorAll('.slider-image');
+            const dots = galleryItem.querySelectorAll('.dot');
+            
+            let currentIndex = 0;
+            images.forEach((img, index) => {
+                if (img.classList.contains('active')) {
+                    currentIndex = index;
+                }
+            });
+            
+            let newIndex = currentIndex + direction;
+            if (newIndex < 0) newIndex = images.length - 1;
+            if (newIndex >= images.length) newIndex = 0;
+            
+            images[currentIndex].classList.remove('active');
+            images[newIndex].classList.add('active');
+            
+            dots[currentIndex].classList.remove('active');
+            dots[newIndex].classList.add('active');
+        }
+
+        function currentSlide(dot, index) {
+            const galleryItem = dot.closest('.gallery-item');
+            const images = galleryItem.querySelectorAll('.slider-image');
+            const dots = galleryItem.querySelectorAll('.dot');
+            
+            images.forEach(img => img.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            
+            images[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+
+        // Fullscreen Gallery Functions
+        let currentFullscreenImages = [];
+        let currentFullscreenIndex = 0;
+
+        function openFullscreen(galleryItem) {
+            const images = galleryItem.querySelectorAll('.slider-image');
+            const folder = galleryItem.getAttribute('data-folder');
+            
+            currentFullscreenImages = Array.from(images).map(img => img.src);
+            currentFullscreenIndex = 0;
+            
+            const fullscreenGallery = document.getElementById('fullscreenGallery');
+            const fullscreenImage = document.getElementById('fullscreenImage');
+            const fullscreenDots = document.getElementById('fullscreenDots');
+            
+            fullscreenImage.src = currentFullscreenImages[0];
+            fullscreenGallery.classList.add('active');
+            
+            // Create dots
+            fullscreenDots.innerHTML = '';
+            currentFullscreenImages.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.className = 'fullscreen-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.onclick = () => setFullscreenSlide(index);
+                fullscreenDots.appendChild(dot);
+            });
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFullscreen() {
+            const fullscreenGallery = document.getElementById('fullscreenGallery');
+            fullscreenGallery.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeFullscreenSlide(direction) {
+            currentFullscreenIndex += direction;
+            if (currentFullscreenIndex < 0) currentFullscreenIndex = currentFullscreenImages.length - 1;
+            if (currentFullscreenIndex >= currentFullscreenImages.length) currentFullscreenIndex = 0;
+            
+            setFullscreenSlide(currentFullscreenIndex);
+        }
+
+        function setFullscreenSlide(index) {
+            currentFullscreenIndex = index;
+            const fullscreenImage = document.getElementById('fullscreenImage');
+            const dots = document.querySelectorAll('.fullscreen-dot');
+            
+            fullscreenImage.src = currentFullscreenImages[index];
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        // Add click events to gallery items
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (!e.target.closest('.slider-btn') && !e.target.closest('.dot')) {
+                        openFullscreen(this);
+                    }
+                });
+            });
+        });
+
+        // Keyboard navigation for fullscreen
+        document.addEventListener('keydown', function(e) {
+            const fullscreenGallery = document.getElementById('fullscreenGallery');
+            if (fullscreenGallery.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeFullscreen();
+                } else if (e.key === 'ArrowLeft') {
+                    changeFullscreenSlide(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeFullscreenSlide(1);
+                }
+            }
+        });
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -924,6 +2542,145 @@
             });
         });
 
+        // Telegram Bot Configuration
+        const BOT_TOKEN = '8272787786:AAHhdBCZvk1B30ZaVvWIttRWBGuwF64gdaI';
+        const CHAT_ID = '384321326';
+
+        // Phone formatting function
+        function formatPhone(event) {
+            let value = event.target.value.replace(/\D/g, '');
+            if (value.startsWith('7')) {
+                value = value.substring(1);
+            }
+            if (value.length > 0) {
+                let formatted = '+7 (';
+                if (value.length > 0) {
+                    formatted += value.substring(0, 3);
+                }
+                if (value.length > 3) {
+                    formatted += ') ' + value.substring(3, 6);
+                }
+                if (value.length > 6) {
+                    formatted += '-' + value.substring(6, 8);
+                }
+                if (value.length > 8) {
+                    formatted += '-' + value.substring(8, 10);
+                }
+                event.target.value = formatted;
+            } else {
+                event.target.value = '';
+            }
+        }
+
+        // Function to send notifications to Telegram
+        function sendToTelegram(message) {
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.ok) {
+                    console.log('Notification sent to Telegram successfully');
+                } else {
+                    console.error('Telegram API error:', result.description);
+                }
+            })
+            .catch(error => {
+                console.error('Failed to send to Telegram:', error);
+            });
+        }
+
+        // Track time on page
+        const pageLoadTime = new Date();
+        
+        // Get detailed traffic and user information
+        function getTrafficInfo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const referrer = document.referrer || 'Прямой заход';
+            
+            // UTM параметры
+            const utmSource = urlParams.get('utm_source') || '-';
+            const utmMedium = urlParams.get('utm_medium') || '-';
+            const utmCampaign = urlParams.get('utm_campaign') || '-';
+            const utmContent = urlParams.get('utm_content') || '-';
+            const utmTerm = urlParams.get('utm_term') || '-';
+            
+            // Яндекс.Директ параметры
+            const yclid = urlParams.get('yclid') || '-';
+            const gclid = urlParams.get('gclid') || '-'; // Google Ads
+            
+            // Информация об устройстве и браузере
+            const userAgent = navigator.userAgent;
+            const platform = navigator.platform;
+            const language = navigator.language || navigator.userLanguage;
+            
+            // Определение типа устройства
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+            const isTablet = /iPad|Android(?!.*Mobile)/i.test(userAgent);
+            let deviceType = 'Desktop';
+            if (isTablet) deviceType = 'Tablet';
+            else if (isMobile) deviceType = 'Mobile';
+            
+            // Разрешение экрана
+            const screenResolution = `${window.screen.width}x${window.screen.height}`;
+            const viewportSize = `${window.innerWidth}x${window.innerHeight}`;
+            
+            // Время на сайте
+            const timeOnPage = Math.floor((new Date() - pageLoadTime) / 1000); // в секундах
+            const timeFormatted = timeOnPage < 60 
+                ? `${timeOnPage} сек` 
+                : `${Math.floor(timeOnPage / 60)} мин ${timeOnPage % 60} сек`;
+            
+            return {
+                // UTM метки
+                referrer: referrer,
+                utmSource: utmSource,
+                utmMedium: utmMedium,
+                utmCampaign: utmCampaign,
+                utmContent: utmContent,
+                utmTerm: utmTerm,
+                yclid: yclid,
+                gclid: gclid,
+                
+                // Устройство
+                deviceType: deviceType,
+                platform: platform,
+                language: language,
+                screenResolution: screenResolution,
+                viewportSize: viewportSize,
+                
+                // Поведение
+                timeOnPage: timeFormatted,
+                timeOnPageSeconds: timeOnPage,
+                
+                // Браузер (упрощенно)
+                browser: getBrowserName(userAgent)
+            };
+        }
+        
+        // Определение браузера
+        function getBrowserName(userAgent) {
+            if (userAgent.indexOf("Firefox") > -1) return "Firefox";
+            if (userAgent.indexOf("SamsungBrowser") > -1) return "Samsung Browser";
+            if (userAgent.indexOf("Opera") > -1 || userAgent.indexOf("OPR") > -1) return "Opera";
+            if (userAgent.indexOf("Trident") > -1) return "IE";
+            if (userAgent.indexOf("Edge") > -1) return "Edge";
+            if (userAgent.indexOf("Chrome") > -1) return "Chrome";
+            if (userAgent.indexOf("Safari") > -1) return "Safari";
+            return "Unknown";
+        }
+
+        // Initialize phone formatting for all phone inputs
+        document.getElementById('phone')?.addEventListener('input', formatPhone);
+
         // Form submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -937,6 +2694,60 @@
                 alert('Пожалуйста, заполните обязательные поля');
                 return;
             }
+            
+            // Phone validation
+            const phonePattern = /\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}/;
+            if (!phonePattern.test(data.phone)) {
+                alert('Пожалуйста, введите корректный номер телефона в формате +7 (XXX) XXX-XX-XX');
+                return;
+            }
+            
+            // Яндекс.Метрика: отправка главной формы расчета
+            if (typeof ym !== 'undefined') {
+                ym(104677623, 'reachGoal', 'main_form_submit');
+            }
+            
+            // Send to Telegram
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🎯 <b>НОВАЯ ЗАЯВКА НА РАСЧЕТ</b>
+
+━━━━━━━━━━━━━━━━━━━━
+👤 <b>КОНТАКТНЫЕ ДАННЫЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+• Имя: ${data.name}
+• Телефон: ${data.phone}
+• Email: ${data.email || 'Не указан'}
+• Комментарий: ${data.message || 'Нет комментариев'}
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+${traffic.utmSource !== '-' ? `🎯 UTM Source: ${traffic.utmSource}` : ''}
+${traffic.utmMedium !== '-' ? `📢 UTM Medium: ${traffic.utmMedium}` : ''}
+${traffic.utmCampaign !== '-' ? `🎪 UTM Campaign: ${traffic.utmCampaign}` : ''}
+${traffic.utmContent !== '-' ? `📝 UTM Content: ${traffic.utmContent}` : ''}
+${traffic.utmTerm !== '-' ? `🔎 UTM Term: ${traffic.utmTerm}` : ''}
+${traffic.yclid !== '-' ? `🟡 Yandex Click ID: ${traffic.yclid}` : ''}
+${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
+
+━━━━━━━━━━━━━━━━━━━━
+💻 <b>УСТРОЙСТВО И БРАУЗЕР</b>
+━━━━━━━━━━━━━━━━━━━━
+📱 Тип устройства: ${traffic.deviceType}
+🌐 Браузер: ${traffic.browser}
+💬 Язык: ${traffic.language}
+📐 Разрешение: ${traffic.screenResolution}
+🖥 Viewport: ${traffic.viewportSize}
+
+━━━━━━━━━━━━━━━━━━━━
+⏱ <b>ПОВЕДЕНИЕ НА САЙТЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+⏰ Время на сайте: ${traffic.timeOnPage}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${window.location.href}`;
+            
+            sendToTelegram(telegramMessage);
             
             // Simulate form submission
             alert('Спасибо за заявку! Мы свяжемся с вами в течение 1 дня для составления расчета.');
@@ -956,6 +2767,715 @@
                 header.style.boxShadow = 'none';
             }
         });
+
+        // Main Gallery Slider Functions
+        let mainSlideIndex = 0;
+        let imagesLoaded = {};
+
+        function lazyLoadImage(img) {
+            if (img.hasAttribute('data-src') && !imagesLoaded[mainSlideIndex]) {
+                img.src = img.getAttribute('data-src');
+                img.removeAttribute('data-src');
+                imagesLoaded[mainSlideIndex] = true;
+            }
+        }
+
+        function updateSlideInfo(images) {
+            const currentImage = images[mainSlideIndex];
+            document.getElementById('projectName').textContent = currentImage.getAttribute('data-project');
+            const description = currentImage.getAttribute('data-description');
+            if (description) {
+                document.getElementById('projectDescription').textContent = description;
+            }
+        }
+
+        function changeMainSlide(direction) {
+            const images = document.querySelectorAll('.main-slider-image');
+            const dots = document.querySelectorAll('#mainSliderDots .dot');
+            
+            images[mainSlideIndex].classList.remove('active');
+            dots[mainSlideIndex].classList.remove('active');
+            
+            mainSlideIndex += direction;
+            if (mainSlideIndex < 0) mainSlideIndex = images.length - 1;
+            if (mainSlideIndex >= images.length) mainSlideIndex = 0;
+            
+            // Lazy load image if needed
+            lazyLoadImage(images[mainSlideIndex]);
+            
+            images[mainSlideIndex].classList.add('active');
+            dots[mainSlideIndex].classList.add('active');
+            
+            // Update project info
+            updateSlideInfo(images);
+            
+            // Preload next image
+            const nextIndex = (mainSlideIndex + 1) % images.length;
+            lazyLoadImage(images[nextIndex]);
+        }
+
+        function setMainSlide(index) {
+            const images = document.querySelectorAll('.main-slider-image');
+            const dots = document.querySelectorAll('#mainSliderDots .dot');
+            
+            images[mainSlideIndex].classList.remove('active');
+            dots[mainSlideIndex].classList.remove('active');
+            
+            mainSlideIndex = index;
+            
+            // Lazy load image if needed
+            lazyLoadImage(images[mainSlideIndex]);
+            
+            images[mainSlideIndex].classList.add('active');
+            dots[mainSlideIndex].classList.add('active');
+            
+            // Update project info
+            updateSlideInfo(images);
+            
+            // Preload next image
+            const nextIndex = (mainSlideIndex + 1) % images.length;
+            lazyLoadImage(images[nextIndex]);
+        }
+
+        // Initialize dots for main slider
+        function initializeMainSliderDots() {
+            const images = document.querySelectorAll('.main-slider-image');
+            const dotsContainer = document.getElementById('mainSliderDots');
+            
+            if (dotsContainer && images.length > 0) {
+                dotsContainer.innerHTML = ''; // Clear existing dots
+                
+                for (let i = 0; i < images.length; i++) {
+                    const dot = document.createElement('span');
+                    dot.className = 'dot' + (i === 0 ? ' active' : '');
+                    dot.onclick = function() { setMainSlide(i); };
+                    dot.setAttribute('aria-label', `Проект ${i + 1}`);
+                    dotsContainer.appendChild(dot);
+                }
+            }
+        }
+
+        // Mini Gallery - Load random 6 images
+        function loadMiniGallery() {
+            const allImages = [
+                'bathroom_0.webp', 'bathroom_1.webp', 'bathroom_2.webp',
+                'kitchen_0.webp', 'kitchen_16.webp', 'kitchen_17.webp', 'kitchen_23.webp', 
+                'kitchen_25.webp', 'kitchen_29.webp', 'kitchen_30.webp', 'kitchen_31.webp',
+                'kitchen_37.webp', 'kitchen_38.webp', 'kitchen_43.webp', 'kitchen_45.webp',
+                'kitchen_48.webp', 'kitchen_5.webp', 'kitchen_50.webp', 'kitchen_6.webp',
+                'living_11.webp', 'living_12.webp', 'living_13.webp', 'living_14.webp',
+                'living_15.webp', 'living_18.webp', 'living_2.webp', 'living_6.webp',
+                'main_24.webp', 'main_25.webp', 'office_1.webp',
+                'Vertico 0-0.webp', 'Vertico 15.webp', 'Vertico 21.webp', 'Vertico 23.webp', 'Vertico 5.webp',
+                'wardrobe_19.webp', 'wardrobe_22.webp', 'wardrobe_25.webp', 'wardrobe_3.webp', 'wardrobe_9.webp'
+            ];
+
+            // Shuffle array and pick first 6
+            const shuffled = allImages.sort(() => 0.5 - Math.random());
+            const selectedImages = shuffled.slice(0, 6);
+
+            const miniGallery = document.getElementById('miniGallery');
+            if (miniGallery) {
+                miniGallery.innerHTML = '';
+                selectedImages.forEach((imageName, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'mini-gallery-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = `main/${imageName}`;
+                    img.alt = `Any-Home проект ${index + 1}`;
+                    img.loading = 'lazy';
+                    
+                    item.appendChild(img);
+                    
+                    // Add click handler to scroll to main gallery
+                    item.addEventListener('click', function() {
+                        const ourWorksSection = document.getElementById('our-works');
+                        if (ourWorksSection) {
+                            ourWorksSection.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'start' 
+                            });
+                        }
+                    });
+                    
+                    miniGallery.appendChild(item);
+                });
+            }
+        }
+
+        // Initialize on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                initializeMainSliderDots();
+                loadMiniGallery();
+            });
+        } else {
+            initializeMainSliderDots();
+            loadMiniGallery();
+        }
+
+        // Preload first few images on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.main-slider-image');
+            // Load first image (already has src)
+            imagesLoaded[0] = true;
+            // Preload second image
+            if (images.length > 1) {
+                lazyLoadImage(images[1]);
+            }
+        });
+
+        // Open full gallery with all projects
+        function openFullGallery() {
+            const allImages = [
+                '2/kitchen_0.webp', '1/bathroom_0.webp', '2/kitchen_16.webp', '1/main_24.webp',
+                '2/kitchen_25.webp', '1/office_1.webp', '2/kitchen_37.webp', '1/bathroom_1.webp',
+                '1/bathroom_2.webp', '1/main_25.webp', '2/kitchen_5.webp', '2/kitchen_6.webp',
+                '2/kitchen_17.webp', '2/kitchen_23.webp', '2/kitchen_29.webp', '2/kitchen_30.webp',
+                '2/kitchen_31.webp', '2/kitchen_38.webp', '2/kitchen_43.webp', '2/kitchen_45.webp',
+                '2/kitchen_48.webp', '2/kitchen_50.webp'
+            ];
+            
+            // Яндекс.Метрика: открытие полной галереи
+            if (typeof ym !== 'undefined') {
+                ym(104677623, 'reachGoal', 'open_full_gallery');
+            }
+            
+            currentFullscreenImages = allImages;
+            currentFullscreenIndex = 0;
+            
+            const fullscreenGallery = document.getElementById('fullscreenGallery');
+            const fullscreenImage = document.getElementById('fullscreenImage');
+            const fullscreenDots = document.getElementById('fullscreenDots');
+            
+            fullscreenImage.src = currentFullscreenImages[0];
+            fullscreenGallery.classList.add('active');
+            
+            // Create dots
+            fullscreenDots.innerHTML = '';
+            currentFullscreenImages.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.className = 'fullscreen-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.onclick = () => setFullscreenSlide(index);
+                fullscreenDots.appendChild(dot);
+            });
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Sticky Bar - показывается при скролле
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            const stickyBar = document.querySelector('.sticky-bar');
+            
+            // Header styling
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+            
+            // Sticky bar visibility
+            if (window.scrollY > 800) {
+                stickyBar.classList.add('visible');
+            } else {
+                stickyBar.classList.remove('visible');
+            }
+        });
+
+        // Modal Functions
+        function openCatalogModal() {
+            document.getElementById('catalogModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Яндекс.Метрика: открытие модалки каталога
+            if (typeof ym !== 'undefined') {
+                ym(104677623, 'reachGoal', 'open_catalog_modal');
+            }
+        }
+
+        function closeCatalogModal() {
+            document.getElementById('catalogModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openConsultationModal() {
+            document.getElementById('consultationModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Яндекс.Метрика: открытие модалки консультации
+            if (typeof ym !== 'undefined') {
+                ym(104677623, 'reachGoal', 'open_consultation_modal');
+            }
+        }
+
+        function closeConsultationModal() {
+            document.getElementById('consultationModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openPrivacyModal() {
+            document.getElementById('privacyModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePrivacyModal() {
+            document.getElementById('privacyModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close privacy modal on outside click
+        document.addEventListener('click', function(event) {
+            const privacyModal = document.getElementById('privacyModal');
+            if (event.target === privacyModal) {
+                closePrivacyModal();
+            }
+        });
+
+        // Initialize modal forms after DOM is ready
+        function initializeModalForms() {
+            // Initialize phone formatting for modal forms
+            const catalogPhoneInput = document.getElementById('catalog_phone');
+            if (catalogPhoneInput) {
+                catalogPhoneInput.addEventListener('input', formatPhone);
+            }
+            
+            const consultationPhoneInput = document.getElementById('consultation_phone');
+            if (consultationPhoneInput) {
+                consultationPhoneInput.addEventListener('input', formatPhone);
+            }
+            
+            // Catalog form submission
+            const catalogForm = document.getElementById('catalogForm');
+            if (catalogForm) {
+                catalogForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const formData = new FormData(this);
+                    const data = Object.fromEntries(formData);
+                    
+                    if (!data.catalog_name || !data.catalog_phone) {
+                        alert('Пожалуйста, заполните обязательные поля');
+                        return;
+                    }
+                    
+                    // Phone validation
+                    const phonePattern = /\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}/;
+                    if (!phonePattern.test(data.catalog_phone)) {
+                        alert('Пожалуйста, введите корректный номер телефона в формате +7 (XXX) XXX-XX-XX');
+                        return;
+                    }
+                    
+                    // Яндекс.Метрика: отправка формы каталога
+                    if (typeof ym !== 'undefined') {
+                        ym(104677623, 'reachGoal', 'catalog_form_submit');
+                    }
+                    
+                    // Send to Telegram
+                    const traffic = getTrafficInfo();
+                    const telegramMessage = `📚 <b>ЗАПРОС КАТАЛОГА</b>
+
+━━━━━━━━━━━━━━━━━━━━
+👤 <b>КОНТАКТНЫЕ ДАННЫЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+• Имя: ${data.catalog_name}
+• Телефон: ${data.catalog_phone}
+• Email: ${data.catalog_email || 'Не указан'}
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+${traffic.utmSource !== '-' ? `🎯 UTM Source: ${traffic.utmSource}` : ''}
+${traffic.utmMedium !== '-' ? `📢 UTM Medium: ${traffic.utmMedium}` : ''}
+${traffic.utmCampaign !== '-' ? `🎪 UTM Campaign: ${traffic.utmCampaign}` : ''}
+${traffic.utmContent !== '-' ? `📝 UTM Content: ${traffic.utmContent}` : ''}
+${traffic.utmTerm !== '-' ? `🔎 UTM Term: ${traffic.utmTerm}` : ''}
+${traffic.yclid !== '-' ? `🟡 Yandex Click ID: ${traffic.yclid}` : ''}
+${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
+
+━━━━━━━━━━━━━━━━━━━━
+💻 <b>УСТРОЙСТВО И БРАУЗЕР</b>
+━━━━━━━━━━━━━━━━━━━━
+📱 Тип устройства: ${traffic.deviceType}
+🌐 Браузер: ${traffic.browser}
+💬 Язык: ${traffic.language}
+📐 Разрешение: ${traffic.screenResolution}
+🖥 Viewport: ${traffic.viewportSize}
+
+━━━━━━━━━━━━━━━━━━━━
+⏱ <b>ПОВЕДЕНИЕ НА САЙТЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+⏰ Время на сайте: ${traffic.timeOnPage}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${window.location.href}`;
+                    
+                    sendToTelegram(telegramMessage);
+                    
+                    alert('Спасибо! Мы отправили каталог на вашу почту.');
+                    closeCatalogModal();
+                    this.reset();
+                });
+            }
+
+            // Consultation form submission
+            const consultationForm = document.getElementById('consultationForm');
+            if (consultationForm) {
+                consultationForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const formData = new FormData(this);
+                    const data = Object.fromEntries(formData);
+                    
+                    if (!data.consultation_name || !data.consultation_phone) {
+                        alert('Пожалуйста, заполните обязательные поля');
+                        return;
+                    }
+                    
+                    // Phone validation
+                    const phonePattern = /\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}/;
+                    if (!phonePattern.test(data.consultation_phone)) {
+                        alert('Пожалуйста, введите корректный номер телефона в формате +7 (XXX) XXX-XX-XX');
+                        return;
+                    }
+                    
+                    // Яндекс.Метрика: отправка формы консультации
+                    if (typeof ym !== 'undefined') {
+                        ym(104677623, 'reachGoal', 'consultation_form_submit');
+                    }
+                    
+                    // Send to Telegram
+                    const traffic = getTrafficInfo();
+                    const telegramMessage = `💬 <b>ЗАЯВКА НА КОНСУЛЬТАЦИЮ</b>
+
+━━━━━━━━━━━━━━━━━━━━
+👤 <b>КОНТАКТНЫЕ ДАННЫЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+• Имя: ${data.consultation_name}
+• Телефон: ${data.consultation_phone}
+• Email: ${data.consultation_email || 'Не указан'}
+• Вопрос: ${data.consultation_question || 'Нет вопроса'}
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+${traffic.utmSource !== '-' ? `🎯 UTM Source: ${traffic.utmSource}` : ''}
+${traffic.utmMedium !== '-' ? `📢 UTM Medium: ${traffic.utmMedium}` : ''}
+${traffic.utmCampaign !== '-' ? `🎪 UTM Campaign: ${traffic.utmCampaign}` : ''}
+${traffic.utmContent !== '-' ? `📝 UTM Content: ${traffic.utmContent}` : ''}
+${traffic.utmTerm !== '-' ? `🔎 UTM Term: ${traffic.utmTerm}` : ''}
+${traffic.yclid !== '-' ? `🟡 Yandex Click ID: ${traffic.yclid}` : ''}
+${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
+
+━━━━━━━━━━━━━━━━━━━━
+💻 <b>УСТРОЙСТВО И БРАУЗЕР</b>
+━━━━━━━━━━━━━━━━━━━━
+📱 Тип устройства: ${traffic.deviceType}
+🌐 Браузер: ${traffic.browser}
+💬 Язык: ${traffic.language}
+📐 Разрешение: ${traffic.screenResolution}
+🖥 Viewport: ${traffic.viewportSize}
+
+━━━━━━━━━━━━━━━━━━━━
+⏱ <b>ПОВЕДЕНИЕ НА САЙТЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+⏰ Время на сайте: ${traffic.timeOnPage}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${window.location.href}`;
+                    
+                    sendToTelegram(telegramMessage);
+                    
+                    alert('Спасибо! Мы свяжемся с вами в ближайшее время для консультации.');
+                    closeConsultationModal();
+                    this.reset();
+                });
+            }
+        }
+
+        // Initialize forms when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeModalForms);
+        } else {
+            // DOM already loaded
+            initializeModalForms();
+        }
+
+        // Click on main slider image - open fullscreen
+        document.querySelectorAll('.main-slider-image').forEach(img => {
+            img.addEventListener('click', function() {
+                openFullGallery();
+            });
+        });
+
+        // Отслеживание кликов по телефону
+        document.querySelectorAll('a[href^="tel:"]').forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (typeof ym !== 'undefined') {
+                    ym(104677623, 'reachGoal', 'phone_click');
+                }
+            });
+        });
+
+        // Отслеживание кликов по WhatsApp
+        document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"]').forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (typeof ym !== 'undefined') {
+                    ym(104677623, 'reachGoal', 'whatsapp_click');
+                }
+            });
+        });
+
+        // Отслеживание кликов по всем CTA кнопкам "Получить расчет"
+        document.querySelectorAll('a[href="#project"]').forEach(function(button) {
+            button.addEventListener('click', function() {
+                if (typeof ym !== 'undefined') {
+                    ym(104677623, 'reachGoal', 'cta_get_quote_click');
+                }
+            });
+        });
+
+        // Отслеживание скролла до формы
+        let formViewed = false;
+        window.addEventListener('scroll', function() {
+            if (!formViewed) {
+                const formSection = document.querySelector('#project');
+                if (formSection) {
+                    const rect = formSection.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        formViewed = true;
+                        if (typeof ym !== 'undefined') {
+                            ym(104677623, 'reachGoal', 'scroll_to_form');
+                        }
+                    }
+                }
+            }
+        });
+
+        // Отслеживание глубины скролла (50%, 75%, 100%)
+        let scrollDepth = {
+            '50': false,
+            '75': false,
+            '100': false
+        };
+
+        window.addEventListener('scroll', function() {
+            const scrollPercent = (window.scrollY + window.innerHeight) / document.body.scrollHeight * 100;
+            
+            if (scrollPercent >= 50 && !scrollDepth['50']) {
+                scrollDepth['50'] = true;
+                if (typeof ym !== 'undefined') {
+                    ym(104677623, 'reachGoal', 'scroll_50');
+                }
+            }
+            
+            if (scrollPercent >= 75 && !scrollDepth['75']) {
+                scrollDepth['75'] = true;
+                if (typeof ym !== 'undefined') {
+                    ym(104677623, 'reachGoal', 'scroll_75');
+                }
+            }
+            
+            if (scrollPercent >= 95 && !scrollDepth['100']) {
+                scrollDepth['100'] = true;
+                if (typeof ym !== 'undefined') {
+                    ym(104677623, 'reachGoal', 'scroll_100');
+                }
+            }
+        });
+
+        // Отслеживание времени на странице (30 сек, 60 сек, 120 сек)
+        let timeTracked = {
+            '30': false,
+            '60': false,
+            '120': false
+        };
+
+        setInterval(function() {
+            const timeOnPage = Math.floor(performance.now() / 1000);
+            
+            if (timeOnPage >= 30 && !timeTracked['30']) {
+                timeTracked['30'] = true;
+                if (typeof ym !== 'undefined') {
+                    ym(104677623, 'reachGoal', 'time_30sec');
+                }
+            }
+            
+            if (timeOnPage >= 60 && !timeTracked['60']) {
+                timeTracked['60'] = true;
+                if (typeof ym !== 'undefined') {
+                    ym(104677623, 'reachGoal', 'time_60sec');
+                }
+            }
+            
+            if (timeOnPage >= 120 && !timeTracked['120']) {
+                timeTracked['120'] = true;
+                if (typeof ym !== 'undefined') {
+                    ym(104677623, 'reachGoal', 'time_120sec');
+                }
+            }
+        }, 5000); // Проверяем каждые 5 секунд
+
     </script>
+
+    <!-- Sticky Action Bar -->
+    <div class="sticky-bar">
+        <div class="sticky-bar-content">
+            <button onclick="openCatalogModal()" class="sticky-btn">
+                <i class="fas fa-images"></i> Каталог
+            </button>
+            <a href="#project" class="sticky-btn primary">
+                <i class="fas fa-calculator"></i> Получить расчет
+            </a>
+            <a href="tel:+74951203542" class="sticky-btn">
+                <i class="fas fa-phone"></i> Позвонить
+            </a>
+            <a href="https://wa.me/74951203542" target="_blank" class="sticky-btn">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- Catalog Modal -->
+    <div class="modal" id="catalogModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeCatalogModal()">×</button>
+            <h3>Скачать каталог проектов</h3>
+            <p>Мы пришлем вам полный каталог бренда Any-Home с реализованными проектами, описанием решений и примерами наших работ</p>
+            
+            <form id="catalogForm">
+                <div class="form-group">
+                    <label for="catalog_name">Ваше имя *</label>
+                    <input type="text" id="catalog_name" name="catalog_name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="catalog_phone">Телефон *</label>
+                    <input type="tel" id="catalog_phone" name="catalog_phone" placeholder="+7 (___) ___-__-__" pattern="\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="catalog_email">Email (опционально)</label>
+                    <input type="email" id="catalog_email" name="catalog_email">
+                </div>
+                
+                <div class="privacy-checkbox">
+                    <input type="checkbox" id="catalog_privacy_agreement" name="catalog_privacy_agreement" checked required>
+                    <label for="catalog_privacy_agreement">
+                        Я согласен с <a href="javascript:void(0)" onclick="openPrivacyModal()">политикой обработки персональных данных</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-download"></i> Получить каталог
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Consultation Modal -->
+    <div class="modal" id="consultationModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeConsultationModal()">×</button>
+            <h3>Бесплатная консультация дизайнера</h3>
+            <p>Обсудим ваш проект, поможем с выбором решений и подготовим предварительный расчет</p>
+            
+            <form id="consultationForm">
+                <div class="form-group">
+                    <label for="consultation_name">Ваше имя *</label>
+                    <input type="text" id="consultation_name" name="consultation_name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="consultation_phone">Телефон *</label>
+                    <input type="tel" id="consultation_phone" name="consultation_phone" placeholder="+7 (___) ___-__-__" pattern="\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="consultation_time">Удобное время для звонка</label>
+                    <select id="consultation_time" name="consultation_time">
+                        <option value="">Выберите время</option>
+                        <option value="morning">Утро (10:00-12:00)</option>
+                        <option value="afternoon">День (12:00-15:00)</option>
+                        <option value="evening">Вечер (15:00-20:00)</option>
+                    </select>
+                </div>
+                
+                <div class="privacy-checkbox">
+                    <input type="checkbox" id="consultation_privacy_agreement" name="consultation_privacy_agreement" checked required>
+                    <label for="consultation_privacy_agreement">
+                        Я согласен с <a href="javascript:void(0)" onclick="openPrivacyModal()">политикой обработки персональных данных</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-comments"></i> Записаться на консультацию
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="privacy-modal" id="privacyModal">
+        <div class="privacy-modal-content">
+            <button class="privacy-modal-close" onclick="closePrivacyModal()">×</button>
+            <h2>Политика обработки персональных данных</h2>
+            
+            <p>Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей сайта meb.any-home.ru (далее — «Сайт»).</p>
+            
+            <h3>1. Общие положения</h3>
+            <p>1.1. Использование Сайта означает согласие пользователя с настоящей Политикой конфиденциальности и условиями обработки персональных данных.</p>
+            <p>1.2. В случае несогласия с условиями Политики конфиденциальности пользователь должен прекратить использование Сайта.</p>
+            <p>1.3. Администрация Сайта не проверяет достоверность персональных данных, предоставляемых пользователями.</p>
+            
+            <h3>2. Предмет политики конфиденциальности</h3>
+            <p>2.1. Настоящая Политика конфиденциальности устанавливает обязательства Администрации по неразглашению и обеспечению режима защиты конфиденциальности персональных данных, которые пользователь предоставляет при заполнении форм на Сайте.</p>
+            <p>2.2. Персональные данные, разрешённые к обработке в рамках настоящей Политики конфиденциальности, предоставляются пользователем путём заполнения форм на Сайте и включают в себя следующую информацию:</p>
+            <ul>
+                <li>Фамилия, имя, отчество;</li>
+                <li>Контактный телефон;</li>
+                <li>Адрес электронной почты (e-mail);</li>
+                <li>Другая информация, предоставленная пользователем по собственной инициативе.</li>
+            </ul>
+            
+            <h3>3. Цели сбора персональных данных</h3>
+            <p>3.1. Персональные данные пользователя Администрация может использовать в целях:</p>
+            <ul>
+                <li>Идентификации пользователя;</li>
+                <li>Предоставления пользователю персонализированных услуг;</li>
+                <li>Связи с пользователем, в том числе направление уведомлений, запросов и информации, касающихся использования услуг, оказания услуг, а также обработка запросов и заявок от пользователя;</li>
+                <li>Улучшения качества обслуживания, удобства использования, разработка новых сервисов и услуг;</li>
+                <li>Проведения статистических и иных исследований на основе обезличенных данных.</li>
+            </ul>
+            
+            <h3>4. Условия обработки персональных данных</h3>
+            <p>4.1. Обработка персональных данных осуществляется с согласия субъекта персональных данных на обработку его персональных данных.</p>
+            <p>4.2. Обработка персональных данных ограничивается достижением конкретных, заранее определённых и законных целей. Не допускается обработка персональных данных, несовместимая с целями сбора персональных данных.</p>
+            <p>4.3. Обработке подлежат только персональные данные, которые отвечают целям их обработки.</p>
+            
+            <h3>5. Защита персональных данных</h3>
+            <p>5.1. Администрация принимает необходимые организационные и технические меры для защиты персональной информации пользователя от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения, а также от иных неправомерных действий третьих лиц.</p>
+            
+            <h3>6. Права субъекта персональных данных</h3>
+            <p>6.1. Пользователь имеет право:</p>
+            <ul>
+                <li>Получать информацию, касающуюся обработки его персональных данных;</li>
+                <li>Требовать уточнения, блокирования или уничтожения своих персональных данных;</li>
+                <li>Отозвать своё согласие на обработку персональных данных;</li>
+                <li>Обжаловать действия или бездействие Администрации в уполномоченный орган по защите прав субъектов персональных данных или в судебном порядке.</li>
+            </ul>
+            
+            <h3>7. Заключительные положения</h3>
+            <p>7.1. Пользователь может получить любые разъяснения по интересующим вопросам, касающимся обработки его персональных данных, обратившись к Администрации с помощью электронной почты или контактных данных, указанных на Сайте.</p>
+            <p>7.2. В данном документе будут отражены любые изменения политики обработки персональных данных Администрацией. Политика действует бессрочно до замены её новой версией.</p>
+            <p>7.3. Актуальная версия Политики в свободном доступе расположена в сети Интернет по адресу meb.any-home.ru.</p>
+            
+            <p style="margin-top: 30px;"><strong>Контактная информация:</strong></p>
+            <p>Email: info@any-home.ru<br>
+            Телефон: +7 (495) 120-35-42<br>
+            Адрес: Москва, Большой Саввинский переулок, д. 12, стр. 8</p>
+        </div>
+    </div>
+
 </body>
 </html>
