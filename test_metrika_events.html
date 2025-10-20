@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест Яндекс.Метрика - Все события</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .test-section h2 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .test-button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .test-button:hover {
+            background: #2980b9;
+        }
+        .test-button.whatsapp {
+            background: #25d366;
+        }
+        .test-button.whatsapp:hover {
+            background: #1da851;
+        }
+        .test-button.phone {
+            background: #e74c3c;
+        }
+        .test-button.phone:hover {
+            background: #c0392b;
+        }
+        .test-button.cta {
+            background: #f39c12;
+        }
+        .test-button.cta:hover {
+            background: #e67e22;
+        }
+        .test-button.form {
+            background: #9b59b6;
+        }
+        .test-button.form:hover {
+            background: #8e44ad;
+        }
+        .test-button.gallery {
+            background: #1abc9c;
+        }
+        .test-button.gallery:hover {
+            background: #16a085;
+        }
+        .test-button.modal {
+            background: #34495e;
+        }
+        .test-button.modal:hover {
+            background: #2c3e50;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .log {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .event-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .event-item {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .event-item h4 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+        }
+        .event-item p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        .metrika-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+        .metrika-status.loading {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .metrika-status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .metrika-status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Яндекс.Метрика -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104677623', 'ym');
+
+        ym(104677623, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/104677623" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+    <div class="container">
+        <h1>📊 Тест Яндекс.Метрика - Все события</h1>
+        
+        <div id="metrika-status" class="metrika-status loading">
+            🔄 Загрузка Яндекс.Метрики...
+        </div>
+        
+        <div class="test-section">
+            <h2>📱 Контактные действия</h2>
+            <p>Тестируем клики по контактным кнопкам:</p>
+            
+            <a href="tel:+74951203542" class="test-button phone">📞 Позвонить</a>
+            <a href="https://wa.me/79938971045" target="_blank" class="test-button whatsapp">📱 WhatsApp</a>
+            <a href="#project" class="test-button cta">🎯 Получить расчет</a>
+            
+            <div id="contact-results" class="status info">Готов к тестированию контактных действий</div>
+        </div>
+
+        <div class="test-section">
+            <h2>📝 Формы</h2>
+            <p>Тестируем отправку форм:</p>
+            
+            <button onclick="testMainForm()" class="test-button form">📋 Главная форма</button>
+            <button onclick="testCatalogForm()" class="test-button form">📚 Форма каталога</button>
+            <button onclick="testConsultationForm()" class="test-button form">💬 Форма консультации</button>
+            
+            <div id="form-results" class="status info">Готов к тестированию форм</div>
+        </div>
+
+        <div class="test-section">
+            <h2>🖼️ Модальные окна и галерея</h2>
+            <p>Тестируем открытие модальных окон:</p>
+            
+            <button onclick="testCatalogModal()" class="test-button modal">📚 Каталог</button>
+            <button onclick="testConsultationModal()" class="test-button modal">💬 Консультация</button>
+            <button onclick="testFullGallery()" class="test-button gallery">🖼️ Полная галерея</button>
+            
+            <div id="modal-results" class="status info">Готов к тестированию модальных окон</div>
+        </div>
+
+        <div class="test-section">
+            <h2>📏 Глубина просмотра</h2>
+            <p>Тестируем события прокрутки:</p>
+            
+            <button onclick="testScrollEvents()" class="test-button">📏 Тест прокрутки</button>
+            <button onclick="testTimeEvents()" class="test-button">⏱️ Тест времени</button>
+            
+            <div id="scroll-results" class="status info">Готов к тестированию прокрутки</div>
+        </div>
+
+        <div class="test-section">
+            <h2>📊 Логи событий</h2>
+            <div id="log-container" class="log">Ожидание событий...</div>
+        </div>
+
+        <div class="test-section">
+            <h2>📋 Список всех событий</h2>
+            <div class="event-list" id="event-list">
+                <!-- События будут добавлены динамически -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Функция логирования
+        function logMessage(message) {
+            const logContainer = document.getElementById('log-container');
+            const timestamp = new Date().toLocaleTimeString();
+            logContainer.innerHTML += `[${timestamp}] ${message}\n`;
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        // Функция проверки статуса Яндекс.Метрики
+        function checkMetrikaStatus() {
+            const statusEl = document.getElementById('metrika-status');
+            if (typeof ym !== 'undefined') {
+                statusEl.className = 'metrika-status success';
+                statusEl.textContent = '✅ Яндекс.Метрика загружена';
+                logMessage('✅ Яндекс.Метрика успешно загружена');
+            } else {
+                statusEl.className = 'metrika-status error';
+                statusEl.textContent = '❌ Яндекс.Метрика не загружена';
+                logMessage('❌ Яндекс.Метрика не загружена');
+            }
+        }
+
+        // Функция отправки события в Яндекс.Метрику
+        function sendMetrikaEvent(eventName, description) {
+            if (typeof ym !== 'undefined') {
+                ym(104677623, 'reachGoal', eventName);
+                logMessage(`📊 Событие отправлено: ${eventName} - ${description}`);
+                updateEventStatus(eventName, 'success');
+                return true;
+            } else {
+                logMessage(`❌ Ошибка: Яндекс.Метрика не загружена для события ${eventName}`);
+                updateEventStatus(eventName, 'error');
+                return false;
+            }
+        }
+
+        // Функция обновления статуса события
+        function updateEventStatus(eventName, status) {
+            const eventItem = document.querySelector(`[data-event="${eventName}"]`);
+            if (eventItem) {
+                const statusEl = eventItem.querySelector('.event-status');
+                if (statusEl) {
+                    statusEl.textContent = status === 'success' ? '✅ Отправлено' : '❌ Ошибка';
+                    statusEl.className = `event-status ${status}`;
+                }
+            }
+        }
+
+        // Тестовые функции для форм
+        function testMainForm() {
+            logMessage('📋 Тестирование главной формы...');
+            sendMetrikaEvent('main_form_submit', 'Отправка главной формы расчета');
+            document.getElementById('form-results').innerHTML = '<div class="status success">✅ Главная форма протестирована</div>';
+        }
+
+        function testCatalogForm() {
+            logMessage('📚 Тестирование формы каталога...');
+            sendMetrikaEvent('catalog_form_submit', 'Скачивание каталога');
+            document.getElementById('form-results').innerHTML = '<div class="status success">✅ Форма каталога протестирована</div>';
+        }
+
+        function testConsultationForm() {
+            logMessage('💬 Тестирование формы консультации...');
+            sendMetrikaEvent('consultation_form_submit', 'Запрос консультации дизайнера');
+            document.getElementById('form-results').innerHTML = '<div class="status success">✅ Форма консультации протестирована</div>';
+        }
+
+        // Тестовые функции для модальных окон
+        function testCatalogModal() {
+            logMessage('📚 Тестирование модального окна каталога...');
+            sendMetrikaEvent('open_catalog_modal', 'Открытие модального окна каталога');
+            document.getElementById('modal-results').innerHTML = '<div class="status success">✅ Модальное окно каталога протестировано</div>';
+        }
+
+        function testConsultationModal() {
+            logMessage('💬 Тестирование модального окна консультации...');
+            sendMetrikaEvent('open_consultation_modal', 'Открытие формы консультации');
+            document.getElementById('modal-results').innerHTML = '<div class="status success">✅ Модальное окно консультации протестировано</div>';
+        }
+
+        function testFullGallery() {
+            logMessage('🖼️ Тестирование полной галереи...');
+            sendMetrikaEvent('open_full_gallery', 'Просмотр полной галереи проектов');
+            document.getElementById('modal-results').innerHTML = '<div class="status success">✅ Полная галерея протестирована</div>';
+        }
+
+        // Тестовые функции для прокрутки и времени
+        function testScrollEvents() {
+            logMessage('📏 Тестирование событий прокрутки...');
+            sendMetrikaEvent('scroll_to_form', 'Прокрутка до формы контакта');
+            setTimeout(() => sendMetrikaEvent('scroll_50', 'Прокрутка страницы 50%'), 100);
+            setTimeout(() => sendMetrikaEvent('scroll_75', 'Прокрутка страницы 75%'), 200);
+            setTimeout(() => sendMetrikaEvent('scroll_100', 'Прокрутка до конца страницы'), 300);
+            document.getElementById('scroll-results').innerHTML = '<div class="status success">✅ События прокрутки протестированы</div>';
+        }
+
+        function testTimeEvents() {
+            logMessage('⏱️ Тестирование событий времени...');
+            sendMetrikaEvent('time_30sec', 'Время на сайте 30 сек');
+            setTimeout(() => sendMetrikaEvent('time_60sec', 'Время на сайте 1 минута'), 100);
+            setTimeout(() => sendMetrikaEvent('time_120sec', 'Время на сайте 2 минуты'), 200);
+            document.getElementById('scroll-results').innerHTML = '<div class="status success">✅ События времени протестированы</div>';
+        }
+
+        // Обработчики для контактных кнопок
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обработчик для телефона
+            document.querySelectorAll('a[href^="tel:"]').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    logMessage('📞 Клик по телефону...');
+                    sendMetrikaEvent('phone_click', 'Клик по номеру телефона');
+                    document.getElementById('contact-results').innerHTML = '<div class="status success">✅ Клик по телефону протестирован</div>';
+                });
+            });
+
+            // Обработчик для WhatsApp
+            document.querySelectorAll('a[href*="wa.me"]').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    logMessage('📱 Клик по WhatsApp...');
+                    sendMetrikaEvent('whatsapp_click', 'Клик по WhatsApp');
+                    document.getElementById('contact-results').innerHTML = '<div class="status success">✅ Клик по WhatsApp протестирован</div>';
+                });
+            });
+
+            // Обработчик для CTA
+            document.querySelectorAll('a[href="#project"]').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    logMessage('🎯 Клик по CTA...');
+                    sendMetrikaEvent('cta_get_quote_click', 'Клик по CTA "Получить расчет"');
+                    document.getElementById('contact-results').innerHTML = '<div class="status success">✅ Клик по CTA протестирован</div>';
+                });
+            });
+        });
+
+        // Создание списка всех событий
+        function createEventList() {
+            const events = [
+                { name: 'main_form_submit', description: 'Отправка главной формы расчета', value: '1000 руб' },
+                { name: 'catalog_form_submit', description: 'Скачивание каталога', value: '300 руб' },
+                { name: 'consultation_form_submit', description: 'Запрос консультации дизайнера', value: '500 руб' },
+                { name: 'phone_click', description: 'Клик по номеру телефона', value: '500 руб' },
+                { name: 'whatsapp_click', description: 'Клик по WhatsApp', value: '400 руб' },
+                { name: 'open_catalog_modal', description: 'Открытие модального окна каталога', value: '50 руб' },
+                { name: 'open_consultation_modal', description: 'Открытие формы консультации', value: '50 руб' },
+                { name: 'open_full_gallery', description: 'Просмотр полной галереи проектов', value: '100 руб' },
+                { name: 'cta_get_quote_click', description: 'Клик по CTA "Получить расчет"', value: '30 руб' },
+                { name: 'scroll_to_form', description: 'Прокрутка до формы контакта', value: '20 руб' },
+                { name: 'scroll_50', description: 'Прокрутка страницы 50%', value: '10 руб' },
+                { name: 'scroll_75', description: 'Прокрутка страницы 75%', value: '20 руб' },
+                { name: 'scroll_100', description: 'Прокрутка до конца страницы', value: '30 руб' },
+                { name: 'time_30sec', description: 'Время на сайте 30 сек', value: '5 руб' },
+                { name: 'time_60sec', description: 'Время на сайте 1 минута', value: '15 руб' },
+                { name: 'time_120sec', description: 'Время на сайте 2 минуты', value: '50 руб' }
+            ];
+
+            const eventList = document.getElementById('event-list');
+            events.forEach(event => {
+                const eventItem = document.createElement('div');
+                eventItem.className = 'event-item';
+                eventItem.setAttribute('data-event', event.name);
+                eventItem.innerHTML = `
+                    <h4>${event.name}</h4>
+                    <p><strong>Описание:</strong> ${event.description}</p>
+                    <p><strong>Ценность:</strong> ${event.value}</p>
+                    <p class="event-status info">⏳ Ожидание тестирования</p>
+                `;
+                eventList.appendChild(eventItem);
+            });
+        }
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            logMessage('🚀 Страница загружена, инициализация...');
+            createEventList();
+            
+            // Проверяем статус Яндекс.Метрики через небольшую задержку
+            setTimeout(checkMetrikaStatus, 1000);
+            
+            logMessage('✅ Тестовая страница готова к работе');
+        });
+    </script>
+</body>
+</html>

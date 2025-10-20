@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест событий Яндекс.Метрики</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+            padding-bottom: 200px;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .sticky-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(44, 44, 44, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 999;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .sticky-bar-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+        .sticky-btn {
+            background: white;
+            color: #2c2c2c;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        .sticky-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+        }
+        .sticky-btn i {
+            margin-right: 5px;
+        }
+        .test-button {
+            background: #25D366;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .test-button:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+        .phone-button {
+            background: #007bff;
+        }
+        .phone-button:hover {
+            background: #0056b3;
+        }
+        .cta-button {
+            background: #2c2c2c;
+        }
+        .cta-button:hover {
+            background: #1a1a1a;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .log {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .log-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .log-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .log-info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        h1 {
+            color: #2c2c2c;
+            text-align: center;
+        }
+        h2 {
+            color: #2c2c2c;
+            border-bottom: 2px solid #25D366;
+            padding-bottom: 10px;
+        }
+        .instructions {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>📊 Тест событий Яндекс.Метрики</h1>
+    
+    <div class="instructions">
+        <strong>📋 Инструкции по тестированию:</strong><br>
+        1. Откройте консоль браузера (F12) и перейдите на вкладку "Console"<br>
+        2. Кликните по кнопкам ниже для тестирования событий<br>
+        3. Проверьте, что в консоли появляются сообщения о событиях<br>
+        4. Проверьте, что уведомления приходят в Telegram<br>
+        5. Проверьте события в Яндекс.Метрике (раздел "Отчеты → Стандартные отчеты → Конверсии")
+    </div>
+
+    <div class="test-section">
+        <h2>📊 Лог событий</h2>
+        <div id="event-log" class="log">
+            <div class="log-entry log-info">Система загружена. Готов к тестированию событий...</div>
+        </div>
+        <button class="test-button" onclick="clearLog()">Очистить лог</button>
+    </div>
+
+    <div class="test-section">
+        <h2>🧪 Тестовые кнопки</h2>
+        <p>Кликните по кнопкам ниже для тестирования событий Яндекс.Метрики:</p>
+        <button class="test-button" onclick="testWhatsAppEvent()">📱 Тест WhatsApp события</button>
+        <button class="test-button phone-button" onclick="testPhoneEvent()">📞 Тест Phone события</button>
+        <button class="test-button cta-button" onclick="testCTAEvent()">🎯 Тест CTA события</button>
+        <button class="test-button" onclick="testAllEvents()" style="background: #6f42c1;">🔄 Тест всех событий</button>
+    </div>
+
+    <div class="test-section">
+        <h2>📱 Sticky Bar (прокрутите вниз)</h2>
+        <p>Нижнее меню для тестирования реальных событий:</p>
+    </div>
+
+    <!-- Sticky Bar -->
+    <div class="sticky-bar">
+        <div class="sticky-bar-content">
+            <button onclick="testCatalogEvent()" class="sticky-btn">
+                <i class="fas fa-images"></i> Каталог
+            </button>
+            <a href="#project" class="sticky-btn" onclick="testCTAEvent()">
+                <i class="fas fa-calculator"></i> Получить расчет
+            </a>
+            <a href="tel:+74951203542" class="sticky-btn" onclick="testPhoneEvent()">
+                <i class="fas fa-phone"></i> Позвонить
+            </a>
+            <a href="https://wa.me/79938971045" target="_blank" class="sticky-btn" onclick="testWhatsAppEvent()">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- Яндекс.Метрика -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104677623', 'ym');
+
+        ym(104677623, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/104677623" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+    <script>
+        // Telegram Bot Configuration
+        const BOT_TOKEN = '8272787786:AAHhdBCZvk1B30ZaVvWIttRWBGuwF64gdaI';
+        const CHAT_ID = '384321326';
+
+        // Логирование
+        function addLog(message, type = 'info') {
+            const log = document.getElementById('event-log');
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function clearLog() {
+            document.getElementById('event-log').innerHTML = '<div class="log-entry log-info">Лог очищен</div>';
+        }
+
+        // Функция отправки в Telegram
+        function sendToTelegram(message) {
+            addLog('Отправка в Telegram...', 'info');
+            return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.ok) {
+                    addLog('✅ Уведомление отправлено в Telegram', 'success');
+                    return true;
+                } else {
+                    addLog(`❌ Ошибка Telegram API: ${result.description}`, 'error');
+                    return false;
+                }
+            })
+            .catch(error => {
+                addLog(`❌ Ошибка отправки: ${error.message}`, 'error');
+                return false;
+            });
+        }
+
+        // Получение информации о трафике
+        function getTrafficInfo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const referrer = document.referrer || 'Прямой заход';
+            
+            return {
+                referrer,
+                utmSource: urlParams.get('utm_source') || '-',
+                utmMedium: urlParams.get('utm_medium') || '-',
+                utmCampaign: urlParams.get('utm_campaign') || '-',
+                deviceType: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
+                screenResolution: `${window.screen.width}x${window.screen.height}`,
+                viewportSize: `${window.innerWidth}x${window.innerHeight}`,
+                language: navigator.language,
+                timeFormatted: '0 сек',
+                url: window.location.href
+            };
+        }
+
+        // Тест WhatsApp события
+        function testWhatsAppEvent() {
+            addLog('🧪 Тестирование WhatsApp события...', 'info');
+            
+            // Отправляем событие в Яндекс.Метрику
+            if (typeof ym !== 'undefined') {
+                ym(104677623, 'reachGoal', 'whatsapp_click');
+                addLog('✅ Событие whatsapp_click отправлено в Яндекс.Метрику', 'success');
+                console.log('✅ Яндекс.Метрика: событие whatsapp_click отправлено');
+            } else {
+                addLog('❌ Яндекс.Метрика не загружена', 'error');
+            }
+            
+            // Отправляем уведомление в Telegram
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ: WHATSAPP СОБЫТИЕ</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ЯНДЕКС.МЕТРИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+✅ Событие: whatsapp_click
+✅ Счетчик: 104677623
+✅ Статус: Отправлено
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+🎯 UTM Source: ${traffic.utmSource}
+📢 UTM Medium: ${traffic.utmMedium}
+🎪 UTM Campaign: ${traffic.utmCampaign}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${traffic.url}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Тестовое событие WhatsApp отправлено в Яндекс.Метрику!`;
+            
+            sendToTelegram(telegramMessage);
+        }
+
+        // Тест Phone события
+        function testPhoneEvent() {
+            addLog('🧪 Тестирование Phone события...', 'info');
+            
+            if (typeof ym !== 'undefined') {
+                ym(104677623, 'reachGoal', 'phone_click');
+                addLog('✅ Событие phone_click отправлено в Яндекс.Метрику', 'success');
+                console.log('✅ Яндекс.Метрика: событие phone_click отправлено');
+            } else {
+                addLog('❌ Яндекс.Метрика не загружена', 'error');
+            }
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ: PHONE СОБЫТИЕ</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ЯНДЕКС.МЕТРИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+✅ Событие: phone_click
+✅ Счетчик: 104677623
+✅ Статус: Отправлено
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Тестовое событие Phone отправлено в Яндекс.Метрику!`;
+            
+            sendToTelegram(telegramMessage);
+        }
+
+        // Тест CTA события
+        function testCTAEvent() {
+            addLog('🧪 Тестирование CTA события...', 'info');
+            
+            if (typeof ym !== 'undefined') {
+                ym(104677623, 'reachGoal', 'cta_get_quote_click');
+                addLog('✅ Событие cta_get_quote_click отправлено в Яндекс.Метрику', 'success');
+                console.log('✅ Яндекс.Метрика: событие cta_get_quote_click отправлено');
+            } else {
+                addLog('❌ Яндекс.Метрика не загружена', 'error');
+            }
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ: CTA СОБЫТИЕ</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ЯНДЕКС.МЕТРИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+✅ Событие: cta_get_quote_click
+✅ Счетчик: 104677623
+✅ Статус: Отправлено
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Тестовое событие CTA отправлено в Яндекс.Метрику!`;
+            
+            sendToTelegram(telegramMessage);
+        }
+
+        // Тест Catalog события
+        function testCatalogEvent() {
+            addLog('🧪 Тестирование Catalog события...', 'info');
+            
+            if (typeof ym !== 'undefined') {
+                ym(104677623, 'reachGoal', 'open_catalog_modal');
+                addLog('✅ Событие open_catalog_modal отправлено в Яндекс.Метрику', 'success');
+                console.log('✅ Яндекс.Метрика: событие open_catalog_modal отправлено');
+            } else {
+                addLog('❌ Яндекс.Метрика не загружена', 'error');
+            }
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ: CATALOG СОБЫТИЕ</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ЯНДЕКС.МЕТРИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+✅ Событие: open_catalog_modal
+✅ Счетчик: 104677623
+✅ Статус: Отправлено
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Тестовое событие Catalog отправлено в Яндекс.Метрику!`;
+            
+            sendToTelegram(telegramMessage);
+        }
+
+        // Тест всех событий
+        function testAllEvents() {
+            addLog('🔄 Тестирование всех событий...', 'info');
+            
+            const events = [
+                { name: 'whatsapp_click', description: 'WhatsApp клик' },
+                { name: 'phone_click', description: 'Phone клик' },
+                { name: 'cta_get_quote_click', description: 'CTA клик' },
+                { name: 'open_catalog_modal', description: 'Открытие каталога' },
+                { name: 'open_consultation_modal', description: 'Открытие консультации' },
+                { name: 'open_full_gallery', description: 'Открытие галереи' }
+            ];
+            
+            events.forEach((event, index) => {
+                setTimeout(() => {
+                    if (typeof ym !== 'undefined') {
+                        ym(104677623, 'reachGoal', event.name);
+                        addLog(`✅ Событие ${event.name} отправлено`, 'success');
+                        console.log(`✅ Яндекс.Метрика: событие ${event.name} отправлено`);
+                    }
+                }, index * 500); // 500ms между событиями
+            });
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ: ВСЕ СОБЫТИЯ</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ЯНДЕКС.МЕТРИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+✅ Отправлено событий: ${events.length}
+✅ Счетчик: 104677623
+✅ Статус: Все события отправлены
+
+━━━━━━━━━━━━━━━━━━━━
+📋 <b>СПИСОК СОБЫТИЙ</b>
+━━━━━━━━━━━━━━━━━━━━
+${events.map(e => `• ${e.name} - ${e.description}`).join('\n')}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Все тестовые события отправлены в Яндекс.Метрику!`;
+            
+            sendToTelegram(telegramMessage);
+        }
+
+        // Инициализация при загрузке
+        window.addEventListener('load', function() {
+            addLog('🚀 Страница загружена', 'success');
+            
+            // Проверяем Яндекс.Метрику
+            if (typeof ym !== 'undefined') {
+                addLog('✅ Яндекс.Метрика загружена', 'success');
+                console.log('✅ Яндекс.Метрика инициализирована');
+            } else {
+                addLog('❌ Яндекс.Метрика не загружена', 'error');
+            }
+            
+            // Проверяем Telegram API
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getMe`)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.ok) {
+                        addLog(`✅ Telegram бот подключен: @${result.result.username}`, 'success');
+                    } else {
+                        addLog(`❌ Ошибка подключения к боту: ${result.description}`, 'error');
+                    }
+                })
+                .catch(error => {
+                    addLog(`❌ Ошибка сети: ${error.message}`, 'error');
+                });
+        });
+    </script>
+</body>
+</html>

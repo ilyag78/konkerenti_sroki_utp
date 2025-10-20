@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отладка WhatsApp в Sticky Bar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+            padding-bottom: 200px;
+        }
+        .debug-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .sticky-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(44, 44, 44, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 999;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .sticky-bar-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+        .sticky-btn {
+            background: white;
+            color: #2c2c2c;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        .sticky-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+        }
+        .sticky-btn i {
+            margin-right: 5px;
+        }
+        .log {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .log-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .log-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .log-info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        .test-button {
+            background: #25D366;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .test-button:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+        h1 {
+            color: #2c2c2c;
+            text-align: center;
+        }
+        h2 {
+            color: #2c2c2c;
+            border-bottom: 2px solid #25D366;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Отладка WhatsApp в Sticky Bar</h1>
+    
+    <div class="debug-section">
+        <h2>📊 Лог событий</h2>
+        <div id="event-log" class="log">
+            <div class="log-entry log-info">Система загружена. Готов к тестированию...</div>
+        </div>
+        <button class="test-button" onclick="clearLog()">Очистить лог</button>
+    </div>
+
+    <div class="debug-section">
+        <h2>🧪 Тестовые кнопки</h2>
+        <p>Кликните по кнопкам ниже для тестирования:</p>
+        <button class="test-button" onclick="testDirectWhatsApp()">📱 Прямой тест WhatsApp</button>
+        <button class="test-button" onclick="testSelector()">🔍 Тест селектора</button>
+        <button class="test-button" onclick="testEventListeners()">👂 Тест обработчиков</button>
+    </div>
+
+    <div class="debug-section">
+        <h2>📱 Sticky Bar (прокрутите вниз)</h2>
+        <p>Нижнее меню с кнопкой WhatsApp:</p>
+    </div>
+
+    <!-- Sticky Bar -->
+    <div class="sticky-bar">
+        <div class="sticky-bar-content">
+            <a href="https://wa.me/79938971045" target="_blank" class="sticky-btn" id="sticky-whatsapp">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Telegram Bot Configuration
+        const BOT_TOKEN = '8272787786:AAHhdBCZvk1B30ZaVvWIttRWBGuwF64gdaI';
+        const CHAT_ID = '384321326';
+
+        // Логирование
+        function addLog(message, type = 'info') {
+            const log = document.getElementById('event-log');
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function clearLog() {
+            document.getElementById('event-log').innerHTML = '<div class="log-entry log-info">Лог очищен</div>';
+        }
+
+        // Функция отправки в Telegram
+        function sendToTelegram(message) {
+            addLog('Отправка в Telegram...', 'info');
+            return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.ok) {
+                    addLog('✅ Уведомление отправлено в Telegram', 'success');
+                    return true;
+                } else {
+                    addLog(`❌ Ошибка Telegram API: ${result.description}`, 'error');
+                    return false;
+                }
+            })
+            .catch(error => {
+                addLog(`❌ Ошибка отправки: ${error.message}`, 'error');
+                return false;
+            });
+        }
+
+        // Получение информации о трафике
+        function getTrafficInfo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const referrer = document.referrer || 'Прямой заход';
+            
+            return {
+                referrer,
+                utmSource: urlParams.get('utm_source') || '-',
+                utmMedium: urlParams.get('utm_medium') || '-',
+                utmCampaign: urlParams.get('utm_campaign') || '-',
+                deviceType: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
+                screenResolution: `${window.screen.width}x${window.screen.height}`,
+                viewportSize: `${window.innerWidth}x${window.innerHeight}`,
+                language: navigator.language,
+                timeFormatted: '0 сек',
+                url: window.location.href
+            };
+        }
+
+        // Тест прямого клика по WhatsApp
+        function testDirectWhatsApp() {
+            addLog('🧪 Тестирование прямого клика по WhatsApp...', 'info');
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🔍 <b>ОТЛАДКА: ПРЯМОЙ ТЕСТ WHATSAPP</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+🎯 UTM Source: ${traffic.utmSource}
+📢 UTM Medium: ${traffic.utmMedium}
+🎪 UTM Campaign: ${traffic.utmCampaign}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${traffic.url}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🔍 Отладочный тест: прямая отправка в Telegram работает!`;
+            
+            sendToTelegram(telegramMessage);
+        }
+
+        // Тест селектора
+        function testSelector() {
+            addLog('🔍 Тестирование селектора WhatsApp...', 'info');
+            
+            const whatsappLinks = document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"]');
+            addLog(`Найдено WhatsApp ссылок: ${whatsappLinks.length}`, 'info');
+            
+            whatsappLinks.forEach((link, index) => {
+                addLog(`Ссылка ${index + 1}: ${link.href}`, 'info');
+                addLog(`Класс: ${link.className}`, 'info');
+                addLog(`ID: ${link.id || 'нет'}`, 'info');
+            });
+        }
+
+        // Тест обработчиков событий
+        function testEventListeners() {
+            addLog('👂 Тестирование обработчиков событий...', 'info');
+            
+            const whatsappLinks = document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"]');
+            
+            whatsappLinks.forEach((link, index) => {
+                // Добавляем тестовый обработчик
+                link.addEventListener('click', function(e) {
+                    addLog(`🎯 Клик по WhatsApp ссылке ${index + 1}: ${this.href}`, 'success');
+                    
+                    // Отправляем уведомление
+                    const traffic = getTrafficInfo();
+                    const telegramMessage = `🔍 <b>ОТЛАДКА: КЛИК ПО WHATSAPP</b>
+
+━━━━━━━━━━━━━━━━━━━━
+🔗 <b>ССЫЛКА</b>
+━━━━━━━━━━━━━━━━━━━━
+${this.href}
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+🎯 UTM Source: ${traffic.utmSource}
+📢 UTM Medium: ${traffic.utmMedium}
+🎪 UTM Campaign: ${traffic.utmCampaign}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${traffic.url}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🔍 Отладочный тест: обработчик событий работает!`;
+                    
+                    sendToTelegram(telegramMessage);
+                });
+                
+                addLog(`✅ Обработчик добавлен к ссылке ${index + 1}`, 'success');
+            });
+        }
+
+        // Инициализация при загрузке
+        window.addEventListener('load', function() {
+            addLog('🚀 Страница загружена', 'success');
+            addLog('🔍 Поиск WhatsApp ссылок...', 'info');
+            
+            const whatsappLinks = document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"]');
+            addLog(`Найдено WhatsApp ссылок: ${whatsappLinks.length}`, 'info');
+            
+            whatsappLinks.forEach((link, index) => {
+                addLog(`Ссылка ${index + 1}: ${link.href}`, 'info');
+            });
+            
+            // Проверяем доступность Telegram API
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getMe`)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.ok) {
+                        addLog(`✅ Telegram бот подключен: @${result.result.username}`, 'success');
+                    } else {
+                        addLog(`❌ Ошибка подключения к боту: ${result.description}`, 'error');
+                    }
+                })
+                .catch(error => {
+                    addLog(`❌ Ошибка сети: ${error.message}`, 'error');
+                });
+        });
+    </script>
+</body>
+</html>

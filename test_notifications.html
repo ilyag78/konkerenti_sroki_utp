@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест уведомлений Telegram</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            background: #25D366;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .test-button:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+        .phone-button {
+            background: #007bff;
+        }
+        .phone-button:hover {
+            background: #0056b3;
+        }
+        .cta-button {
+            background: #2c2c2c;
+        }
+        .cta-button:hover {
+            background: #1a1a1a;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        h1 {
+            color: #2c2c2c;
+            text-align: center;
+        }
+        h2 {
+            color: #2c2c2c;
+            border-bottom: 2px solid #25D366;
+            padding-bottom: 10px;
+        }
+        .instructions {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Тест системы уведомлений Telegram</h1>
+    
+    <div class="instructions">
+        <strong>📋 Инструкции по тестированию:</strong><br>
+        1. Откройте Telegram и найдите чат с ботом<br>
+        2. Нажмите на кнопки ниже для тестирования разных типов уведомлений<br>
+        3. Проверьте, что уведомления приходят в Telegram<br>
+        4. Проверьте консоль браузера (F12) на наличие ошибок
+    </div>
+
+    <div class="test-section">
+        <h2>📱 Тест WhatsApp уведомлений</h2>
+        <p>Кликните по кнопке ниже, чтобы протестировать уведомление о переходе в WhatsApp:</p>
+        <button class="test-button" onclick="testWhatsApp()">
+            📱 Перейти в WhatsApp
+        </button>
+        <div id="whatsapp-status" class="status" style="display: none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📞 Тест телефонных уведомлений</h2>
+        <p>Кликните по кнопке ниже, чтобы протестировать уведомление о клике по телефону:</p>
+        <button class="test-button phone-button" onclick="testPhone()">
+            📞 Позвонить
+        </button>
+        <div id="phone-status" class="status" style="display: none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🎯 Тест CTA уведомлений</h2>
+        <p>Кликните по кнопке ниже, чтобы протестировать уведомление о клике по CTA:</p>
+        <button class="test-button cta-button" onclick="testCTA()">
+            🎯 Получить расчет
+        </button>
+        <div id="cta-status" class="status" style="display: none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🖼️ Тест галереи</h2>
+        <p>Кликните по кнопке ниже, чтобы протестировать уведомление о просмотре галереи:</p>
+        <button class="test-button" onclick="testGallery()" style="background: #6f42c1;">
+            🖼️ Смотреть все проекты
+        </button>
+        <div id="gallery-status" class="status" style="display: none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📚 Тест каталога</h2>
+        <p>Кликните по кнопке ниже, чтобы протестировать уведомление о открытии каталога:</p>
+        <button class="test-button" onclick="testCatalog()" style="background: #fd7e14;">
+            📚 Скачать каталог
+        </button>
+        <div id="catalog-status" class="status" style="display: none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>💬 Тест консультации</h2>
+        <p>Кликните по кнопке ниже, чтобы протестировать уведомление о открытии консультации:</p>
+        <button class="test-button" onclick="testConsultation()" style="background: #20c997;">
+            💬 Заказать консультацию
+        </button>
+        <div id="consultation-status" class="status" style="display: none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📊 Статус системы</h2>
+        <div id="system-status" class="status info">
+            Система загружается...
+        </div>
+    </div>
+
+    <script>
+        // Telegram Bot Configuration (из основного файла)
+        const BOT_TOKEN = '8272787786:AAHhdBCZvk1B30ZaVvWIttRWBGuwF64gdaI';
+        const CHAT_ID = '384321326';
+
+        // Функция отправки в Telegram
+        function sendToTelegram(message) {
+            return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.ok) {
+                    console.log('✅ Уведомление отправлено в Telegram');
+                    return true;
+                } else {
+                    console.error('❌ Ошибка Telegram API:', result.description);
+                    return false;
+                }
+            })
+            .catch(error => {
+                console.error('❌ Ошибка отправки в Telegram:', error);
+                return false;
+            });
+        }
+
+        // Получение информации о трафике
+        function getTrafficInfo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const referrer = document.referrer || 'Прямой заход';
+            
+            const utmSource = urlParams.get('utm_source') || '-';
+            const utmMedium = urlParams.get('utm_medium') || '-';
+            const utmCampaign = urlParams.get('utm_campaign') || '-';
+            
+            const userAgent = navigator.userAgent;
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+            const deviceType = isMobile ? 'Mobile' : 'Desktop';
+            
+            const timeOnPage = Math.floor((new Date() - new Date()) / 1000);
+            const timeFormatted = `${timeOnPage} сек`;
+            
+            return {
+                referrer,
+                utmSource,
+                utmMedium,
+                utmCampaign,
+                deviceType,
+                screenResolution: `${window.screen.width}x${window.screen.height}`,
+                viewportSize: `${window.innerWidth}x${window.innerHeight}`,
+                language: navigator.language,
+                timeFormatted,
+                url: window.location.href
+            };
+        }
+
+        // Тест WhatsApp
+        function testWhatsApp() {
+            const status = document.getElementById('whatsapp-status');
+            status.style.display = 'block';
+            status.className = 'status info';
+            status.textContent = '🔄 Отправка уведомления о WhatsApp...';
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ: ПЕРЕХОД В WHATSAPP</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+🎯 UTM Source: ${traffic.utmSource}
+📢 UTM Medium: ${traffic.utmMedium}
+🎪 UTM Campaign: ${traffic.utmCampaign}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${traffic.url}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Это тестовое уведомление! Система работает корректно.`;
+            
+            sendToTelegram(telegramMessage).then(success => {
+                if (success) {
+                    status.className = 'status success';
+                    status.textContent = '✅ Уведомление о WhatsApp отправлено в Telegram!';
+                } else {
+                    status.className = 'status error';
+                    status.textContent = '❌ Ошибка отправки уведомления. Проверьте консоль браузера.';
+                }
+            });
+        }
+
+        // Тест телефона
+        function testPhone() {
+            const status = document.getElementById('phone-status');
+            status.style.display = 'block';
+            status.className = 'status info';
+            status.textContent = '🔄 Отправка уведомления о клике по телефону...';
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ: КЛИК ПО ТЕЛЕФОНУ</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📞 <b>НОМЕР ТЕЛЕФОНА</b>
+━━━━━━━━━━━━━━━━━━━━
++7 (495) 120-35-42
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+🎯 UTM Source: ${traffic.utmSource}
+📢 UTM Medium: ${traffic.utmMedium}
+🎪 UTM Campaign: ${traffic.utmCampaign}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${traffic.url}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Это тестовое уведомление! Система работает корректно.`;
+            
+            sendToTelegram(telegramMessage).then(success => {
+                if (success) {
+                    status.className = 'status success';
+                    status.textContent = '✅ Уведомление о клике по телефону отправлено в Telegram!';
+                } else {
+                    status.className = 'status error';
+                    status.textContent = '❌ Ошибка отправки уведомления. Проверьте консоль браузера.';
+                }
+            });
+        }
+
+        // Тест CTA
+        function testCTA() {
+            const status = document.getElementById('cta-status');
+            status.style.display = 'block';
+            status.className = 'status info';
+            status.textContent = '🔄 Отправка уведомления о клике по CTA...';
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ: КЛИК ПО CTA "ПОЛУЧИТЬ РАСЧЕТ"</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+🎯 UTM Source: ${traffic.utmSource}
+📢 UTM Medium: ${traffic.utmMedium}
+🎪 UTM Campaign: ${traffic.utmCampaign}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${traffic.url}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Это тестовое уведомление! Система работает корректно.`;
+            
+            sendToTelegram(telegramMessage).then(success => {
+                if (success) {
+                    status.className = 'status success';
+                    status.textContent = '✅ Уведомление о клике по CTA отправлено в Telegram!';
+                } else {
+                    status.className = 'status error';
+                    status.textContent = '❌ Ошибка отправки уведомления. Проверьте консоль браузера.';
+                }
+            });
+        }
+
+        // Тест галереи
+        function testGallery() {
+            const status = document.getElementById('gallery-status');
+            status.style.display = 'block';
+            status.className = 'status info';
+            status.textContent = '🔄 Отправка уведомления о просмотре галереи...';
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ: ПРОСМОТР ПОЛНОЙ ГАЛЕРЕИ</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+🎯 UTM Source: ${traffic.utmSource}
+📢 UTM Medium: ${traffic.utmMedium}
+🎪 UTM Campaign: ${traffic.utmCampaign}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${traffic.url}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Это тестовое уведомление! Система работает корректно.`;
+            
+            sendToTelegram(telegramMessage).then(success => {
+                if (success) {
+                    status.className = 'status success';
+                    status.textContent = '✅ Уведомление о просмотре галереи отправлено в Telegram!';
+                } else {
+                    status.className = 'status error';
+                    status.textContent = '❌ Ошибка отправки уведомления. Проверьте консоль браузера.';
+                }
+            });
+        }
+
+        // Тест каталога
+        function testCatalog() {
+            const status = document.getElementById('catalog-status');
+            status.style.display = 'block';
+            status.className = 'status info';
+            status.textContent = '🔄 Отправка уведомления о открытии каталога...';
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ: ОТКРЫТИЕ КАТАЛОГА</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+🎯 UTM Source: ${traffic.utmSource}
+📢 UTM Medium: ${traffic.utmMedium}
+🎪 UTM Campaign: ${traffic.utmCampaign}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${traffic.url}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Это тестовое уведомление! Система работает корректно.`;
+            
+            sendToTelegram(telegramMessage).then(success => {
+                if (success) {
+                    status.className = 'status success';
+                    status.textContent = '✅ Уведомление о открытии каталога отправлено в Telegram!';
+                } else {
+                    status.className = 'status error';
+                    status.textContent = '❌ Ошибка отправки уведомления. Проверьте консоль браузера.';
+                }
+            });
+        }
+
+        // Тест консультации
+        function testConsultation() {
+            const status = document.getElementById('consultation-status');
+            status.style.display = 'block';
+            status.className = 'status info';
+            status.textContent = '🔄 Отправка уведомления о открытии консультации...';
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ: ОТКРЫТИЕ КОНСУЛЬТАЦИИ</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+🎯 UTM Source: ${traffic.utmSource}
+📢 UTM Medium: ${traffic.utmMedium}
+🎪 UTM Campaign: ${traffic.utmCampaign}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${traffic.url}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Это тестовое уведомление! Система работает корректно.`;
+            
+            sendToTelegram(telegramMessage).then(success => {
+                if (success) {
+                    status.className = 'status success';
+                    status.textContent = '✅ Уведомление о открытии консультации отправлено в Telegram!';
+                } else {
+                    status.className = 'status error';
+                    status.textContent = '❌ Ошибка отправки уведомления. Проверьте консоль браузера.';
+                }
+            });
+        }
+
+        // Проверка системы при загрузке
+        window.addEventListener('load', function() {
+            const status = document.getElementById('system-status');
+            
+            // Проверяем доступность Telegram API
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getMe`)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.ok) {
+                        status.className = 'status success';
+                        status.textContent = `✅ Система готова к тестированию! Бот: @${result.result.username}`;
+                    } else {
+                        status.className = 'status error';
+                        status.textContent = '❌ Ошибка подключения к Telegram боту';
+                    }
+                })
+                .catch(error => {
+                    status.className = 'status error';
+                    status.textContent = '❌ Ошибка сети. Проверьте подключение к интернету.';
+                });
+        });
+    </script>
+</body>
+</html>

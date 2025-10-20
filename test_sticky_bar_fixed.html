@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест Sticky Bar - Исправленная версия</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .test-section h2 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .test-button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .test-button:hover {
+            background: #2980b9;
+        }
+        .test-button.whatsapp {
+            background: #25d366;
+        }
+        .test-button.whatsapp:hover {
+            background: #1da851;
+        }
+        .test-button.phone {
+            background: #e74c3c;
+        }
+        .test-button.phone:hover {
+            background: #c0392b;
+        }
+        .test-button.cta {
+            background: #f39c12;
+        }
+        .test-button.cta:hover {
+            background: #e67e22;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .log {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .sticky-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #2c3e50;
+            padding: 15px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .sticky-btn {
+            background: white;
+            color: #2c3e50;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .sticky-btn:hover {
+            background: #ecf0f1;
+            transform: translateY(-2px);
+        }
+        .sticky-btn.primary {
+            background: #3498db;
+            color: white;
+        }
+        .sticky-btn.primary:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Тест Sticky Bar - Исправленная версия</h1>
+        
+        <div class="test-section">
+            <h2>📱 Тест кнопок Sticky Bar</h2>
+            <p>Нажмите на кнопки в нижней панели и проверьте консоль браузера на наличие логов.</p>
+            
+            <div id="test-results">
+                <div class="status info">Готов к тестированию. Откройте консоль браузера (F12) для просмотра логов.</div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>📊 Логи событий</h2>
+            <div id="log-container" class="log">Ожидание событий...</div>
+        </div>
+    </div>
+
+    <!-- Sticky Bar (как на основном сайте) -->
+    <div class="sticky-bar">
+        <button onclick="openCatalogModal()" class="sticky-btn">
+            <i class="fas fa-images"></i> Каталог
+        </button>
+        <a href="#project" class="sticky-btn primary">
+            <i class="fas fa-calculator"></i> Получить расчет
+        </a>
+        <a href="tel:+74951203542" class="sticky-btn">
+            <i class="fas fa-phone"></i> Позвонить
+        </a>
+        <a href="https://wa.me/79938971045" target="_blank" class="sticky-btn">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+    </div>
+
+    <script>
+        // Telegram Bot настройки
+        const BOT_TOKEN = '8272787786:AAHhdBCZvk1B30ZaVvWIttRWBGuwF64gdaI';
+        const CHAT_ID = '384321326';
+
+        // Функция отправки в Telegram
+        function sendToTelegram(message) {
+            return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.ok) {
+                    console.log('✅ Notification sent to Telegram successfully');
+                    logMessage('✅ Уведомление отправлено в Telegram');
+                    return true;
+                } else {
+                    console.error('❌ Telegram API error:', result.description);
+                    logMessage('❌ Ошибка Telegram API: ' + result.description);
+                    return false;
+                }
+            })
+            .catch(error => {
+                console.error('❌ Failed to send to Telegram:', error);
+                logMessage('❌ Ошибка отправки в Telegram: ' + error.message);
+                return false;
+            });
+        }
+
+        // Функция логирования
+        function logMessage(message) {
+            const logContainer = document.getElementById('log-container');
+            const timestamp = new Date().toLocaleTimeString();
+            logContainer.innerHTML += `[${timestamp}] ${message}\n`;
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        // Функция получения информации о трафике
+        function getTrafficInfo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return {
+                referrer: document.referrer || '-',
+                utmSource: urlParams.get('utm_source') || '-',
+                utmMedium: urlParams.get('utm_medium') || '-',
+                utmCampaign: urlParams.get('utm_campaign') || '-',
+                utmContent: urlParams.get('utm_content') || '-',
+                utmTerm: urlParams.get('utm_term') || '-',
+                yclid: urlParams.get('yclid') || '-',
+                gclid: urlParams.get('gclid') || '-',
+                deviceType: /Mobile|Android|iPhone|iPad/.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
+                screenResolution: `${screen.width}x${screen.height}`,
+                viewportSize: `${window.innerWidth}x${window.innerHeight}`,
+                language: navigator.language,
+                timeFormatted: '0:00'
+            };
+        }
+
+        // Функция для добавления обработчиков WhatsApp
+        function addWhatsAppListeners() {
+            document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"]').forEach(function(link) {
+                link.removeEventListener('click', handleWhatsAppClick);
+                link.addEventListener('click', handleWhatsAppClick);
+            });
+        }
+
+        // Обработчик клика по WhatsApp
+        function handleWhatsAppClick(event) {
+            console.log('📱 WhatsApp клик зарегистрирован:', this.href);
+            logMessage('📱 WhatsApp клик зарегистрирован: ' + this.href);
+
+            // Отправка уведомления в Telegram о переходе в WhatsApp
+            const traffic = getTrafficInfo();
+            const telegramMessage = `📱 <b>ПЕРЕХОД В WHATSAPP</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+${traffic.utmSource !== '-' ? `🎯 UTM Source: ${traffic.utmSource}` : ''}
+${traffic.utmMedium !== '-' ? `📢 UTM Medium: ${traffic.utmMedium}` : ''}
+${traffic.utmCampaign !== '-' ? `🎪 UTM Campaign: ${traffic.utmCampaign}` : ''}
+${traffic.utmContent !== '-' ? `📝 UTM Content: ${traffic.utmContent}` : ''}
+${traffic.utmTerm !== '-' ? `🔍 UTM Term: ${traffic.utmTerm}` : ''}
+${traffic.yclid !== '-' ? `🟡 Yandex Click ID: ${traffic.yclid}` : ''}
+${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${window.location.href}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+Пользователь готов к общению в WhatsApp! Рекомендуется оперативно ответить на сообщение!`;
+
+            sendToTelegram(telegramMessage);
+        }
+
+        // Функция для добавления обработчиков телефона
+        function addPhoneListeners() {
+            document.querySelectorAll('a[href^="tel:"]').forEach(function(link) {
+                link.removeEventListener('click', handlePhoneClick);
+                link.addEventListener('click', handlePhoneClick);
+            });
+        }
+
+        // Обработчик клика по телефону
+        function handlePhoneClick(event) {
+            console.log('📞 Phone клик зарегистрирован:', this.href);
+            logMessage('📞 Phone клик зарегистрирован: ' + this.href);
+            
+            // Отправка уведомления в Telegram о клике по телефону
+            const traffic = getTrafficInfo();
+            const phoneNumber = this.href.replace('tel:', '');
+            const telegramMessage = `📞 <b>КЛИК ПО ТЕЛЕФОНУ</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📞 <b>НОМЕР ТЕЛЕФОНА</b>
+━━━━━━━━━━━━━━━━━━━━
+${phoneNumber}
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+${traffic.utmSource !== '-' ? `🎯 UTM Source: ${traffic.utmSource}` : ''}
+${traffic.utmMedium !== '-' ? `📢 UTM Medium: ${traffic.utmMedium}` : ''}
+${traffic.utmCampaign !== '-' ? `🎪 UTM Campaign: ${traffic.utmCampaign}` : ''}
+${traffic.utmContent !== '-' ? `📝 UTM Content: ${traffic.utmContent}` : ''}
+${traffic.utmTerm !== '-' ? `🔍 UTM Term: ${traffic.utmTerm}` : ''}
+${traffic.yclid !== '-' ? `🟡 Yandex Click ID: ${traffic.yclid}` : ''}
+${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${window.location.href}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+Пользователь готов звонить! Будьте готовы к звонку.`;
+            
+            sendToTelegram(telegramMessage);
+        }
+
+        // Функция для добавления обработчиков CTA
+        function addCTAListeners() {
+            document.querySelectorAll('a[href="#project"]').forEach(function(button) {
+                button.removeEventListener('click', handleCTAClick);
+                button.addEventListener('click', handleCTAClick);
+            });
+        }
+
+        // Обработчик клика по CTA
+        function handleCTAClick(event) {
+            console.log('🎯 CTA клик зарегистрирован:', this.textContent.trim());
+            logMessage('🎯 CTA клик зарегистрирован: ' + this.textContent.trim());
+            
+            // Отправка уведомления в Telegram о клике по CTA
+            const traffic = getTrafficInfo();
+            const buttonText = this.textContent.trim();
+            const telegramMessage = `🎯 <b>КЛИК ПО CTA "${buttonText}"</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+${traffic.utmSource !== '-' ? `🎯 UTM Source: ${traffic.utmSource}` : ''}
+${traffic.utmMedium !== '-' ? `📢 UTM Medium: ${traffic.utmMedium}` : ''}
+${traffic.utmCampaign !== '-' ? `🎪 UTM Campaign: ${traffic.utmCampaign}` : ''}
+${traffic.utmContent !== '-' ? `📝 UTM Content: ${traffic.utmContent}` : ''}
+${traffic.utmTerm !== '-' ? `🔍 UTM Term: ${traffic.utmTerm}` : ''}
+${traffic.yclid !== '-' ? `🟡 Yandex Click ID: ${traffic.yclid}` : ''}
+${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${window.location.href}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+Пользователь заинтересован в расчете! Высокий потенциал конверсии.`;
+            
+            sendToTelegram(telegramMessage);
+        }
+
+        // Функция для добавления всех обработчиков событий
+        function addAllEventListeners() {
+            addWhatsAppListeners();
+            addPhoneListeners();
+            addCTAListeners();
+        }
+
+        // Функция открытия каталога (заглушка)
+        function openCatalogModal() {
+            console.log('📚 Каталог открыт');
+            logMessage('📚 Каталог открыт');
+            alert('Каталог открыт (тест)');
+        }
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            logMessage('🚀 Страница загружена, инициализация обработчиков...');
+            addAllEventListeners();
+            logMessage('✅ Обработчики добавлены');
+            
+            // Дополнительная инициализация через задержку
+            setTimeout(function() {
+                addAllEventListeners();
+                logMessage('✅ Повторная инициализация обработчиков');
+            }, 1000);
+            
+            setTimeout(function() {
+                addAllEventListeners();
+                logMessage('✅ Финальная инициализация обработчиков');
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

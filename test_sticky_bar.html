@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест нижнего меню (Sticky Bar)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+            padding-bottom: 200px; /* Место для sticky bar */
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .sticky-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(44, 44, 44, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 999;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .sticky-bar-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+        .sticky-btn {
+            background: white;
+            color: #2c2c2c;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        .sticky-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+        }
+        .sticky-btn.primary {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            font-weight: 600;
+        }
+        .sticky-btn i {
+            margin-right: 5px;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        h1 {
+            color: #2c2c2c;
+            text-align: center;
+        }
+        h2 {
+            color: #2c2c2c;
+            border-bottom: 2px solid #25D366;
+            padding-bottom: 10px;
+        }
+        .instructions {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .test-results {
+            background: #e2e3e5;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+        .test-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .test-item:last-child {
+            border-bottom: none;
+        }
+        .test-name {
+            font-weight: 500;
+        }
+        .test-status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        .pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .passed {
+            background: #d4edda;
+            color: #155724;
+        }
+        .failed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Тест нижнего меню (Sticky Bar)</h1>
+    
+    <div class="instructions">
+        <strong>📋 Инструкции по тестированию:</strong><br>
+        1. Прокрутите страницу вниз, чтобы увидеть нижнее меню<br>
+        2. Кликните по каждой кнопке в нижнем меню<br>
+        3. Проверьте, что уведомления приходят в Telegram<br>
+        4. Следите за статусом тестов ниже
+    </div>
+
+    <div class="test-section">
+        <h2>📊 Результаты тестов</h2>
+        <div class="test-results">
+            <div class="test-item">
+                <span class="test-name">📚 Кнопка "Каталог"</span>
+                <span class="test-status pending" id="catalog-test">Ожидает</span>
+            </div>
+            <div class="test-item">
+                <span class="test-name">🎯 Кнопка "Получить расчет"</span>
+                <span class="test-status pending" id="cta-test">Ожидает</span>
+            </div>
+            <div class="test-item">
+                <span class="test-name">📞 Кнопка "Позвонить"</span>
+                <span class="test-status pending" id="phone-test">Ожидает</span>
+            </div>
+            <div class="test-item">
+                <span class="test-name">📱 Кнопка "WhatsApp"</span>
+                <span class="test-status pending" id="whatsapp-test">Ожидает</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔍 Отладка</h2>
+        <div id="debug-info" class="status info">
+            Система загружается...
+        </div>
+    </div>
+
+    <!-- Нижнее меню (Sticky Bar) -->
+    <div class="sticky-bar">
+        <div class="sticky-bar-content">
+            <button onclick="testCatalogClick()" class="sticky-btn">
+                <i class="fas fa-images"></i> Каталог
+            </button>
+            <a href="#project" class="sticky-btn primary" onclick="testCTAClick()">
+                <i class="fas fa-calculator"></i> Получить расчет
+            </a>
+            <a href="tel:+74951203542" class="sticky-btn" onclick="testPhoneClick()">
+                <i class="fas fa-phone"></i> Позвонить
+            </a>
+            <a href="https://wa.me/79938971045" target="_blank" class="sticky-btn" onclick="testWhatsAppClick()">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Telegram Bot Configuration
+        const BOT_TOKEN = '8272787786:AAHhdBCZvk1B30ZaVvWIttRWBGuwF64gdaI';
+        const CHAT_ID = '384321326';
+
+        // Функция отправки в Telegram
+        function sendToTelegram(message) {
+            return fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.ok) {
+                    console.log('✅ Уведомление отправлено в Telegram');
+                    return true;
+                } else {
+                    console.error('❌ Ошибка Telegram API:', result.description);
+                    return false;
+                }
+            })
+            .catch(error => {
+                console.error('❌ Ошибка отправки в Telegram:', error);
+                return false;
+            });
+        }
+
+        // Получение информации о трафике
+        function getTrafficInfo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const referrer = document.referrer || 'Прямой заход';
+            
+            const utmSource = urlParams.get('utm_source') || '-';
+            const utmMedium = urlParams.get('utm_medium') || '-';
+            const utmCampaign = urlParams.get('utm_campaign') || '-';
+            
+            const userAgent = navigator.userAgent;
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+            const deviceType = isMobile ? 'Mobile' : 'Desktop';
+            
+            const timeOnPage = Math.floor((new Date() - new Date()) / 1000);
+            const timeFormatted = `${timeOnPage} сек`;
+            
+            return {
+                referrer,
+                utmSource,
+                utmMedium,
+                utmCampaign,
+                deviceType,
+                screenResolution: `${window.screen.width}x${window.screen.height}`,
+                viewportSize: `${window.innerWidth}x${window.innerHeight}`,
+                language: navigator.language,
+                timeFormatted,
+                url: window.location.href
+            };
+        }
+
+        // Обновление статуса теста
+        function updateTestStatus(testId, status, message = '') {
+            const element = document.getElementById(testId);
+            element.className = `test-status ${status}`;
+            element.textContent = message || (status === 'passed' ? '✅ Пройден' : status === 'failed' ? '❌ Не пройден' : '⏳ Ожидает');
+        }
+
+        // Тест кнопки каталога
+        function testCatalogClick() {
+            console.log('🧪 Тестирование кнопки каталога');
+            updateTestStatus('catalog-test', 'pending', '⏳ Тестируется...');
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ STICKY BAR: ОТКРЫТИЕ КАТАЛОГА</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+🎯 UTM Source: ${traffic.utmSource}
+📢 UTM Medium: ${traffic.utmMedium}
+🎪 UTM Campaign: ${traffic.utmCampaign}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${traffic.url}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Тест нижнего меню: кнопка каталога работает!`;
+            
+            sendToTelegram(telegramMessage).then(success => {
+                if (success) {
+                    updateTestStatus('catalog-test', 'passed', '✅ Пройден');
+                } else {
+                    updateTestStatus('catalog-test', 'failed', '❌ Ошибка');
+                }
+            });
+        }
+
+        // Тест CTA кнопки
+        function testCTAClick() {
+            console.log('🧪 Тестирование CTA кнопки');
+            updateTestStatus('cta-test', 'pending', '⏳ Тестируется...');
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ STICKY BAR: КЛИК ПО CTA</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+🎯 UTM Source: ${traffic.utmSource}
+📢 UTM Medium: ${traffic.utmMedium}
+🎪 UTM Campaign: ${traffic.utmCampaign}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${traffic.url}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Тест нижнего меню: CTA кнопка работает!`;
+            
+            sendToTelegram(telegramMessage).then(success => {
+                if (success) {
+                    updateTestStatus('cta-test', 'passed', '✅ Пройден');
+                } else {
+                    updateTestStatus('cta-test', 'failed', '❌ Ошибка');
+                }
+            });
+        }
+
+        // Тест кнопки телефона
+        function testPhoneClick() {
+            console.log('🧪 Тестирование кнопки телефона');
+            updateTestStatus('phone-test', 'pending', '⏳ Тестируется...');
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ STICKY BAR: КЛИК ПО ТЕЛЕФОНУ</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📞 <b>НОМЕР ТЕЛЕФОНА</b>
+━━━━━━━━━━━━━━━━━━━━
++7 (495) 120-35-42
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+🎯 UTM Source: ${traffic.utmSource}
+📢 UTM Medium: ${traffic.utmMedium}
+🎪 UTM Campaign: ${traffic.utmCampaign}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${traffic.url}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Тест нижнего меню: кнопка телефона работает!`;
+            
+            sendToTelegram(telegramMessage).then(success => {
+                if (success) {
+                    updateTestStatus('phone-test', 'passed', '✅ Пройден');
+                } else {
+                    updateTestStatus('phone-test', 'failed', '❌ Ошибка');
+                }
+            });
+        }
+
+        // Тест кнопки WhatsApp
+        function testWhatsAppClick() {
+            console.log('🧪 Тестирование кнопки WhatsApp');
+            updateTestStatus('whatsapp-test', 'pending', '⏳ Тестируется...');
+            
+            const traffic = getTrafficInfo();
+            const telegramMessage = `🧪 <b>ТЕСТ STICKY BAR: ПЕРЕХОД В WHATSAPP</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📊 <b>ИСТОЧНИК ТРАФИКА</b>
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${traffic.referrer}
+🎯 UTM Source: ${traffic.utmSource}
+📢 UTM Medium: ${traffic.utmMedium}
+🎪 UTM Campaign: ${traffic.utmCampaign}
+
+━━━━━━━━━━━━━━━━━━━━
+📱 <b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+🖥️ Устройство: ${traffic.deviceType}
+📐 Разрешение: ${traffic.screenResolution}
+🌐 Размер окна: ${traffic.viewportSize}
+🌍 Язык: ${traffic.language}
+🕐 Время на сайте: ${traffic.timeFormatted}
+📅 Дата и время: ${new Date().toLocaleString('ru-RU')}
+🌐 URL: ${traffic.url}
+
+━━━━━━━━━━━━━━━━━━━━
+💡 <b>РЕКОМЕНДАЦИЯ</b>
+━━━━━━━━━━━━━━━━━━━━
+🧪 Тест нижнего меню: кнопка WhatsApp работает!`;
+            
+            sendToTelegram(telegramMessage).then(success => {
+                if (success) {
+                    updateTestStatus('whatsapp-test', 'passed', '✅ Пройден');
+                } else {
+                    updateTestStatus('whatsapp-test', 'failed', '❌ Ошибка');
+                }
+            });
+        }
+
+        // Проверка системы при загрузке
+        window.addEventListener('load', function() {
+            const debugInfo = document.getElementById('debug-info');
+            
+            // Проверяем доступность Telegram API
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getMe`)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.ok) {
+                        debugInfo.className = 'status success';
+                        debugInfo.textContent = `✅ Система готова! Бот: @${result.result.username}. Прокрутите вниз и протестируйте кнопки нижнего меню.`;
+                    } else {
+                        debugInfo.className = 'status error';
+                        debugInfo.textContent = '❌ Ошибка подключения к Telegram боту';
+                    }
+                })
+                .catch(error => {
+                    debugInfo.className = 'status error';
+                    debugInfo.textContent = '❌ Ошибка сети. Проверьте подключение к интернету.';
+                });
+        });
+    </script>
+</body>
+</html>
