@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проверка настроек Telegram</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .info-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .info-section h2 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .config-item {
+            margin: 15px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+        .config-item strong {
+            color: #2c3e50;
+        }
+        .test-button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .test-button:hover {
+            background: #2980b9;
+        }
+        .test-button.success {
+            background: #27ae60;
+        }
+        .test-button.success:hover {
+            background: #229954;
+        }
+        .test-button.error {
+            background: #e74c3c;
+        }
+        .test-button.error:hover {
+            background: #c0392b;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .log {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .bot-info {
+            background: #e8f5e8;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .bot-info h3 {
+            margin-top: 0;
+            color: #155724;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #856404;
+        }
+        .warning h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 Проверка настроек Telegram</h1>
+        
+        <div class="info-section">
+            <h2>🔧 Текущие настройки</h2>
+            
+            <div class="config-item">
+                <strong>BOT_TOKEN:</strong> <span id="bot-token">8272787786:AAHhdBCZvk1B30ZaVvWIttRWBGuwF64gdaI</span>
+            </div>
+            
+            <div class="config-item">
+                <strong>CHAT_ID:</strong> <span id="chat-id">-4979391524</span>
+            </div>
+            
+            <div class="config-item">
+                <strong>API URL:</strong> <span id="api-url">https://api.telegram.org/bot8272787786:AAHhdBCZvk1B30ZaVvWIttRWBGuwF64gdaI/sendMessage</span>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>🤖 Информация о боте</h2>
+            <div id="bot-info" class="bot-info">
+                <h3>Загрузка информации о боте...</h3>
+                <p>Получаем данные о боте из Telegram API...</p>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>💬 Информация о чате</h2>
+            <div id="chat-info" class="bot-info">
+                <h3>Загрузка информации о чате...</h3>
+                <p>Получаем данные о чате из Telegram API...</p>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>🧪 Тестирование</h2>
+            <p>Отправьте тестовое сообщение для проверки настроек:</p>
+            
+            <button onclick="testBotConnection()" class="test-button">🔍 Проверить подключение</button>
+            <button onclick="sendTestMessage()" class="test-button success">📤 Отправить тест</button>
+            <button onclick="getBotInfo()" class="test-button">ℹ️ Информация о боте</button>
+            <button onclick="getChatInfo()" class="test-button">💬 Информация о чате</button>
+            
+            <div id="test-results" class="status info">Готов к тестированию</div>
+        </div>
+
+        <div class="info-section">
+            <h2>⚠️ Важные замечания</h2>
+            <div class="warning">
+                <h3>🔒 Безопасность</h3>
+                <p><strong>Внимание!</strong> Токен бота и ID чата видны в коде сайта. Это означает, что:</p>
+                <ul>
+                    <li>Любой пользователь может увидеть эти данные</li>
+                    <li>Кто-то может отправлять сообщения от имени вашего бота</li>
+                    <li>Рекомендуется использовать серверную часть для отправки уведомлений</li>
+                </ul>
+            </div>
+            
+            <div class="warning">
+                <h3>📱 Получение уведомлений</h3>
+                <p>Уведомления отправляются в чат с ID <strong>-4979391524</strong>. Убедитесь, что:</p>
+                <ul>
+                    <li>Вы добавили бота в этот чат</li>
+                    <li>Бот имеет права на отправку сообщений</li>
+                    <li>Вы подписаны на уведомления от бота</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>📊 Логи тестирования</h2>
+            <div id="log-container" class="log">Ожидание тестирования...</div>
+        </div>
+    </div>
+
+    <script>
+        // Telegram Bot настройки
+        const BOT_TOKEN = '8272787786:AAHhdBCZvk1B30ZaVvWIttRWBGuwF64gdaI';
+        const CHAT_ID = '-4979391524';
+
+        // Функция логирования
+        function logMessage(message) {
+            const logContainer = document.getElementById('log-container');
+            const timestamp = new Date().toLocaleTimeString();
+            logContainer.innerHTML += `[${timestamp}] ${message}\n`;
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        // Функция обновления статуса
+        function updateStatus(message, type = 'info') {
+            const statusEl = document.getElementById('test-results');
+            statusEl.className = `status ${type}`;
+            statusEl.textContent = message;
+        }
+
+        // Проверка подключения к боту
+        async function testBotConnection() {
+            logMessage('🔍 Проверка подключения к боту...');
+            updateStatus('Проверка подключения...', 'info');
+            
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getMe`);
+                const data = await response.json();
+                
+                if (data.ok) {
+                    logMessage('✅ Подключение к боту успешно');
+                    logMessage(`📱 Бот: @${data.result.username} (${data.result.first_name})`);
+                    updateStatus('✅ Подключение к боту успешно', 'success');
+                } else {
+                    logMessage('❌ Ошибка подключения к боту: ' + data.description);
+                    updateStatus('❌ Ошибка подключения к боту', 'error');
+                }
+            } catch (error) {
+                logMessage('❌ Ошибка сети: ' + error.message);
+                updateStatus('❌ Ошибка сети', 'error');
+            }
+        }
+
+        // Получение информации о боте
+        async function getBotInfo() {
+            logMessage('ℹ️ Получение информации о боте...');
+            
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getMe`);
+                const data = await response.json();
+                
+                if (data.ok) {
+                    const botInfo = document.getElementById('bot-info');
+                    botInfo.innerHTML = `
+                        <h3>✅ Информация о боте</h3>
+                        <p><strong>Имя:</strong> ${data.result.first_name}</p>
+                        <p><strong>Username:</strong> @${data.result.username}</p>
+                        <p><strong>ID:</strong> ${data.result.id}</p>
+                        <p><strong>Может присоединяться к группам:</strong> ${data.result.can_join_groups ? 'Да' : 'Нет'}</p>
+                        <p><strong>Может читать сообщения группы:</strong> ${data.result.can_read_all_group_messages ? 'Да' : 'Нет'}</p>
+                        <p><strong>Поддерживает inline запросы:</strong> ${data.result.supports_inline_queries ? 'Да' : 'Нет'}</p>
+                    `;
+                    logMessage('✅ Информация о боте получена');
+                } else {
+                    logMessage('❌ Ошибка получения информации о боте: ' + data.description);
+                }
+            } catch (error) {
+                logMessage('❌ Ошибка получения информации о боте: ' + error.message);
+            }
+        }
+
+        // Получение информации о чате
+        async function getChatInfo() {
+            logMessage('💬 Получение информации о чате...');
+            
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getChat?chat_id=${CHAT_ID}`);
+                const data = await response.json();
+                
+                if (data.ok) {
+                    const chatInfo = document.getElementById('chat-info');
+                    chatInfo.innerHTML = `
+                        <h3>✅ Информация о чате</h3>
+                        <p><strong>ID:</strong> ${data.result.id}</p>
+                        <p><strong>Тип:</strong> ${data.result.type}</p>
+                        ${data.result.title ? `<p><strong>Название:</strong> ${data.result.title}</p>` : ''}
+                        ${data.result.first_name ? `<p><strong>Имя:</strong> ${data.result.first_name}</p>` : ''}
+                        ${data.result.last_name ? `<p><strong>Фамилия:</strong> ${data.result.last_name}</p>` : ''}
+                        ${data.result.username ? `<p><strong>Username:</strong> @${data.result.username}</p>` : ''}
+                    `;
+                    logMessage('✅ Информация о чате получена');
+                } else {
+                    logMessage('❌ Ошибка получения информации о чате: ' + data.description);
+                    const chatInfo = document.getElementById('chat-info');
+                    chatInfo.innerHTML = `
+                        <h3>❌ Ошибка получения информации о чате</h3>
+                        <p><strong>Ошибка:</strong> ${data.description}</p>
+                        <p><strong>Возможные причины:</strong></p>
+                        <ul>
+                            <li>Чат не существует</li>
+                            <li>Бот не добавлен в чат</li>
+                            <li>Неправильный CHAT_ID</li>
+                            <li>Бот заблокирован в чате</li>
+                        </ul>
+                    `;
+                }
+            } catch (error) {
+                logMessage('❌ Ошибка получения информации о чате: ' + error.message);
+            }
+        }
+
+        // Отправка тестового сообщения
+        async function sendTestMessage() {
+            logMessage('📤 Отправка тестового сообщения...');
+            updateStatus('Отправка тестового сообщения...', 'info');
+            
+            const testMessage = `🧪 <b>ТЕСТОВОЕ СООБЩЕНИЕ</b>
+
+━━━━━━━━━━━━━━━━━━━━
+📅 <b>ВРЕМЯ ОТПРАВКИ</b>
+━━━━━━━━━━━━━━━━━━━━
+${new Date().toLocaleString('ru-RU')}
+
+━━━━━━━━━━━━━━━━━━━━
+🔧 <b>ИНФОРМАЦИЯ О ТЕСТЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+Это тестовое сообщение для проверки настроек Telegram бота.
+
+Если вы получили это сообщение, значит:
+✅ Бот работает корректно
+✅ CHAT_ID настроен правильно
+✅ Уведомления будут приходить
+
+━━━━━━━━━━━━━━━━━━━━
+🌐 <b>ИНФОРМАЦИЯ О САЙТЕ</b>
+━━━━━━━━━━━━━━━━━━━━
+URL: ${window.location.href}
+User Agent: ${navigator.userAgent}
+Время: ${new Date().toLocaleString('ru-RU')}`;
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: testMessage,
+                        parse_mode: 'HTML'
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.ok) {
+                    logMessage('✅ Тестовое сообщение отправлено успешно');
+                    logMessage(`📨 Message ID: ${result.result.message_id}`);
+                    updateStatus('✅ Тестовое сообщение отправлено успешно', 'success');
+                } else {
+                    logMessage('❌ Ошибка отправки сообщения: ' + result.description);
+                    updateStatus('❌ Ошибка отправки сообщения', 'error');
+                }
+            } catch (error) {
+                logMessage('❌ Ошибка отправки сообщения: ' + error.message);
+                updateStatus('❌ Ошибка отправки сообщения', 'error');
+            }
+        }
+
+        // Автоматическая загрузка информации при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            logMessage('🚀 Страница загружена, получение информации...');
+            getBotInfo();
+            getChatInfo();
+        });
+    </script>
+</body>
+</html>

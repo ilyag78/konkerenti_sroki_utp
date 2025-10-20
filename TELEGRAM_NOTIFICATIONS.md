@@ -38,7 +38,7 @@
 ### Конфигурация
 ```javascript
 const BOT_TOKEN = '8272787786:AAHhdBCZvk1B30ZaVvWIttRWBGuwF64gdaI';
-const CHAT_ID = '384321326';
+const CHAT_ID = '-4979391524';
 ```
 
 ### Функция отправки
