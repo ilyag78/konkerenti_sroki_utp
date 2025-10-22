@@ -2716,7 +2716,7 @@
                     
                     <form id="detailedQuestionsForm">
                         <div class="form-group">
-                            <label>Что планируете заказать?</label>
+                            <label>Что планируете заказать? (можно выбрать несколько)</label>
                             <div class="project-buttons">
                                 <button type="button" class="project-btn" data-value="kitchen">🍳 Кухня</button>
                                 <button type="button" class="project-btn" data-value="living_room">🛋️ Гостиная</button>
@@ -2751,10 +2751,6 @@
                             <input type="hidden" id="services" name="services">
                         </div>
                         
-                        <div class="form-group">
-                            <label for="email">Email (для отправки детального расчета)</label>
-                            <input type="email" id="email" name="email" placeholder="your@email.com">
-                        </div>
                         
                         <div class="form-group">
                             <label for="message">Дополнительная информация</label>
@@ -3111,7 +3107,8 @@
             
             // Send to Telegram
             const traffic = getTrafficInfo();
-            const telegramMessage = `🎯 <b>НОВАЯ ЗАЯВКА НА РАСЧЕТ</b>
+            const telegramMessage = `🚨🚨🚨 НОВАЯ ЗАЯВКА! 🚨🚨🚨
+🎯 <b>НОВАЯ ЗАЯВКА НА РАСЧЕТ</b>
 
 ━━━━━━━━━━━━━━━━━━━━
 👤 <b>КОНТАКТНЫЕ ДАННЫЕ</b>
@@ -3590,7 +3587,8 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
                     
                     // Send to Telegram
                     const traffic = getTrafficInfo();
-                    const telegramMessage = `📚 <b>ЗАПРОС КАТАЛОГА</b>
+                    const telegramMessage = `🚨🚨🚨 ЗАЯВКА НА КАТАЛОГ! 🚨🚨🚨
+📚 <b>ЗАПРОС КАТАЛОГА</b>
 
 ━━━━━━━━━━━━━━━━━━━━
 👤 <b>КОНТАКТНЫЕ ДАННЫЕ</b>
@@ -3662,7 +3660,8 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
                     
                     // Send to Telegram
                     const traffic = getTrafficInfo();
-                    const telegramMessage = `💬 <b>ЗАЯВКА НА КОНСУЛЬТАЦИЮ</b>
+                    const telegramMessage = `🚨🚨🚨 ЗАЯВКА НА КОНСУЛЬТАЦИЮ! 🚨🚨🚨
+💬 <b>ЗАЯВКА НА КОНСУЛЬТАЦИЮ</b>
 
 ━━━━━━━━━━━━━━━━━━━━
 👤 <b>КОНТАКТНЫЕ ДАННЫЕ</b>
@@ -4047,6 +4046,12 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
                 'house': 'Частный дом',
                 'commercial': 'Коммерческое помещение'
             };
+            
+            // Обрабатываем множественные значения
+            if (value && value.includes(',')) {
+                return value.split(',').map(v => names[v.trim()] || v.trim()).join(', ');
+            }
+            
             return names[value] || value;
         }
         
@@ -4073,6 +4078,7 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
         function sendFirstNotification(formData) {
             const trafficInfo = getTrafficInfo();
             const message = `
+🚨🚨🚨 НОВАЯ ЗАЯВКА! 🚨🚨🚨
 🔥 ГОРЯЧИЙ ЛИД - БАЗОВАЯ ЗАЯВКА
 ━━━━━━━━━━━━━━━━━━━━
 👤 КЛИЕНТ
@@ -4108,13 +4114,13 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
         function sendDetailedNotification(formData) {
             const trafficInfo = getTrafficInfo();
             const message = `
+🚨🚨🚨 ГОРЯЧИЙ ЛИД! 🚨🚨🚨
 🎯 ДЕТАЛЬНАЯ ЗАЯВКА - ГОТОВ К ПРОДАЖЕ
 ━━━━━━━━━━━━━━━━━━━━
 👤 КЛИЕНТ
 ━━━━━━━━━━━━━━━━━━━━
 📝 Имя: ${formData.name}
 📞 Телефон: ${formData.phone}
-📧 Email: ${formData.email || 'Не указан'}
 ━━━━━━━━━━━━━━━━━━━━
 🏠 ПРОЕКТ
 ━━━━━━━━━━━━━━━━━━━━
@@ -4247,7 +4253,6 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
                         project_type: document.getElementById('project_type').value,
                         timeline: document.getElementById('timeline').value,
                         services: document.getElementById('services').value,
-                        email: document.getElementById('email').value,
                         message: document.getElementById('message').value
                     };
                     
@@ -4266,22 +4271,27 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
             }
         });
         
-        // Обработка кнопок выбора проекта
+        // Обработка всех кнопок формы (объединено в один блок)
         document.addEventListener('DOMContentLoaded', function() {
+            // Обработка кнопок выбора проекта (множественный выбор)
             document.querySelectorAll('.project-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    document.querySelectorAll('.project-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
+                    this.classList.toggle('active');
+                    
+                    // Собираем все выбранные значения
+                    const selectedValues = [];
+                    document.querySelectorAll('.project-btn.active').forEach(activeBtn => {
+                        selectedValues.push(activeBtn.dataset.value);
+                    });
+                    
                     const projectTypeInput = document.getElementById('project_type');
                     if (projectTypeInput) {
-                        projectTypeInput.value = this.dataset.value;
+                        projectTypeInput.value = selectedValues.join(', ');
                     }
                 });
             });
-        });
-        
-        // Обработка кнопок выбора сроков
-        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Обработка кнопок выбора сроков
             document.querySelectorAll('.timeline-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.timeline-btn').forEach(b => b.classList.remove('active'));
@@ -4292,10 +4302,8 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
                     }
                 });
             });
-        });
-        
-        // Обработка кнопок выбора услуг
-        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Обработка кнопок выбора услуг
             document.querySelectorAll('.service-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.service-btn').forEach(b => b.classList.remove('active'));
