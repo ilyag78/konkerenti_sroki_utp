@@ -1969,6 +1969,111 @@
                 font-size: 1.8rem;
             }
         }
+        
+        /* Стили для прогрессивной формы */
+        .form-guarantees {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .form-guarantees span {
+            font-size: 0.9rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .questions-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+        }
+        
+        .questions-header h3 {
+            color: #2c2c2c;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .questions-header p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .project-buttons, .timeline-buttons, .services-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .project-btn, .timeline-btn, .service-btn {
+            padding: 15px 20px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: #2c2c2c;
+        }
+        
+        .project-btn:hover, .timeline-btn:hover, .service-btn:hover {
+            border-color: #2c2c2c;
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+        
+        .project-btn.active, .timeline-btn.active, .service-btn.active {
+            border-color: #2c2c2c;
+            background: #2c2c2c;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(44, 44, 44, 0.2);
+        }
+        
+        /* Мобильные стили для кнопок */
+        @media (max-width: 768px) {
+            .project-buttons, .timeline-buttons, .services-buttons {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 8px;
+            }
+            
+            .project-btn, .timeline-btn, .service-btn {
+                padding: 12px 16px;
+                font-size: 13px;
+            }
+            
+            .form-guarantees {
+                gap: 15px;
+            }
+            
+            .form-guarantees span {
+                font-size: 0.85rem;
+            }
+            
+            .questions-header {
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+            
+            .questions-header h3 {
+                font-size: 1.3rem;
+            }
+            
+            .questions-header p {
+                font-size: 0.9rem;
+            }
+        }
     </style>
     
     <!-- Yandex.Metrika counter -->
@@ -2201,7 +2306,7 @@
             
             <div class="cta-center">
                 <button onclick="openCatalogModal()" class="cta-button cta-secondary">
-                    <i class="fas fa-download"></i> Скачать каталог проектов
+                    <i class="fab fa-whatsapp"></i> Получить каталог в WhatsApp
                 </button>
             </div>
         </div>
@@ -2581,75 +2686,86 @@
             </p>
             
             <div class="cta-form">
-                <form id="contactForm">
+                <!-- Ультра-минимальная форма (2 поля) -->
+                <form id="ultraSimpleForm">
                     <div class="form-group">
-                        <label for="name">Ваше имя *</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" placeholder="Ваше имя" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="phone">Телефон *</label>
-                        <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" pattern="\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="project_type">Тип проекта</label>
-                        <select id="project_type" name="project_type">
-                            <option value="">Выберите тип проекта</option>
-                            <option value="kitchen">Кухня</option>
-                            <option value="living_room">Гостиная</option>
-                            <option value="bedroom">Спальня</option>
-                            <option value="bathroom">Ванная комната</option>
-                            <option value="office">Кабинет</option>
-                            <option value="children">Детская</option>
-                            <option value="full_apartment">Полная квартира</option>
-                            <option value="house">Частный дом</option>
-                            <option value="commercial">Коммерческое помещение</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="timeline">Желаемые сроки реализации</label>
-                        <select id="timeline" name="timeline">
-                            <option value="">Выберите сроки</option>
-                            <option value="urgent">Приоритетный проект (до 60 дней)</option>
-                            <option value="normal">Стандартные сроки (60-80 дней)</option>
-                            <option value="flexible">Гибкие сроки</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="services">Какие услуги вас интересуют?</label>
-                        <select id="services" name="services">
-                            <option value="">Выберите услуги</option>
-                            <option value="full_cycle">Полный цикл (дизайн + производство + установка)</option>
-                            <option value="design_production">Дизайн + производство</option>
-                            <option value="production_only">Только производство</option>
-                            <option value="consultation">Консультация по проекту</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Дополнительная информация</label>
-                        <textarea id="message" name="message" rows="4" placeholder="Опишите ваши пожелания, особенности помещения, стиль..."></textarea>
-                    </div>
-                    
-                    <div class="privacy-checkbox">
-                        <input type="checkbox" id="privacy_agreement" name="privacy_agreement" checked required>
-                        <label for="privacy_agreement">
-                            Я согласен с <a href="javascript:void(0)" onclick="openPrivacyModal()">политикой обработки персональных данных</a>
-                        </label>
+                        <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
                     </div>
                     
                     <button type="submit" class="submit-btn">
-                        Получить расчет и начать проект
+                        Получить расчет за 1 день
                     </button>
+                    
+                    <div class="form-guarantees">
+                        <span>✓ Расчет за 1 день</span>
+                        <span>✓ Без обязательств</span>
+                        <span>✓ Консультация бесплатно</span>
+                    </div>
                 </form>
+                
+                <!-- Дополнительные вопросы (скрыты изначально) -->
+                <div id="additionalQuestions" style="display:none;">
+                    <div class="questions-header">
+                        <h3>🎯 Помогите нам составить точный расчет</h3>
+                        <p>Ответьте на несколько вопросов, и мы пришлем детальный расчет с учетом всех ваших требований</p>
+                    </div>
+                    
+                    <form id="detailedQuestionsForm">
+                        <div class="form-group">
+                            <label>Что планируете заказать?</label>
+                            <div class="project-buttons">
+                                <button type="button" class="project-btn" data-value="kitchen">🍳 Кухня</button>
+                                <button type="button" class="project-btn" data-value="living_room">🛋️ Гостиная</button>
+                                <button type="button" class="project-btn" data-value="bedroom">🛏️ Спальня</button>
+                                <button type="button" class="project-btn" data-value="bathroom">🚿 Ванная</button>
+                                <button type="button" class="project-btn" data-value="office">💼 Кабинет</button>
+                                <button type="button" class="project-btn" data-value="children">🧸 Детская</button>
+                                <button type="button" class="project-btn" data-value="full_apartment">🏠 Вся квартира</button>
+                                <button type="button" class="project-btn" data-value="house">🏡 Частный дом</button>
+                            </div>
+                            <input type="hidden" id="project_type" name="project_type">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Когда планируете начать проект?</label>
+                            <div class="timeline-buttons">
+                                <button type="button" class="timeline-btn" data-value="urgent">⚡ Срочно (до 60 дней)</button>
+                                <button type="button" class="timeline-btn" data-value="normal">📅 Стандартные сроки (60-80 дней)</button>
+                                <button type="button" class="timeline-btn" data-value="flexible">🔄 Гибкие сроки</button>
+                            </div>
+                            <input type="hidden" id="timeline" name="timeline">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Какие услуги вас интересуют?</label>
+                            <div class="services-buttons">
+                                <button type="button" class="service-btn" data-value="full_cycle">🎨 Полный цикл (дизайн + производство + установка)</button>
+                                <button type="button" class="service-btn" data-value="design_production">✏️ Дизайн + производство</button>
+                                <button type="button" class="service-btn" data-value="production_only">🏭 Только производство</button>
+                                <button type="button" class="service-btn" data-value="consultation">💬 Консультация по проекту</button>
+                            </div>
+                            <input type="hidden" id="services" name="services">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email (для отправки детального расчета)</label>
+                            <input type="email" id="email" name="email" placeholder="your@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Дополнительная информация</label>
+                            <textarea id="message" name="message" rows="3" placeholder="Опишите ваши пожелания, особенности помещения, стиль..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            Получить детальный расчет
+                        </button>
+                    </form>
+                </div>
             </div>
             
         </div>
@@ -2826,10 +2942,6 @@
             });
         });
 
-        // Telegram Bot Configuration
-        const BOT_TOKEN = '8272787786:AAHhdBCZvk1B30ZaVvWIttRWBGuwF64gdaI';
-        const CHAT_ID = '-4979391524';
-
         // Phone formatting function
         function formatPhone(event) {
             let value = event.target.value.replace(/\D/g, '');
@@ -2963,9 +3075,15 @@
         }
 
         // Initialize phone formatting for all phone inputs
-        document.getElementById('phone')?.addEventListener('input', formatPhone);
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneInput = document.getElementById('phone');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', formatPhone);
+            }
+        });
 
-        // Form submission
+        // Old form submission (removed - now using progressive form)
+        /*
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -3039,6 +3157,7 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
             // Reset form
             this.reset();
         });
+        */
 
         // Add some interactive effects
         window.addEventListener('scroll', function() {
@@ -3510,7 +3629,7 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
                     
                     sendToTelegram(telegramMessage);
                     
-                    alert('Спасибо! Мы отправили каталог на вашу почту.');
+                    alert('Спасибо! Мы отправим каталог в WhatsApp в течение 5 минут.');
                     closeCatalogModal();
                     this.reset();
                 });
@@ -3583,7 +3702,7 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
                     
                     sendToTelegram(telegramMessage);
                     
-                    alert('Спасибо! Мы свяжемся с вами в ближайшее время для консультации.');
+                    alert('Спасибо! Наш дизайнер свяжется с вами в течение 1 часа для консультации.');
                     closeConsultationModal();
                     this.reset();
                 });
@@ -3870,6 +3989,325 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
             }
         }, 5000); // Проверяем каждые 5 секунд
 
+        // ========================================
+        // ПРОГРЕССИВНАЯ ФОРМА - НОВАЯ ЛОГИКА
+        // ========================================
+        
+        // Конфигурация Telegram
+        const BOT_TOKEN = '8272787786:AAHhdBCZvk1B30ZaVvWIttRWBGuwF64gdaI';
+        const CHAT_ID = '-4979391524';
+        
+        // Функция получения информации о трафике
+        function getTrafficInfo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return {
+                referrer: document.referrer || 'direct',
+                utm_source: urlParams.get('utm_source') || 'unknown',
+                utm_medium: urlParams.get('utm_medium') || 'unknown',
+                utm_campaign: urlParams.get('utm_campaign') || 'unknown',
+                device: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+                screen: `${screen.width}x${screen.height}`,
+                language: navigator.language,
+                timeOnSite: Math.floor(performance.now() / 1000)
+            };
+        }
+        
+        // Функция отправки в Telegram
+        function sendToTelegram(message) {
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Telegram notification sent:', data);
+            })
+            .catch(error => {
+                console.error('Error sending to Telegram:', error);
+            });
+        }
+        
+        // Функция получения названий для значений
+        function getProjectTypeName(value) {
+            const names = {
+                'kitchen': 'Кухня',
+                'living_room': 'Гостиная',
+                'bedroom': 'Спальня',
+                'bathroom': 'Ванная комната',
+                'office': 'Кабинет',
+                'children': 'Детская',
+                'full_apartment': 'Полная квартира',
+                'house': 'Частный дом',
+                'commercial': 'Коммерческое помещение'
+            };
+            return names[value] || value;
+        }
+        
+        function getTimelineName(value) {
+            const names = {
+                'urgent': 'Срочно (до 60 дней)',
+                'normal': 'Стандартные сроки (60-80 дней)',
+                'flexible': 'Гибкие сроки'
+            };
+            return names[value] || value;
+        }
+        
+        function getServiceName(value) {
+            const names = {
+                'full_cycle': 'Полный цикл (дизайн + производство + установка)',
+                'design_production': 'Дизайн + производство',
+                'production_only': 'Только производство',
+                'consultation': 'Консультация по проекту'
+            };
+            return names[value] || value;
+        }
+        
+        // Функция отправки первого уведомления (горячий лид)
+        function sendFirstNotification(formData) {
+            const trafficInfo = getTrafficInfo();
+            const message = `
+🔥 ГОРЯЧИЙ ЛИД - БАЗОВАЯ ЗАЯВКА
+━━━━━━━━━━━━━━━━━━━━
+👤 КЛИЕНТ
+━━━━━━━━━━━━━━━━━━━━
+📝 Имя: ${formData.name}
+📞 Телефон: ${formData.phone}
+━━━━━━━━━━━━━━━━━━━━
+📊 ИСТОЧНИК ТРАФИКА
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${trafficInfo.referrer}
+🎯 UTM Source: ${trafficInfo.utm_source}
+📢 UTM Medium: ${trafficInfo.utm_medium}
+📱 Устройство: ${trafficInfo.device}
+🖥️ Разрешение: ${trafficInfo.screen}
+⏰ Время на сайте: ${trafficInfo.timeOnSite} сек
+━━━━━━━━━━━━━━━━━━━━
+💡 РЕКОМЕНДАЦИЯ
+━━━━━━━━━━━━━━━━━━━━
+Клиент оставил базовую заявку! 
+Рекомендуется позвонить в течение 5 минут.
+Пользователь сейчас заполняет дополнительные вопросы.
+            `;
+            
+            sendToTelegram(message);
+            
+            // Отправляем событие в Яндекс.Метрику
+            if (typeof ym !== 'undefined') {
+                ym(104677623, 'reachGoal', 'main_form_submit');
+            }
+        }
+        
+        // Функция отправки детального уведомления
+        function sendDetailedNotification(formData) {
+            const trafficInfo = getTrafficInfo();
+            const message = `
+🎯 ДЕТАЛЬНАЯ ЗАЯВКА - ГОТОВ К ПРОДАЖЕ
+━━━━━━━━━━━━━━━━━━━━
+👤 КЛИЕНТ
+━━━━━━━━━━━━━━━━━━━━
+📝 Имя: ${formData.name}
+📞 Телефон: ${formData.phone}
+📧 Email: ${formData.email || 'Не указан'}
+━━━━━━━━━━━━━━━━━━━━
+🏠 ПРОЕКТ
+━━━━━━━━━━━━━━━━━━━━
+🎨 Тип проекта: ${getProjectTypeName(formData.project_type)}
+⏰ Сроки: ${getTimelineName(formData.timeline)}
+🛠️ Услуги: ${getServiceName(formData.services)}
+📝 Доп. информация: ${formData.message || 'Не указана'}
+━━━━━━━━━━━━━━━━━━━━
+📊 ИСТОЧНИК ТРАФИКА
+━━━━━━━━━━━━━━━━━━━━
+🔗 Referrer: ${trafficInfo.referrer}
+🎯 UTM Source: ${trafficInfo.utm_source}
+📢 UTM Medium: ${trafficInfo.utm_medium}
+📱 Устройство: ${trafficInfo.device}
+🖥️ Разрешение: ${trafficInfo.screen}
+⏰ Время на сайте: ${trafficInfo.timeOnSite} сек
+━━━━━━━━━━━━━━━━━━━━
+💡 РЕКОМЕНДАЦИЯ
+━━━━━━━━━━━━━━━━━━━━
+ГОРЯЧИЙ ЛИД! Клиент детально описал проект.
+Высокая вероятность конверсии в продажу.
+Рекомендуется позвонить в течение 10 минут.
+            `;
+            
+            sendToTelegram(message);
+            
+            // Отправляем событие в Яндекс.Метрику
+            if (typeof ym !== 'undefined') {
+                ym(104677623, 'reachGoal', 'detailed_form_submit');
+            }
+        }
+        
+        // Функция показа сообщения об успехе
+        function showSuccessMessage(message) {
+            const successDiv = document.createElement('div');
+            successDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                z-index: 10000;
+                font-size: 14px;
+                box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+            `;
+            successDiv.textContent = message;
+            document.body.appendChild(successDiv);
+            
+            setTimeout(() => {
+                successDiv.remove();
+            }, 5000);
+        }
+        
+        // Функция показа финального сообщения
+        function showFinalMessage(message) {
+            const finalDiv = document.createElement('div');
+            finalDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                color: #2c2c2c;
+                padding: 40px;
+                border-radius: 12px;
+                z-index: 10000;
+                font-size: 16px;
+                text-align: center;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+                max-width: 400px;
+                width: 90%;
+            `;
+            finalDiv.innerHTML = `
+                <div style="font-size: 48px; margin-bottom: 20px;">✅</div>
+                <h3 style="margin-bottom: 15px; color: #2c2c2c;">Спасибо за заявку!</h3>
+                <p>${message}</p>
+            `;
+            document.body.appendChild(finalDiv);
+            
+            setTimeout(() => {
+                finalDiv.remove();
+            }, 8000);
+        }
+        
+        // Обработка первой формы (ультра-минимальная)
+        document.addEventListener('DOMContentLoaded', function() {
+            const ultraSimpleForm = document.getElementById('ultraSimpleForm');
+            if (ultraSimpleForm) {
+                ultraSimpleForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        phone: document.getElementById('phone').value
+                    };
+                    
+                    // Отправляем первое уведомление
+                    sendFirstNotification(formData);
+                    
+                    // Показываем дополнительные вопросы
+                    const additionalQuestions = document.getElementById('additionalQuestions');
+                    if (additionalQuestions) {
+                        additionalQuestions.style.display = 'block';
+                        
+                        // Плавно скроллим к дополнительным вопросам
+                        additionalQuestions.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                    
+                    // Показываем сообщение об успехе
+                    showSuccessMessage('Спасибо! Теперь помогите нам составить точный расчет');
+                });
+            }
+        });
+        
+        // Обработка дополнительных вопросов
+        document.addEventListener('DOMContentLoaded', function() {
+            const detailedQuestionsForm = document.getElementById('detailedQuestionsForm');
+            if (detailedQuestionsForm) {
+                detailedQuestionsForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        phone: document.getElementById('phone').value,
+                        project_type: document.getElementById('project_type').value,
+                        timeline: document.getElementById('timeline').value,
+                        services: document.getElementById('services').value,
+                        email: document.getElementById('email').value,
+                        message: document.getElementById('message').value
+                    };
+                    
+                    // Отправляем детальное уведомление
+                    sendDetailedNotification(formData);
+                    
+                    // Показываем финальное сообщение
+                    showFinalMessage('Отлично! Мы свяжемся с вами в течение 1 дня для составления детального расчета.');
+                    
+                    // Скрываем форму
+                    const additionalQuestions = document.getElementById('additionalQuestions');
+                    if (additionalQuestions) {
+                        additionalQuestions.style.display = 'none';
+                    }
+                });
+            }
+        });
+        
+        // Обработка кнопок выбора проекта
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.project-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.project-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const projectTypeInput = document.getElementById('project_type');
+                    if (projectTypeInput) {
+                        projectTypeInput.value = this.dataset.value;
+                    }
+                });
+            });
+        });
+        
+        // Обработка кнопок выбора сроков
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.timeline-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.timeline-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const timelineInput = document.getElementById('timeline');
+                    if (timelineInput) {
+                        timelineInput.value = this.dataset.value;
+                    }
+                });
+            });
+        });
+        
+        // Обработка кнопок выбора услуг
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.service-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.service-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const servicesInput = document.getElementById('services');
+                    if (servicesInput) {
+                        servicesInput.value = this.dataset.value;
+                    }
+                });
+            });
+        });
+
     </script>
 
     <!-- Sticky Action Bar -->
@@ -3894,8 +4332,8 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
     <div class="modal" id="catalogModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeCatalogModal()">×</button>
-            <h3>Скачать каталог проектов</h3>
-            <p>Мы пришлем вам полный каталог бренда Any-Home с реализованными проектами, описанием решений и примерами наших работ</p>
+            <h3>Получить каталог в WhatsApp</h3>
+            <p>Мы пришлем каталог бренда Any-Home с реализованными проектами и примерами работ</p>
             
             <form id="catalogForm">
                 <div class="form-group">
@@ -3908,11 +4346,6 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
                     <input type="tel" id="catalog_phone" name="catalog_phone" placeholder="+7 (___) ___-__-__" pattern="\+7\s?\(\d{3}\)\s?\d{3}-\d{2}-\d{2}" required>
                 </div>
                 
-                <div class="form-group">
-                    <label for="catalog_email">Email (опционально)</label>
-                    <input type="email" id="catalog_email" name="catalog_email">
-                </div>
-                
                 <div class="privacy-checkbox">
                     <input type="checkbox" id="catalog_privacy_agreement" name="catalog_privacy_agreement" checked required>
                     <label for="catalog_privacy_agreement">
@@ -3921,7 +4354,7 @@ ${traffic.gclid !== '-' ? `🔵 Google Click ID: ${traffic.gclid}` : ''}
                 </div>
                 
                 <button type="submit" class="submit-btn">
-                    <i class="fas fa-download"></i> Получить каталог
+                    <i class="fab fa-whatsapp"></i> Получить каталог в WhatsApp
                 </button>
             </form>
         </div>
